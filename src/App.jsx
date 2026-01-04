@@ -2,16 +2,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
-import Hero from './components/sections/Hero'; // Hero সেকশনটি ইমপোর্ট করুন
+import Categories from './components/sections/Categories';
+import Hero from './components/sections/Hero';
+import WhyChoose from './components/sections/WhyChoose';
+import ListProperty from './Pages/ListProperty/ListProperty'; // এটি যোগ করুন
+import SignIn from './Pages/Sign/SignIn';
 
 function App() {
     return (
         <Router>
             <div className="flex flex-col min-h-screen font-sans">
-                {/* সব পেজের জন্য কমন নেভিগেশন বার */}
                 <Navbar />
 
-                {/* মেইন কন্টেন্ট এরিয়া */}
                 <main className="flex-grow">
                     <Routes>
                         <Route
@@ -19,14 +21,17 @@ function App() {
                             element={
                                 <>
                                     <Hero />
-                                    {/* এখানে পরবর্তী সেকশনগুলো (যেমন: Stats, Categories) এক এক করে আসবে */}
+                                    <Categories />
+                                    <WhyChoose />
                                 </>
                             }
                         />
+                        <Route path="/signin" element={<SignIn />} />
+                        {/* List Property পেজের জন্য নতুন রাউট */}
+                        <Route path="/list-property" element={<ListProperty />} />
                     </Routes>
                 </main>
 
-                {/* সব পেজের জন্য কমন ফুটার */}
                 <Footer />
             </div>
         </Router>
