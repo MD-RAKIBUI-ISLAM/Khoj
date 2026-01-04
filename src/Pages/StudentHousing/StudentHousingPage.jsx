@@ -14,6 +14,7 @@ import { studentHostelsData } from '../../data/mockData';
 
 function StudentHousingPage() {
     const [searchLocation, setSearchLocation] = useState('Dhaka');
+    const [selectedDestination, setSelectedDestination] = useState(null);
     const [price, setPrice] = useState(100000);
     const [selectedRooms, setSelectedRooms] = useState('Any');
     const [activeFilters, setActiveFilters] = useState({
@@ -47,8 +48,9 @@ function StudentHousingPage() {
         });
     };
 
-    const mapUrl = `https://www.google.com/maps?q=student+hostels+in+${encodeURIComponent(searchLocation)}&output=embed`;
-
+    const mapUrl = selectedDestination
+        ? `https://www.google.com/maps?saddr=My+Location&daddr=${encodeURIComponent(selectedDestination)}&output=embed`
+        : `https://www.google.com/maps?q=${encodeURIComponent(`${searchLocation} student hostel`)}&output=embed`;
     return (
         <div className="min-h-screen bg-[#F8F9FB] pb-20 font-sans">
             <header className="bg-white border-b px-4 lg:px-12 py-10">
@@ -272,9 +274,8 @@ function StudentHousingPage() {
                                             <button
                                                 type="button"
                                                 onClick={() =>
-                                                    window.open(
-                                                        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${item.title} ${item.location}`)}`,
-                                                        '_blank'
+                                                    setSelectedDestination(
+                                                        `${item.title}, ${item.location}`
                                                     )
                                                 }
                                                 className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-slate-100 text-slate-600 bg-white rounded-2xl font-black text-xs hover:bg-slate-800 hover:text-white hover:border-slate-800 transition-all duration-300 group"

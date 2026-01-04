@@ -1,7 +1,7 @@
-import budgetFriendlyImg from '../assets/budget_friendly_hostel.png';
 import centralHostelImg from '../assets/central_hostel.png';
 import modernHostelImg from '../assets/modern_student_hostel.png';
 import premiumHousingImg from '../assets/premium_student_housing.png';
+import sylhetHostelImg from '../assets/sylhet_hostel.png';
 
 export const buttonTexts = {
     search: 'Search Now',
@@ -339,12 +339,13 @@ export const studentHostelsData = [
         ],
         tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
         utilities: { current: '1000BDT', gas: '500BDT', water: '250BDT' },
-        image: modernHostelImg
+        image: modernHostelImg,
+        mapLocation: 'https://www.google.com/maps/search/Dhanmondi+Student+Hostel+Dhaka'
     },
     {
         id: 2,
-        title: 'Premium student Housing - Mirpur',
-        location: 'Mirpur, Dhaka',
+        title: 'Premium Student Housing - Mirpur',
+        location: 'Mirpur-10, Dhaka',
         rating: 4.8,
         reviews: 256,
         price: '10,000BDT',
@@ -359,12 +360,13 @@ export const studentHostelsData = [
         ],
         tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
         utilities: { current: '1200BDT', gas: '400BDT', water: '200BDT' },
-        image: premiumHousingImg
+        image: premiumHousingImg,
+        mapLocation: 'https://www.google.com/maps/search/Mirpur+Student+Hostel+Dhaka'
     },
     {
         id: 3,
         title: 'Central Hostel - Chittagong',
-        location: 'GEC, Chittagong',
+        location: 'GEC Circle, Chittagong',
         rating: 4.3,
         reviews: 92,
         price: '10,000BDT',
@@ -379,25 +381,27 @@ export const studentHostelsData = [
         ],
         tags: ['WiFi', 'Hot Water', 'Basic Kitchen', '24/7 Security'],
         utilities: { current: '700BDT', gas: '350BDT', water: '180BDT' },
-        image: centralHostelImg
+        image: centralHostelImg,
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong'
     },
     {
         id: 4,
-        title: 'Budget Friendly Hostel - Nasirabad',
-        location: 'Nasirabad, Chittagong',
-        rating: 4.1,
-        reviews: 67,
-        price: '10,000BDT',
-        rooms: 1,
+        title: 'Sylhet Elite Student Home',
+        location: 'Zindabazar, Sylhet',
+        rating: 4.6,
+        reviews: 75,
+        price: '9,500BDT',
+        rooms: 3,
         washrooms: 2,
-        capacity: '3-4 People per room',
+        capacity: '2-3 People per room',
         roomAvailability: [
             'Room 401: 2 free seat out of 4',
             'Room 402: 1 free seat out of 3',
-            'Room 403: 3 free seat out of 4'
+            'Room 403: 3 free seat out of 3'
         ],
-        tags: ['WiFi', 'Hot Water', 'Common Area', '24/7 Guard'],
-        utilities: { current: '700BDT', gas: '350BDT', water: '150BDT' },
-        image: budgetFriendlyImg
+        tags: ['WiFi', 'Library', 'Dining Hall', '24/7 Guard'],
+        utilities: { current: '800BDT', gas: '300BDT', water: '150BDT' },
+        image: sylhetHostelImg,
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet'
     }
 ];
