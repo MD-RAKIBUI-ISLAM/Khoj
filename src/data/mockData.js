@@ -388,7 +388,7 @@ export const studentHostelsData = [
         rating: 4.1,
         reviews: 67,
         price: '10,000BDT',
-        rooms: 4,
+        rooms: 1,
         washrooms: 2,
         capacity: '3-4 People per room',
         roomAvailability: [
