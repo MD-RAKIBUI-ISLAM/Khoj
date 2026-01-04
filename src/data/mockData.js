@@ -12,21 +12,48 @@ export const navData = {
 };
 
 export const footerData = {
-    logo: '/assets/khoj_logo.png', // ডিজাইনে ফুটার লোগোটি সাদা বক্সে আছে
+    logo: '/assets/khoj_logo.png',
     description: 'Your trusted accommodation platform for all of Bangladesh',
     sections: [
         {
             title: 'Browse',
-            links: ['Student Housing', 'Hostels', 'Hotels', 'Home Rentals']
+            links: [
+                'Student Housing',
+                'Hostels',
+                'Hotels',
+                'Home Rentals',
+                'Luxury Villas',
+                'Guest Houses',
+                'Shared Apartments'
+            ]
         },
         {
             title: 'For Owners',
-            links: ['List Property', 'Resources', 'Pricing']
+            links: ['List Property', 'Resources', 'Pricing', 'Owner Dashboard', 'Success Stories']
         },
         {
             title: 'Legal',
-            links: ['Privacy Policy', 'Terms of Service', 'Contact Us']
+            links: [
+                'Privacy Policy',
+                'Terms of Service',
+                'Contact Us',
+                'Cookie Policy',
+                'Disclaimer'
+            ]
         }
     ],
-    copyright: '© 2025 Khoj. All rights reserved. Helping Bangladesh find perfect stays.'
+    copyright: '© 2025 Khoj. All rights reserved.'
+};
+
+export const heroData = {
+    badge: 'Across all of Bangladesh',
+    title: 'Find Your Perfect Stay',
+    description:
+        'Discover verified accommodations tailored for students, tourists, families, and travelers. Browse thousands of listings with detailed information and real reviews.',
+    placeholder: 'Search by a city or district...',
+    stats: [
+        { label: 'Districts Covered', value: '60K+' },
+        { label: 'Total Listings', value: '28K+' },
+        { label: 'Happy User', value: '50K+' }
+    ]
 };
