@@ -1,3 +1,8 @@
+import budgetFriendlyImg from '../assets/budget_friendly_hostel.png';
+import centralHostelImg from '../assets/central_hostel.png';
+import modernHostelImg from '../assets/modern_student_hostel.png';
+import premiumHousingImg from '../assets/premium_student_housing.png';
+
 export const buttonTexts = {
     search: 'Search Now',
     bookNow: 'Confirm Booking',
@@ -68,7 +73,7 @@ export const statsData = [
 export const categoriesData = [
     {
         id: 1,
-        title: 'Students Housing',
+        title: 'Students Housing & Hostels',
         description: 'Affordable accommodation near Universitys',
         listings: '12K+ listings',
         features: ['Affordable rates', 'Study rooms', 'Shared kitchens'],
@@ -314,3 +319,85 @@ export const lpGuidesAndFAQ = {
         ]
     }
 };
+
+export const studentHostelsData = [
+    {
+        id: 1,
+        title: 'Modern Student Hostel-Dhanmondi',
+        location: 'Dhanmondi, Dhaka',
+        rating: 4.5,
+        reviews: 128,
+        price: '12,000BDT',
+        rooms: 4,
+        washrooms: 2,
+        capacity: '2-3 People per room',
+        roomAvailability: [
+            'Room 101: 1 free seat out of 3',
+            'Room 102: 0 free seat out of 3',
+            'Room 103: 1 free seat out of 2',
+            'Room 104: 3 free seat out of 3'
+        ],
+        tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
+        utilities: { current: '1000BDT', gas: '500BDT', water: '250BDT' },
+        image: modernHostelImg
+    },
+    {
+        id: 2,
+        title: 'Premium student Housing - Mirpur',
+        location: 'Mirpur, Dhaka',
+        rating: 4.8,
+        reviews: 256,
+        price: '10,000BDT',
+        rooms: 6,
+        washrooms: 2,
+        capacity: '2-4 People per room',
+        roomAvailability: [
+            'Room 301: 1 free seat out of 4',
+            'Room 302: 2 free seat out of 4',
+            'Room 303: 1 free seat out of 2',
+            'Room 304: 4 free seat out of 4'
+        ],
+        tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
+        utilities: { current: '1200BDT', gas: '400BDT', water: '200BDT' },
+        image: premiumHousingImg
+    },
+    {
+        id: 3,
+        title: 'Central Hostel - Chittagong',
+        location: 'GEC, Chittagong',
+        rating: 4.3,
+        reviews: 92,
+        price: '10,000BDT',
+        rooms: 5,
+        washrooms: 2,
+        capacity: '3-4 People per room',
+        roomAvailability: [
+            'Room 501: 1 free seat out of 4',
+            'Room 502: 2 free seat out of 4',
+            'Room 503: 3 free seat out of 3',
+            'Room 504: 2 free seat out of 4'
+        ],
+        tags: ['WiFi', 'Hot Water', 'Basic Kitchen', '24/7 Security'],
+        utilities: { current: '700BDT', gas: '350BDT', water: '180BDT' },
+        image: centralHostelImg
+    },
+    {
+        id: 4,
+        title: 'Budget Friendly Hostel - Nasirabad',
+        location: 'Nasirabad, Chittagong',
+        rating: 4.1,
+        reviews: 67,
+        price: '10,000BDT',
+        rooms: 4,
+        washrooms: 2,
+        capacity: '3-4 People per room',
+        roomAvailability: [
+            'Room 401: 2 free seat out of 4',
+            'Room 402: 1 free seat out of 3',
+            'Room 403: 3 free seat out of 4'
+        ],
+        tags: ['WiFi', 'Hot Water', 'Common Area', '24/7 Guard'],
+        utilities: { current: '700BDT', gas: '350BDT', water: '150BDT' },
+        image: budgetFriendlyImg
+    }
+];
