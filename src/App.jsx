@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Categories from './components/sections/Categories';
 import Hero from './components/sections/Hero';
 import WhyChoose from './components/sections/WhyChoose';
+import HotelResortPage from './Pages/HotelResort/HotelResortPage';
 import ListProperty from './Pages/ListProperty/ListProperty'; // এটি যোগ করুন
 import SignIn from './Pages/Sign/SignIn';
 import StudentHousingPage from './Pages/StudentHousing/StudentHousingPage';
@@ -31,6 +32,7 @@ function App() {
                         {/* List Property পেজের জন্য নতুন রাউট */}
                         <Route path="/list-property" element={<ListProperty />} />
                         <Route path="/student-housing" element={<StudentHousingPage />} />
+                        <Route path="/hotel-resort" element={<HotelResortPage />} />
                     </Routes>
                 </main>
 

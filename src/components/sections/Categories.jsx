@@ -15,8 +15,9 @@ function Categories() {
         if (cat.title === 'Students Housing & Hostels' || cat.id === 1) {
             navigate('/student-housing');
         } else if (cat.title === 'Tourist Resorts and Hotels') {
+            navigate('/hotel-resort');
             // ভবিষ্যতে এই পেজ তৈরি করলে এখানে পাথ দিবেন
-            console.log('Tourist page coming soon');
+            // console.log('Tourist page coming soon');
         } else {
             console.log(`${cat.title} clicked`);
         }

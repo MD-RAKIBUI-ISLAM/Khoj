@@ -1,4 +1,5 @@
 import centralHostelImg from '../assets/central_hostel.png';
+import luxuryResortImg from '../assets/luxuary_resort.png';
 import modernHostelImg from '../assets/modern_student_hostel.png';
 import premiumHousingImg from '../assets/premium_student_housing.png';
 import sylhetHostelImg from '../assets/sylhet_hostel.png';
@@ -404,5 +405,63 @@ export const studentHostelsData = [
         utilities: { current: '800BDT', gas: '300BDT', water: '150BDT' },
         image: sylhetHostelImg,
         mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet'
+    }
+];
+
+export const hotelResortData = [
+    {
+        id: 1,
+        title: "Luxuary 5- Star Resort - Cox's Bazar",
+        location: "Cox's Bazar",
+        rating: 4.9,
+        reviews: 128,
+        price: '8,000BDT',
+        roomStats: { single: 15, double: 25, deluxe: 10 },
+        availability: [
+            'Single: 12 available, Next free: 5 Dec, 2025',
+            'Double: 12 available, Next free: 5 Dec, 2025',
+            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+        ],
+        tags: ['Free WiFi', 'Resturent', 'Spa', 'Beach Access', '24/7 Security'],
+        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
+        image: luxuryResortImg,
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet'
+    },
+    {
+        id: 2,
+        title: 'Premium student Housing - Mirpur',
+        location: 'Mirpur-10, Dhaka',
+        rating: 4.8,
+        reviews: 256,
+        price: '10,000BDT',
+        roomStats: { single: 16, double: 20, deluxe: 10 },
+        availability: [
+            'Single: 12 available, Next free: 5 Dec, 2025',
+            'Double: 12 available, Next free: 5 Dec, 2025',
+            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+        ],
+        tags: ['Free WiFi', 'Resturent', 'AC Room', '24/7 Security'],
+        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
+        image: premiumHousingImg,
+        mapLocation:
+            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.328233583151!2d90.3665091!3d23.8069245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d6f6b8c2ff%3A0x3b138861ee082232!2sMirpur%2010%20Roundabout!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd'
+    },
+    {
+        id: 3,
+        title: 'Central Hostel - Chittagong',
+        location: 'GEC Circle, Chittagong',
+        rating: 4.3,
+        reviews: 92,
+        price: '10,000BDT',
+        roomStats: { single: 5, double: 2, deluxe: 6 },
+        availability: [
+            'Single: 12 available, Next free: 5 Dec, 2025',
+            'Double: 12 available, Next free: 5 Dec, 2025',
+            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+        ],
+        tags: ['WiFi', 'Hot Water', 'Basic Kitchen', '24/7 Security'],
+        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
+        image: centralHostelImg,
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong'
     }
 ];
