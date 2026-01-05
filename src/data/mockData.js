@@ -361,7 +361,8 @@ export const studentHostelsData = [
         tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
         utilities: { current: '1200BDT', gas: '400BDT', water: '200BDT' },
         image: premiumHousingImg,
-        mapLocation: 'https://www.google.com/maps/search/Mirpur+Student+Hostel+Dhaka'
+        mapLocation:
+            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.328233583151!2d90.3665091!3d23.8069245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d6f6b8c2ff%3A0x3b138861ee082232!2sMirpur%2010%20Roundabout!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd'
     },
     {
         id: 3,
