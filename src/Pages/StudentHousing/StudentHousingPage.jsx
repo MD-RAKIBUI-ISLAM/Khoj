@@ -198,9 +198,14 @@ function StudentHousingPage() {
                                             </div>
                                         </div>
 
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-5">
                                             {[
                                                 { label: 'Rooms', val: item.rooms, icon: null },
+                                                {
+                                                    label: 'Washroom',
+                                                    val: item.washrooms,
+                                                    icon: <LuDroplets size={10} />
+                                                }, // Add kora hoyeche
                                                 {
                                                     label: 'Current',
                                                     val: item.utilities.current,
