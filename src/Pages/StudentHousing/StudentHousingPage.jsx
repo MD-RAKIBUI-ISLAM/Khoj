@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'; // useEffect যোগ করা হয়েছে
+import { useEffect, useState } from 'react';
 import { LuFilter } from 'react-icons/lu';
 
 import HostelCard from '../../components/common/HostelCard';
@@ -15,7 +15,6 @@ function StudentHousingPage() {
         rooms: 'Any'
     });
 
-    // লজিক: যখনই searchLocation চেঞ্জ হবে, ডিরেকশন রিসেট হয়ে যাবে
     useEffect(() => {
         setSelectedDestination(null);
     }, [searchLocation]);
@@ -42,12 +41,9 @@ function StudentHousingPage() {
         });
     };
 
-    // সরাসরি নেভিগেশনের জন্য ফাংশন
     const handleNavigation = (item) => {
         const fullAddress = `${item.title}, ${item.location}`;
-        setSelectedDestination(fullAddress); // অ্যাপের ম্যাপ আপডেট করার জন্য
-
-        // নতুন ট্যাবে রিয়েল গুগল ম্যাপ ডিরেকশন ওপেন হবে
+        setSelectedDestination(fullAddress);
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`;
         window.open(googleMapsUrl, '_blank');
     };
@@ -70,8 +66,10 @@ function StudentHousingPage() {
             </header>
 
             <div className="max-w-[1600px] mx-auto px-4 lg:px-12 pt-8">
-                <div className="flex flex-col lg:flex-row gap-8">
-                    <aside className="w-full lg:w-[350px] space-y-6 shrink-0">
+                {/* Main Content Layout: sticky map on left, scrollable content on right */}
+                <div className="flex flex-col lg:flex-row gap-8 items-start relative">
+                    {/* LEFT SIDE: Sticky Map and Filters */}
+                    <aside className="w-full lg:w-[400px] space-y-6 lg:sticky lg:top-8 shrink-0">
                         <MapViewer
                             searchLocation={searchLocation}
                             setSearchLocation={setSearchLocation}
@@ -79,7 +77,7 @@ function StudentHousingPage() {
                             foundCount={filteredHostels.length}
                         />
 
-                        {/* ফিল্টার সেকশন (আগের মতোই থাকবে) */}
+                        {/* ফিল্টার সেকশন */}
                         <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 p-6">
                             <div className="flex items-center gap-2 mb-6 border-b pb-4">
                                 <LuFilter className="text-slate-800" size={20} />
@@ -132,14 +130,23 @@ function StudentHousingPage() {
                         </div>
                     </aside>
 
-                    <main className="flex-grow space-y-6">
-                        {filteredHostels.map((item) => (
-                            <HostelCard
-                                key={item.id}
-                                item={item}
-                                onRouteClick={() => handleNavigation(item)}
-                            />
-                        ))}
+                    {/* RIGHT SIDE: Scrollable Hostel Cards */}
+                    <main className="flex-grow space-y-6 w-full">
+                        {filteredHostels.length > 0 ? (
+                            filteredHostels.map((item) => (
+                                <HostelCard
+                                    key={item.id}
+                                    item={item}
+                                    onRouteClick={() => handleNavigation(item)}
+                                />
+                            ))
+                        ) : (
+                            <div className="bg-white rounded-[32px] p-20 text-center border-2 border-dashed border-gray-100">
+                                <p className="text-gray-400 font-bold text-lg text-center mx-auto">
+                                    No Hostels Found in this range
+                                </p>
+                            </div>
+                        )}
                     </main>
                 </div>
             </div>
