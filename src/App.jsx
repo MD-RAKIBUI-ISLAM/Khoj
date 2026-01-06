@@ -9,6 +9,7 @@ import HomeRentalsPage from './Pages/HomeRentalsPage/HomeRentalsPage';
 import HotelResortPage from './Pages/HotelResort/HotelResortPage';
 import ListProperty from './Pages/ListProperty/ListProperty'; // এটি যোগ করুন
 import SignIn from './Pages/Sign/SignIn';
+import ModernStudentHostel from './Pages/StudentHousing/ModernStudentHostel';
 import StudentHousingPage from './Pages/StudentHousing/StudentHousingPage';
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
                         <Route path="/student-housing" element={<StudentHousingPage />} />
                         <Route path="/hotel-resort" element={<HotelResortPage />} />
                         <Route path="/home-rentals" element={<HomeRentalsPage />} />
+                        <Route
+                            path="/student-housing/details/:id"
+                            element={<ModernStudentHostel />}
+                        />
                     </Routes>
                 </main>
 

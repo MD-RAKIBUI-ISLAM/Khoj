@@ -1,6 +1,6 @@
 import {
     LuArrowRight,
-    LuCheck, // আপনার লিস্ট অনুযায়ী 'LuCheck' ব্যবহার করা হলো
+    LuCheck,
     LuDroplets,
     LuFlame,
     LuMapPin,
@@ -9,8 +9,10 @@ import {
     LuUsers,
     LuZap
 } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 function HostelCard({ item, onRouteClick }) {
+    const navigate = useNavigate();
     return (
         <div className="bg-white rounded-[32px] border border-gray-100 p-6 flex flex-col xl:flex-row gap-8 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500 group relative overflow-hidden">
             {/* Image Section */}
@@ -205,6 +207,7 @@ function HostelCard({ item, onRouteClick }) {
 
                         <button
                             type="button"
+                            onClick={() => navigate(`/student-housing/details/${item.id}`)}
                             className="flex-grow sm:flex-grow-0 flex items-center justify-center gap-2 px-8 py-4 bg-blue-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-600 transition-all group/details"
                         >
                             View Details
