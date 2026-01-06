@@ -73,24 +73,48 @@ function HostelCard({ item, onRouteClick }) {
                         </div>
                     </div>
 
-                    {/* Stats Row */}
-                    <div className="flex flex-wrap gap-3 mb-6">
-                        <div className="flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-2xl border border-blue-100/50">
-                            <LuUsers size={16} className="text-blue-600" />
-                            <span className="text-sm font-black text-blue-900">
-                                {item.capacity}
-                            </span>
+                    {/* Stats Row - Enhanced & Professional Look */}
+                    <div className="flex flex-wrap gap-4 mb-8">
+                        {/* 1. Capacity Card */}
+                        <div className="flex-1 min-w-[120px] group/stat flex flex-col items-center justify-center gap-2 p-5 bg-gradient-to-b from-blue-50/50 to-white border border-blue-100/60 rounded-[24px] hover:border-blue-400 hover:shadow-lg transition-all duration-300">
+                            <div className="p-3 bg-white rounded-2xl shadow-sm text-blue-600 group-hover/stat:scale-110 transition-transform">
+                                <LuUsers size={24} />
+                            </div>
+                            <div className="text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">
+                                    Capacity
+                                </p>
+                                <p className="text-lg font-black text-slate-900">{item.capacity}</p>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-2xl border border-slate-100">
-                            <span className="text-sm font-bold text-slate-500">Rooms:</span>
-                            <span className="text-sm font-black text-slate-900">{item.rooms}</span>
+
+                        {/* 2. Rooms Card */}
+                        <div className="flex-1 min-w-[120px] group/stat flex flex-col items-center justify-center gap-2 p-5 bg-gradient-to-b from-slate-50/50 to-white border border-slate-100 rounded-[24px] hover:border-slate-300 hover:shadow-lg transition-all duration-300">
+                            <div className="p-3 bg-white rounded-2xl shadow-sm text-indigo-600 group-hover/stat:scale-110 transition-transform">
+                                <LuMapPin size={24} />{' '}
+                                {/* আপনি এখানে LuHome ও ব্যবহার করতে পারেন */}
+                            </div>
+                            <div className="text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">
+                                    Rooms
+                                </p>
+                                <p className="text-lg font-black text-slate-900">{item.rooms}</p>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-2xl border border-slate-100">
-                            <LuDroplets size={14} className="text-cyan-500" />
-                            <span className="text-sm font-bold text-slate-500">Washroom:</span>
-                            <span className="text-sm font-black text-slate-900">
-                                {item.washrooms}
-                            </span>
+
+                        {/* 3. Washroom Card */}
+                        <div className="flex-1 min-w-[120px] group/stat flex flex-col items-center justify-center gap-2 p-5 bg-gradient-to-b from-cyan-50/50 to-white border border-cyan-100/60 rounded-[24px] hover:border-cyan-400 hover:shadow-lg transition-all duration-300">
+                            <div className="p-3 bg-white rounded-2xl shadow-sm text-cyan-500 group-hover/stat:scale-110 transition-transform">
+                                <LuDroplets size={24} />
+                            </div>
+                            <div className="text-center">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5">
+                                    Washroom
+                                </p>
+                                <p className="text-lg font-black text-slate-900">
+                                    {item.washrooms}
+                                </p>
+                            </div>
                         </div>
                     </div>
 
