@@ -121,14 +121,14 @@ function HotelCard({ item, onRouteClick }) {
                         </div>
                         <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col justify-center">
                             <div className="flex flex-wrap gap-x-4 gap-y-2">
-                                {Object.entries(item.meals).map(([meal, status]) => (
+                                {Object.entries(item.meals).map(([meal, details]) => (
                                     <p
                                         key={meal}
                                         className="text-[11px] font-bold text-slate-500 uppercase flex items-center gap-1.5"
                                     >
                                         <span
                                             className={
-                                                status.includes('Free')
+                                                details.status?.toLowerCase().includes('free')
                                                     ? 'text-green-500'
                                                     : 'text-slate-300'
                                             }
@@ -137,7 +137,7 @@ function HotelCard({ item, onRouteClick }) {
                                         </span>
                                         {meal}:{' '}
                                         <span className="text-slate-800">
-                                            {status.split('(')[0]}
+                                            {details.status?.split('(')[0]}
                                         </span>
                                     </p>
                                 ))}
