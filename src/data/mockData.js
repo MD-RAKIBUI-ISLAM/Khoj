@@ -330,20 +330,84 @@ export const studentHostelsData = [
         title: 'Modern Student Hostel-Dhanmondi',
         location: 'Dhanmondi, Dhaka',
         rating: 4.5,
-        reviews: 128,
-        price: '12,000BDT',
-        rooms: 4,
+        reviews: 128, // total review count
+        price: '12,000BDT', // monthly rent
+        rooms: 4, // available rooms
         washrooms: 2,
         capacity: '2-3 People per room',
-        roomAvailability: [
-            'Room 101: 1 free seat out of 3',
-            'Room 102: 0 free seat out of 3',
-            'Room 103: 1 free seat out of 2',
-            'Room 104: 3 free seat out of 3'
+
+        // ১. এক্সট্রা কস্ট / ইউটিলিটি (Sidebar এর জন্য)
+        utilities: {
+            current: '800BDT',
+            gas: '500BDT',
+            water: '200BDT'
+        },
+        totalMonthlyCost: '13,500BDT',
+
+        // ২. ডেসক্রিপশন
+        description:
+            'A comfortable and affordable student hostel located in the heart of Dhanmondi. Perfect for university students seeking quality accommodation with all necessary amenities. The hostel features a common study area, high-speed Wi-Fi throughout, and friendly staff.',
+
+        // ৩. বিস্তারিত এ্যামেনিটিস (Tabs এর জন্য)
+        amenities: {
+            connectivity: ['High speed Wifi', '24/7 Internet'],
+            facilities: [
+                'Common Study Area',
+                'Laundry Service',
+                'Shared Kitchen',
+                'Hot Water Facility'
+            ],
+            safety: ['24/7 Security', 'Safety Deposit Box', 'CCTV Camera'],
+            leisure: ['Television Area', 'Outdoor Space', 'Reading Room']
+        },
+
+        // ৪. হোস্টেল ইনফরমেশন ও টার্মস
+        hostelInfo: {
+            gateHours: '6 AM - 12 AM (Late entry available with notice)',
+            security: 'Professional security guard on duty 24/7',
+            cleaning: 'Daily room cleaning (Monday - Saturday)',
+            cookingFacilities: 'Shared kitchen with cooking facilities'
+        },
+        terms: [
+            'Minimum 6 months stay',
+            'One month security deposit',
+            'No smoking inside rooms',
+            'Quiet hours after 11 PM',
+            'Guests allowed on weekends only'
         ],
+
+        // ৫. রুম এভেইল্যাবিলিটি (আগের ডাটা বজায় রাখা হয়েছে)
+        roomAvailability: [
+            { room: 'Room 101', status: '1 free seat out of 3' },
+            { room: 'Room 102', status: '0 free seat out of 3' },
+            { room: 'Room 103', status: '1 free seat out of 2' },
+            { room: 'Room 104', status: '3 free seat out of 3' }
+        ],
+
+        // ৬. ইউজার রিভিউ (ইমেজে যেমন দেখা যাচ্ছে)
+        userReviews: [
+            {
+                id: 1,
+                user: 'Fatima Khan',
+                date: '2 weeks ago',
+                rating: 5,
+                comment:
+                    'Excellent accommodation for students. The WiFi is very fast and the common study area is great for group projects.'
+            },
+            {
+                id: 2,
+                user: 'Karim Ahmad',
+                date: '1 month ago',
+                rating: 4,
+                comment:
+                    'Great value for money. Location is perfect for university students. Only issue is sometimes hot water pressure is low.'
+            }
+        ],
+
         tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
-        utilities: { current: '1000BDT', gas: '500BDT', water: '250BDT' },
         image: modernHostelImg,
+        // মাল্টিপল ইমেজ থাকলে স্লাইডারের জন্য
+        additionalImages: [modernHostelImg, modernHostelImg, modernHostelImg],
         mapLocation: 'https://www.google.com/maps/search/Dhanmondi+Student+Hostel+Dhaka'
     },
     {
@@ -356,15 +420,41 @@ export const studentHostelsData = [
         rooms: 6,
         washrooms: 2,
         capacity: '2-4 People per room',
+        utilities: { current: '1200BDT', gas: '400BDT', water: '200BDT' },
+        totalMonthlyCost: '11,800BDT',
+        description:
+            'Experience premium living in the heart of Mirpur. Our facility provides a studious environment with top-notch security and modern amenities for serious students.',
         roomAvailability: [
-            'Room 301: 1 free seat out of 4',
-            'Room 302: 2 free seat out of 4',
-            'Room 303: 1 free seat out of 2',
-            'Room 304: 4 free seat out of 4'
+            { room: 'Room 301', status: '1 free seat out of 4' },
+            { room: 'Room 302', status: '2 free seat out of 4' },
+            { room: 'Room 303', status: '1 free seat out of 2' },
+            { room: 'Room 304', status: '4 free seat out of 4' }
+        ],
+        amenities: {
+            connectivity: ['High speed Wifi', '24/7 Internet'],
+            facilities: ['Library Access', 'Laundry Service', 'AC Rooms', 'Shared Kitchen'],
+            safety: ['24/7 Security', 'CCTV Monitoring'],
+            leisure: ['Indoor Games', 'Common TV Room']
+        },
+        hostelInfo: {
+            gateHours: '5:30 AM - 11:30 PM',
+            security: '24/7 Guard Service',
+            cleaning: 'Daily Cleaning',
+            cookingFacilities: 'Full Kitchen Available'
+        },
+        terms: ['1 Month Advance', 'Quiet Hours: 11 PM', 'No Outside Guests after 8 PM'],
+        userReviews: [
+            {
+                id: 1,
+                user: 'Sabbir Hossain',
+                date: '1 month ago',
+                rating: 5,
+                comment: 'Best hostel in Mirpur area.'
+            }
         ],
         tags: ['High Speed WiFi', 'Laundry Service', 'AC Room', '24/7 Security'],
-        utilities: { current: '1200BDT', gas: '400BDT', water: '200BDT' },
         image: premiumHousingImg,
+        additionalImages: [premiumHousingImg],
         mapLocation:
             'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.328233583151!2d90.3665091!3d23.8069245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d6f6b8c2ff%3A0x3b138861ee082232!2sMirpur%2010%20Roundabout!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd'
     },
@@ -378,15 +468,41 @@ export const studentHostelsData = [
         rooms: 5,
         washrooms: 2,
         capacity: '3-4 People per room',
+        utilities: { current: '700BDT', gas: '350BDT', water: '180BDT' },
+        totalMonthlyCost: '11,230BDT',
+        description:
+            'Conveniently located near GEC Circle, providing easy access to major universities in Chittagong. Safe, clean, and affordable.',
         roomAvailability: [
-            'Room 501: 1 free seat out of 4',
-            'Room 502: 2 free seat out of 4',
-            'Room 503: 3 free seat out of 3',
-            'Room 504: 2 free seat out of 4'
+            { room: 'Room 501', status: '1 free seat out of 4' },
+            { room: 'Room 502', status: '2 free seat out of 4' },
+            { room: 'Room 503', status: '3 free seat out of 3' },
+            { room: 'Room 504', status: '2 free seat out of 4' }
+        ],
+        amenities: {
+            connectivity: ['Standard WiFi'],
+            facilities: ['Basic Kitchen', 'Hot Water', 'Study Room'],
+            safety: ['24/7 Guard'],
+            leisure: ['Rooftop Access']
+        },
+        hostelInfo: {
+            gateHours: '6 AM - 11 PM',
+            security: 'Manual Guard',
+            cleaning: 'Weekly Deep Clean',
+            cookingFacilities: 'Basic Stove'
+        },
+        terms: ['Identity Verification Required', 'No Smoking', 'Rent due by 5th of month'],
+        userReviews: [
+            {
+                id: 1,
+                user: 'Anika Tasnim',
+                date: '3 weeks ago',
+                rating: 4,
+                comment: 'Good location but kitchen could be cleaner.'
+            }
         ],
         tags: ['WiFi', 'Hot Water', 'Basic Kitchen', '24/7 Security'],
-        utilities: { current: '700BDT', gas: '350BDT', water: '180BDT' },
         image: centralHostelImg,
+        additionalImages: [centralHostelImg],
         mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong'
     },
     {
@@ -399,14 +515,40 @@ export const studentHostelsData = [
         rooms: 3,
         washrooms: 2,
         capacity: '2-3 People per room',
+        utilities: { current: '800BDT', gas: '300BDT', water: '150BDT' },
+        totalMonthlyCost: '10,750BDT',
+        description:
+            'A home away from home in Sylhet. We focus on providing a quiet and elite environment for students who want to focus on their studies.',
         roomAvailability: [
-            'Room 401: 2 free seat out of 4',
-            'Room 402: 1 free seat out of 3',
-            'Room 403: 3 free seat out of 3'
+            { room: 'Room 401', status: '2 free seat out of 4' },
+            { room: 'Room 402', status: '1 free seat out of 3' },
+            { room: 'Room 403', status: '3 free seat out of 3' }
+        ],
+        amenities: {
+            connectivity: ['Fiber Optic WiFi'],
+            facilities: ['Library', 'Dining Hall', 'Prayer Room'],
+            safety: ['24/7 Security'],
+            leisure: ['Newspaper/Magazine Area']
+        },
+        hostelInfo: {
+            gateHours: '5 AM - 12 AM',
+            security: 'CCTV & Guard',
+            cleaning: 'Daily Room Service',
+            cookingFacilities: 'Canteen Service Available'
+        },
+        terms: ['Students Only', 'No Noise after 10 PM', 'Security Deposit Required'],
+        userReviews: [
+            {
+                id: 1,
+                user: 'Rashed Ahmed',
+                date: '2 months ago',
+                rating: 5,
+                comment: 'Very quiet place, perfect for medical students.'
+            }
         ],
         tags: ['WiFi', 'Library', 'Dining Hall', '24/7 Guard'],
-        utilities: { current: '800BDT', gas: '300BDT', water: '150BDT' },
         image: sylhetHostelImg,
+        additionalImages: [sylhetHostelImg],
         mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet'
     }
 ];

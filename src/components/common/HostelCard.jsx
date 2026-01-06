@@ -125,15 +125,21 @@ function HostelCard({ item, onRouteClick }) {
                                 Room Availability
                             </p>
                             <div className="space-y-1.5">
-                                {item.roomAvailability?.map((line, i) => (
+                                {item.roomAvailability?.map((info, i) => (
                                     <p
                                         key={i}
                                         className="text-xs text-slate-600 font-semibold flex items-center gap-2"
                                     >
                                         <span
-                                            className={`w-1.5 h-1.5 rounded-full ${line.includes('0 free') ? 'bg-rose-400' : 'bg-emerald-500 animate-pulse'}`}
+                                            className={`w-1.5 h-1.5 rounded-full ${
+                                                // লজিক চেক: status এর মধ্যে '0 free' লেখা আছে কি না
+                                                info.status.includes('0 free')
+                                                    ? 'bg-rose-400'
+                                                    : 'bg-emerald-500 animate-pulse'
+                                            }`}
                                         />
-                                        {line}
+                                        {/* নতুন ডাটা স্ট্রাকচার অনুযায়ী টেক্সট দেখানো */}
+                                        {info.room}: {info.status}
                                     </p>
                                 ))}
                             </div>
