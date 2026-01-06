@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-    LuArrowLeft,
     LuChevronLeft,
     LuChevronRight,
     LuClock,
@@ -13,7 +12,7 @@ import {
     LuStar,
     LuZap
 } from 'react-icons/lu';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import BookingModal from '../../components/common/BookingModal';
 import Button from '../../components/common/Button';
@@ -21,12 +20,10 @@ import { studentHostelsData } from '../../data/mockData';
 
 function ModernStudentHostel() {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Amenities');
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-    // ডাইনামিক ডাটা ফিল্টারিং (Radix parameter সহ)
     const hostel =
         studentHostelsData.find((item) => item.id === parseInt(id, 10)) || studentHostelsData[0];
 
@@ -43,65 +40,107 @@ function ModernStudentHostel() {
 
     return (
         <div className="min-h-screen bg-[#FDFDFD] pb-44 font-sans selection:bg-blue-100">
-            {/* Top Navigation */}
-            <header className="sticky top-[72px] z-[110] bg-white/80 backdrop-blur-md max-w-[1200px] mx-auto px-6 py-6">
-                <button
-                    type="button"
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-slate-500 font-bold hover:text-blue-600 transition-all group"
-                >
-                    <LuArrowLeft
-                        size={20}
-                        className="group-hover:-translate-x-1 transition-transform"
-                    />
-                    Back to Listings
-                </button>
-            </header>
-
-            <main className="max-w-[1200px] mx-auto px-6">
-                {/* 1. Hero Image Slider (High Resolution Support) */}
-                <section className="relative rounded-[32px] md:rounded-[48px] overflow-hidden bg-slate-900 aspect-[4/3] md:aspect-[21/9] shadow-2xl group border border-slate-200">
+            <main className="max-w-[1200px] mx-auto px-6 pt-40 lg:px-12">
+                {/* 1. Hero Image Slider */}
+                <section className="relative mx-auto max-w-[900px] rounded-[24px] overflow-hidden bg-slate-900 aspect-[16/9] md:aspect-[21/7] shadow-xl group border border-slate-200">
                     <img
                         src={hostel.additionalImages[currentImgIndex]}
                         alt={hostel.title}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-                    {/* Image Navigation Buttons */}
-                    <div className="absolute inset-x-4 md:inset-x-8 top-1/2 -translate-y-1/2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    {/* Navigation Arrows - ইমেজ ছোট হওয়ায় এগুলোও কিছুটা ছোট করা হয়েছে */}
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                             type="button"
                             onClick={prevImage}
-                            className="p-3 md:p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white hover:bg-white hover:text-black transition-all shadow-xl"
+                            className="p-2 bg-white/20 backdrop-blur-xl border border-white/30 rounded-full text-white hover:bg-white hover:text-black transition-all"
                         >
-                            <LuChevronLeft size={24} />
+                            <LuChevronLeft size={20} />
                         </button>
                         <button
                             type="button"
                             onClick={nextImage}
-                            className="p-3 md:p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full text-white hover:bg-white hover:text-black transition-all shadow-xl"
+                            className="p-2 bg-white/20 backdrop-blur-xl border border-white/30 rounded-full text-white hover:bg-white hover:text-black transition-all"
                         >
-                            <LuChevronRight size={24} />
+                            <LuChevronRight size={20} />
                         </button>
                     </div>
 
-                    <div className="absolute bottom-8 left-8 text-white">
-                        <div className="flex gap-2 mb-3">
-                            <span className="px-3 py-1 bg-blue-500 text-white text-[10px] font-black uppercase tracking-widest rounded-lg shadow-lg">
+                    <div className="absolute bottom-6 left-6 text-white">
+                        <div className="flex gap-2 mb-2">
+                            <span className="px-2 py-0.5 bg-blue-500 text-white text-[9px] font-black uppercase tracking-widest rounded-md shadow-lg">
                                 Verified
                             </span>
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight">
+                        <h1 className="text-2xl md:text-3xl font-black tracking-tight">
                             {hostel.title}
                         </h1>
                     </div>
                 </section>
 
-                {/* 2. Content Grid */}
+                {/* 2. Content Grid - Strictly Ordered for Mobile */}
                 <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    {/* Left: Tab Navigation */}
-                    <aside className="lg:col-span-4">
+                    {/* 1. Overview - Mobile Order 1 */}
+                    <div className="lg:col-span-8 order-1 lg:order-2 space-y-4">
+                        <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
+                            Overview
+                        </h2>
+                        <p className="text-slate-600 leading-relaxed text-lg font-medium">
+                            {hostel.description}
+                        </p>
+                    </div>
+
+                    {/* 2. Room Capacity & Availability - Mobile Order 2 */}
+                    <div className="lg:col-span-8 order-2 lg:order-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-6 bg-slate-900 rounded-[32px] flex items-center gap-5 border border-slate-800 shadow-xl shadow-slate-200/50">
+                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
+                                <LuInfo size={24} />
+                            </div>
+                            <div>
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] mb-0.5">
+                                    Room Capacity
+                                </p>
+                                <h4 className="text-lg font-black text-white leading-tight">
+                                    {hostel.capacity}
+                                </h4>
+                            </div>
+                        </div>
+                        <div className="p-6 bg-blue-50/50 border border-blue-100 rounded-[32px] flex items-center gap-5">
+                            <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
+                                <LuShieldCheck size={24} />
+                            </div>
+                            <div>
+                                <p className="text-[10px] font-black text-blue-400 uppercase tracking-[2px] mb-0.5">
+                                    Available Now
+                                </p>
+                                <h4 className="text-lg font-black text-slate-900 leading-tight">
+                                    {hostel.rooms} Empty Rooms
+                                </h4>
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap gap-3 p-2 bg-slate-50/50 border border-slate-100 rounded-[32px] md:col-span-2">
+                            {hostel.roomAvailability.map((room, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex-1 min-w-[140px] bg-white border border-slate-200/60 p-4 rounded-2xl text-center"
+                                >
+                                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
+                                        {room.room}
+                                    </p>
+                                    <p
+                                        className={`text-[11px] font-black uppercase ${room.status.includes('0 free') ? 'text-rose-500' : 'text-emerald-600'}`}
+                                    >
+                                        {room.status}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* 3. Aside (Tabs) - Mobile Order 3, Desktop Order 1 (Left Sidebar) */}
+                    <aside className="lg:col-span-4 order-3 lg:order-1 lg:row-span-3">
                         <div className="sticky top-32 flex flex-col gap-3 p-3 bg-slate-50 rounded-[32px] border border-slate-100">
                             {[
                                 { id: 'Amenities', icon: <LuShieldCheck />, label: 'Amenities' },
@@ -129,71 +168,9 @@ function ModernStudentHostel() {
                         </div>
                     </aside>
 
-                    {/* Right: Tab Panels */}
-                    <article className="lg:col-span-8 space-y-8">
-                        <div className="space-y-4">
-                            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
-                                Overview
-                            </h2>
-                            <p className="text-slate-600 leading-relaxed text-lg font-medium">
-                                {hostel.description}
-                            </p>
-                        </div>
-                        {/* 🚀 New: Capacity & Room Availability Section */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {/* Capacity Info */}
-                            <div className="p-6 bg-slate-900 rounded-[32px] flex items-center gap-5 border border-slate-800 shadow-xl shadow-slate-200/50">
-                                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
-                                    <LuInfo size={24} />
-                                </div>
-                                <div>
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] mb-0.5">
-                                        Room Capacity
-                                    </p>
-                                    <h4 className="text-lg font-black text-white leading-tight">
-                                        {hostel.capacity}
-                                    </h4>
-                                </div>
-                            </div>
-
-                            {/* Total Rooms Availability */}
-                            <div className="p-6 bg-blue-50/50 border border-blue-100 rounded-[32px] flex items-center gap-5">
-                                <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                                    <LuShieldCheck size={24} />
-                                </div>
-                                <div>
-                                    <p className="text-[10px] font-black text-blue-400 uppercase tracking-[2px] mb-0.5">
-                                        Available Now
-                                    </p>
-                                    <h4 className="text-lg font-black text-slate-900 leading-tight">
-                                        {hostel.rooms} Empty Rooms
-                                    </h4>
-                                </div>
-                            </div>
-
-                            {/* Detailed Room List (Scrollable on mobile) */}
-                            <div className="flex flex-wrap gap-3 p-2 bg-slate-50/50 border border-slate-100 rounded-[32px]">
-                                {hostel.roomAvailability.map((room, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="flex-1 min-w-[140px] bg-white border border-slate-200/60 p-4 rounded-2xl text-center"
-                                    >
-                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
-                                            {room.room}
-                                        </p>
-                                        <p
-                                            className={`text-[11px] font-black uppercase ${room.status.includes('0 free') ? 'text-rose-500' : 'text-emerald-600'}`}
-                                        >
-                                            {room.status}
-                                        </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Content Loader */}
+                    {/* 4. Tab Panels - Mobile Order 4 */}
+                    <div className="lg:col-span-8 order-4 lg:order-4">
                         <div className="bg-white border border-slate-100 p-8 md:p-10 rounded-[40px] shadow-sm min-h-[400px]">
-                            {/* Amenities Tab */}
                             {activeTab === 'Amenities' && (
                                 <div className="space-y-10 animate-in fade-in duration-500">
                                     {Object.entries(hostel.amenities).map(([category, list]) => (
@@ -221,8 +198,6 @@ function ModernStudentHostel() {
                                     ))}
                                 </div>
                             )}
-
-                            {/* Hostel Info & Rules Tab */}
                             {activeTab === 'House Rule' && (
                                 <div className="space-y-10 animate-in fade-in duration-500">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -267,8 +242,6 @@ function ModernStudentHostel() {
                                     </div>
                                 </div>
                             )}
-
-                            {/* User Reviews Tab */}
                             {activeTab === 'Reviews' && (
                                 <div className="space-y-6 animate-in fade-in duration-500">
                                     {hostel.userReviews.map((rev) => (
@@ -308,13 +281,13 @@ function ModernStudentHostel() {
                                 </div>
                             )}
                         </div>
-                    </article>
+                    </div>
                 </div>
             </main>
 
-            {/* 3. Floating Bottom Booking Bar - Footer-Aware Sticky Design */}
+            {/* Floating Booking Bar */}
             <div className="mt-20 px-0 md:px-6 sticky bottom-0 md:bottom-8 z-[100]">
-                <div className="max-w-[1100px] mx-auto bg-slate-900/95 backdrop-blur-2xl p-5 md:p-6 rounded-t-3xl md:rounded-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.3)] border-t md:border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-300">
+                <div className="max-w-[1100px] mx-auto bg-slate-900/95 backdrop-blur-2xl p-5 md:p-6 rounded-t-3xl md:rounded-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.3)] border-t md:border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-8 w-full md:w-auto px-4 md:px-0">
                         <div>
                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
@@ -329,30 +302,27 @@ function ModernStudentHostel() {
                                 </span>
                             </div>
                         </div>
-
-                        {/* Bills Highlight */}
                         <div className="hidden lg:flex gap-6 border-l border-white/10 pl-8">
                             <div className="text-center group cursor-help">
-                                <LuZap className="text-yellow-400 mx-auto mb-1 group-hover:scale-125 transition-transform" />
+                                <LuZap className="text-yellow-400 mx-auto mb-1" />
                                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">
                                     {hostel.utilities.current}
                                 </p>
                             </div>
                             <div className="text-center group cursor-help">
-                                <LuFlame className="text-orange-400 mx-auto mb-1 group-hover:scale-125 transition-transform" />
+                                <LuFlame className="text-orange-400 mx-auto mb-1" />
                                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">
                                     {hostel.utilities.gas}
                                 </p>
                             </div>
                             <div className="text-center group cursor-help">
-                                <LuDroplets className="text-blue-400 mx-auto mb-1 group-hover:scale-125 transition-transform" />
+                                <LuDroplets className="text-blue-400 mx-auto mb-1" />
                                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-tighter">
                                     {hostel.utilities.water}
                                 </p>
                             </div>
                         </div>
                     </div>
-
                     <div className="flex gap-3 w-full md:w-auto px-4 md:px-0">
                         <Button
                             type="button"
@@ -361,20 +331,19 @@ function ModernStudentHostel() {
                             className="flex-1 md:flex-none bg-white/10 text-white hover:bg-white/20 border-0 rounded-2xl px-6 py-4 font-black text-[10px] uppercase tracking-widest"
                         />
                         <Button
-                            type="button" // type change kore button dewa hoyeche
-                            onClick={() => setIsBookingModalOpen(true)} // Modal trigger
+                            type="button"
+                            onClick={() => setIsBookingModalOpen(true)}
                             label="Confirm Booking"
-                            className="flex-[2] md:flex-none bg-blue-600 hover:bg-blue-500 py-4 px-12 rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-2xl shadow-blue-600/30 transition-all active:scale-95"
+                            className="flex-[2] md:flex-none bg-blue-600 hover:bg-blue-500 py-4 px-12 rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-2xl shadow-blue-600/30 active:scale-95"
                         />
                     </div>
                 </div>
             </div>
-            {/* Modal Component Integration */}
+
             <BookingModal
                 isOpen={isBookingModalOpen}
                 onClose={() => setIsBookingModalOpen(false)}
                 hostelTitle={hostel.title}
-                // হোস্টেলের ডাটা থেকে রুমের লিস্টটি প্রপ হিসেবে পাস করা হচ্ছে
                 roomOptions={hostel.roomAvailability}
             />
         </div>
