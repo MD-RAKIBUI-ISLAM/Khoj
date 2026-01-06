@@ -1,7 +1,10 @@
 import centralHostelImg from '../assets/central_hostel.png';
+import familyHouseImg from '../assets/Family_House_Complex_Feni.png';
 import luxuryResortImg from '../assets/luxuary_resort.png';
+import feniComplexImg from '../assets/Modern_Apartment_Complex_Feni.png';
 import modernHostelImg from '../assets/modern_student_hostel.png';
 import premiumHousingImg from '../assets/premium_student_housing.png';
+import bananiApartmentImg from '../assets/Spacious_Apartment_Banani.png';
 import sylhetHostelImg from '../assets/sylhet_hostel.png';
 
 export const buttonTexts = {
@@ -96,7 +99,7 @@ export const categoriesData = [
     },
     {
         id: 3,
-        title: 'Home Rentals',
+        title: 'Home Rentals & Apartments',
         description: 'Entire apartments and houses',
         listings: '8.9K+ listings',
         features: ['Family Friendly', 'Long-term rent', 'Full Spaces'],
@@ -463,5 +466,84 @@ export const hotelResortData = [
         meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
         image: centralHostelImg,
         mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong'
+    }
+];
+
+export const homeRentalsData = [
+    {
+        id: 1,
+        title: 'Spacious Apartment - Banani',
+        location: 'Banani, Dhaka',
+        rating: 4.9,
+        reviews: 128,
+        price: '35,000BDT',
+        size: '1,500 sqft',
+        rooms: 3,
+        baths: 2,
+        balcony: 2,
+        direction: 'South-East',
+        security: 'High - 24/7 Guard',
+        flatAvailability: [
+            { id: 'Flat 1A', status: 'Vacant' },
+            { id: 'Flat 2A', status: 'Vacant' },
+            { id: 'Flat 3A', status: 'Vacant' },
+            { id: 'Flat 1B', status: 'Booked till Feb, 2026' },
+            { id: 'Flat 2B', status: 'Booked till Apr, 2026' }
+        ],
+        tags: ['Balcony', 'Parking', 'Garden Access', 'Elevator'],
+        features: ['Balcony', 'Parking', 'Garden Access'],
+        image: bananiApartmentImg,
+        mapLocation: 'https://www.google.com/maps?q=Banani+Dhaka'
+    },
+    {
+        id: 2,
+        title: 'Modern Apartment Complex - Feni City',
+        location: 'Feni City, Feni',
+        rating: 4.8,
+        reviews: 256,
+        price: '28,000BDT',
+        size: '900 sqft',
+        rooms: 2,
+        baths: 2,
+        balcony: 1,
+        direction: 'North-West',
+        security: 'CCTV - 24/7 Security',
+        flatAvailability: [
+            { id: 'Flat 101', status: 'Booked till Mar, 2026' },
+            { id: 'Flat 103', status: 'Booked till Jan, 2026' },
+            { id: 'Flat 202', status: 'Vacant' },
+            { id: 'Flat 102', status: 'Vacant' },
+            { id: 'Flat 201', status: 'Vacant' },
+            { id: 'Flat 203', status: 'Booked till Feb, 2026' }
+        ],
+        tags: ['Balcony', 'Common Garden', 'Security', 'Gas Connection'],
+        features: ['Balcony', 'Common Garden', 'Security'],
+        image: feniComplexImg,
+        mapLocation: 'https://www.google.com/maps?q=Feni+City+Feni'
+    },
+    {
+        id: 3,
+        title: 'Family House Complex - Feni',
+        location: 'GEC, Feni',
+        rating: 4.3,
+        reviews: 92,
+        price: '28,000BDT',
+        size: '1500 sqft',
+        rooms: 2,
+        baths: 2,
+        balcony: 1,
+        direction: 'South-East',
+        security: 'High - 24/7 Guard',
+        flatAvailability: [
+            { id: 'Flat A-1', status: 'Vacant' },
+            { id: 'Flat B-1', status: 'Booked till Feb, 2026' },
+            { id: 'Flat C-1', status: 'Vacant' },
+            { id: 'Flat A-2', status: 'Booked till Mar, 2026' },
+            { id: 'Flat B-2', status: 'Vacant' }
+        ],
+        tags: ['Large Balcony', 'Garden', 'Parking', 'Pet Friendly'],
+        features: ['Large Balcony', 'Garden', 'Parking'],
+        image: familyHouseImg,
+        mapLocation: 'https://www.google.com/maps?q=GEC+Feni'
     }
 ];

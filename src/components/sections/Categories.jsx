@@ -11,15 +11,26 @@ function Categories() {
     const navigate = useNavigate();
 
     const handleBrowse = (cat) => {
-        // ডাইনামিক করার জন্য আমরা টাইটেল বা আইডি ব্যবহার করতে পারি
-        if (cat.title === 'Students Housing & Hostels' || cat.id === 1) {
+        const title = cat.title.toLowerCase(); // ছোট হাতের অক্ষরে রূপান্তর করে চেক করা নিরাপদ
+
+        if (title.includes('student') || cat.id === 1) {
             navigate('/student-housing');
-        } else if (cat.title === 'Tourist Resorts and Hotels') {
+        } else if (
+            title.includes('tourist') ||
+            title.includes('resort') ||
+            title.includes('hotel') ||
+            cat.id === 2
+        ) {
             navigate('/hotel-resort');
-            // ভবিষ্যতে এই পেজ তৈরি করলে এখানে পাথ দিবেন
-            // console.log('Tourist page coming soon');
+        } else if (
+            title.includes('home') ||
+            title.includes('rental') ||
+            title.includes('apartment') ||
+            cat.id === 3
+        ) {
+            navigate('/home-rentals');
         } else {
-            console.log(`${cat.title} clicked`);
+            console.log(`${cat.title} clicked but no route found`);
         }
     };
 
