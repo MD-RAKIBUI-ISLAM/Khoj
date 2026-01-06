@@ -556,61 +556,546 @@ export const studentHostelsData = [
 export const hotelResortData = [
     {
         id: 1,
-        title: "Luxuary 5- Star Resort - Cox's Bazar",
-        location: "Cox's Bazar",
-        rating: 4.9,
+        title: "Luxuary 5- Star Resort - Cox's Bazar", // Replaced
+        location: "Cox's Bazar", // Replaced
+        rating: 4.5,
         reviews: 128,
-        price: '8,000BDT',
-        roomStats: { single: 15, double: 25, deluxe: 10 },
+        price: '8,000 BDT',
+        roomStats: { single: 14, double: 20, deluxe: 10 },
         availability: [
-            'Single: 12 available, Next free: 5 Dec, 2025',
-            'Double: 12 available, Next free: 5 Dec, 2025',
-            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+            'Single: 14 available, Next free: 5 Dec, 2025',
+            'Double: 20 available, Next free: 5 Dec, 2025',
+            'Deluxe: 10 available, Next free: 5 Dec, 2025'
         ],
-        tags: ['Free WiFi', 'Resturent', 'Spa', 'Beach Access', '24/7 Security'],
-        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
-        image: luxuryResortImg,
-        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet'
+        tags: [
+            'Free WiFi',
+            'Swimming Pool',
+            'Beach Access',
+            'Restaurant & Bar',
+            'Spa',
+            '24/7 Security'
+        ],
+        amenities: {
+            connectivity: {
+                title: 'Connectivity',
+                items: [
+                    {
+                        name: 'Free High-Speed WiFi',
+                        desc: 'Available in all rooms and public areas',
+                        icon: 'LuWifi'
+                    },
+                    {
+                        name: 'Business Center',
+                        desc: 'Equipped with printers and workstations',
+                        icon: 'LuPcCase'
+                    }
+                ]
+            },
+            facilities: {
+                title: 'Hotel Facilities',
+                items: [
+                    {
+                        name: 'Room Service 24/7',
+                        desc: 'Delicious meals delivered to your door',
+                        icon: 'LuConciergeBell'
+                    },
+                    {
+                        name: 'Restaurant & Bar',
+                        desc: 'Cuisine from around the world',
+                        icon: 'LuUtensils'
+                    },
+                    {
+                        name: 'Conference Rooms',
+                        desc: 'State-of-the-art meeting spaces',
+                        icon: 'LuPresentation'
+                    },
+                    {
+                        name: 'Parking Available',
+                        desc: 'Secure on-site parking for guests',
+                        icon: 'LuCar'
+                    }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Wellness',
+                items: [
+                    {
+                        name: 'Swimming Pool',
+                        desc: 'Infinity pool with a mountain view',
+                        icon: 'LuWaves'
+                    },
+                    {
+                        name: 'Spa & Wellness Center',
+                        desc: 'Professional massage and sauna',
+                        icon: 'LuFlower2'
+                    },
+                    {
+                        name: 'Fitness Center',
+                        desc: 'Modern equipment and personal trainers',
+                        icon: 'LuDumbbell'
+                    },
+                    {
+                        name: 'Beach Access',
+                        desc: 'Private path to the sandy shore',
+                        icon: 'LuPalmtree'
+                    }
+                ]
+            },
+            safety: {
+                title: 'Safety & Security',
+                items: [
+                    {
+                        name: '24/7 Security',
+                        desc: 'CCTV surveillance and professional guards',
+                        icon: 'LuShieldCheck'
+                    },
+                    {
+                        name: 'Fire Safety',
+                        desc: 'Smoke detectors and extinguishers in all areas',
+                        icon: 'LuFlame'
+                    }
+                ]
+            }
+        },
+        meals: {
+            breakfast: {
+                status: 'Free',
+                type: 'Continental & Local Buffet',
+                time: '7:30 AM - 10:30 AM',
+                description: 'Fresh fruits, juices, eggs, and traditional delicacies.',
+                icon: 'LuCoffee'
+            },
+            lunch: {
+                status: 'Available (Paid)',
+                type: 'A La Carte / Set Menu',
+                time: '1:00 PM - 3:30 PM',
+                description: 'Authentic Bengali cuisine and International dishes.',
+                icon: 'LuUtensils'
+            },
+            dinner: {
+                status: 'Available (Paid)',
+                type: 'Fine Dining / BBQ',
+                time: '7:30 PM - 10:30 PM',
+                description: 'Special rooftop BBQ and candle-light dinner options.',
+                icon: 'LuMoon'
+            },
+            allDayDining: {
+                status: 'Available',
+                type: 'Snacks & Beverages',
+                time: '24/7',
+                description: 'Room service and café available for quick bites.',
+                icon: 'LuPizza'
+            }
+        },
+        description:
+            "Experience luxury at our beachfront resort in Cox's Bazar. With stunning ocean views, world-class amenities, and exceptional service, we offer the perfect getaway destination. Our resort features multiple restaurants, spa facilities, and direct beach access.",
+        policies: {
+            checkIn: {
+                time: '2:00 PM',
+                note: 'Early check-in subject to availability',
+                icon: 'LuClock'
+            },
+            checkOut: {
+                time: '12:00 PM',
+                note: 'Express check-out available',
+                icon: 'LuLogOut'
+            },
+            cancellation: {
+                title: 'Flexible Cancellation',
+                description: 'Full refund if cancelled at least 24 hours before check-in date.',
+                isFree: true
+            },
+            childPolicy: {
+                title: 'Children & Extra Beds',
+                description:
+                    'Children under 5 stay for free using existing bedding. Extra bed incurs additional charges.'
+            },
+            parking: {
+                status: 'Complimentary',
+                type: 'On-site Secure Parking',
+                note: 'Valet parking available'
+            },
+            smoking: {
+                policy: 'Non-smoking Rooms',
+                description:
+                    'Smoking is strictly prohibited inside rooms. Designated smoking zones are available outdoors.'
+            },
+            pets: {
+                status: 'Not Allowed',
+                description: 'To maintain a hypoallergenic environment, pets are not permitted.'
+            },
+            securityDeposit: {
+                status: 'Required',
+                amount: 'BDT 2,000 (Refundable)',
+                note: 'Collected at check-in for incidental charges'
+            }
+        },
+        image: luxuryResortImg, // Replaced
+        additionalImages: [luxuryResortImg, premiumHousingImg, centralHostelImg],
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+Zindabazar+Sylhet' // Replaced
     },
     {
         id: 2,
-        title: 'Premium Hotels - Mirpur',
-        location: 'Mirpur-10, Dhaka',
-        rating: 4.8,
-        reviews: 256,
-        price: '10,000BDT',
-        roomStats: { single: 16, double: 20, deluxe: 10 },
+        title: 'Premium Hotels - Mirpur', // Replaced
+        location: 'Mirpur-10, Dhaka', // Replaced
+        rating: 4.5,
+        reviews: 128,
+        price: '8,000 BDT',
+        roomStats: { single: 14, double: 20, deluxe: 10 },
         availability: [
-            'Single: 12 available, Next free: 5 Dec, 2025',
-            'Double: 12 available, Next free: 5 Dec, 2025',
-            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+            'Single: 14 available, Next free: 5 Dec, 2025',
+            'Double: 20 available, Next free: 5 Dec, 2025',
+            'Deluxe: 10 available, Next free: 5 Dec, 2025'
         ],
-        tags: ['Free WiFi', 'Resturent', 'AC Room', '24/7 Security'],
-        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
-        image: premiumHousingImg,
+        tags: [
+            'Free WiFi',
+            'Swimming Pool',
+            'Beach Access',
+            'Restaurant & Bar',
+            'Spa',
+            '24/7 Security'
+        ],
+        amenities: {
+            connectivity: {
+                title: 'Connectivity',
+                items: [
+                    {
+                        name: 'Free High-Speed WiFi',
+                        desc: 'Available in all rooms and public areas',
+                        icon: 'LuWifi'
+                    },
+                    {
+                        name: 'Business Center',
+                        desc: 'Equipped with printers and workstations',
+                        icon: 'LuPcCase'
+                    }
+                ]
+            },
+            facilities: {
+                title: 'Hotel Facilities',
+                items: [
+                    {
+                        name: 'Room Service 24/7',
+                        desc: 'Delicious meals delivered to your door',
+                        icon: 'LuConciergeBell'
+                    },
+                    {
+                        name: 'Restaurant & Bar',
+                        desc: 'Cuisine from around the world',
+                        icon: 'LuUtensils'
+                    },
+                    {
+                        name: 'Conference Rooms',
+                        desc: 'State-of-the-art meeting spaces',
+                        icon: 'LuPresentation'
+                    },
+                    {
+                        name: 'Parking Available',
+                        desc: 'Secure on-site parking for guests',
+                        icon: 'LuCar'
+                    }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Wellness',
+                items: [
+                    {
+                        name: 'Swimming Pool',
+                        desc: 'Infinity pool with a mountain view',
+                        icon: 'LuWaves'
+                    },
+                    {
+                        name: 'Spa & Wellness Center',
+                        desc: 'Professional massage and sauna',
+                        icon: 'LuFlower2'
+                    },
+                    {
+                        name: 'Fitness Center',
+                        desc: 'Modern equipment and personal trainers',
+                        icon: 'LuDumbbell'
+                    },
+                    {
+                        name: 'Beach Access',
+                        desc: 'Private path to the sandy shore',
+                        icon: 'LuPalmtree'
+                    }
+                ]
+            },
+            safety: {
+                title: 'Safety & Security',
+                items: [
+                    {
+                        name: '24/7 Security',
+                        desc: 'CCTV surveillance and professional guards',
+                        icon: 'LuShieldCheck'
+                    },
+                    {
+                        name: 'Fire Safety',
+                        desc: 'Smoke detectors and extinguishers in all areas',
+                        icon: 'LuFlame'
+                    }
+                ]
+            }
+        },
+        meals: {
+            breakfast: {
+                status: 'Free',
+                type: 'Continental & Local Buffet',
+                time: '7:30 AM - 10:30 AM',
+                description: 'Fresh fruits, juices, eggs, and traditional delicacies.',
+                icon: 'LuCoffee'
+            },
+            lunch: {
+                status: 'Available (Paid)',
+                type: 'A La Carte / Set Menu',
+                time: '1:00 PM - 3:30 PM',
+                description: 'Authentic Bengali cuisine and International dishes.',
+                icon: 'LuUtensils'
+            },
+            dinner: {
+                status: 'Available (Paid)',
+                type: 'Fine Dining / BBQ',
+                time: '7:30 PM - 10:30 PM',
+                description: 'Special rooftop BBQ and candle-light dinner options.',
+                icon: 'LuMoon'
+            },
+            allDayDining: {
+                status: 'Available',
+                type: 'Snacks & Beverages',
+                time: '24/7',
+                description: 'Room service and café available for quick bites.',
+                icon: 'LuPizza'
+            }
+        },
+        description:
+            "Experience luxury at our beachfront resort in Cox's Bazar. With stunning ocean views, world-class amenities, and exceptional service, we offer the perfect getaway destination. Our resort features multiple restaurants, spa facilities, and direct beach access.",
+        policies: {
+            checkIn: {
+                time: '2:00 PM',
+                note: 'Early check-in subject to availability',
+                icon: 'LuClock'
+            },
+            checkOut: {
+                time: '12:00 PM',
+                note: 'Express check-out available',
+                icon: 'LuLogOut'
+            },
+            cancellation: {
+                title: 'Flexible Cancellation',
+                description: 'Full refund if cancelled at least 24 hours before check-in date.',
+                isFree: true
+            },
+            childPolicy: {
+                title: 'Children & Extra Beds',
+                description:
+                    'Children under 5 stay for free using existing bedding. Extra bed incurs additional charges.'
+            },
+            parking: {
+                status: 'Complimentary',
+                type: 'On-site Secure Parking',
+                note: 'Valet parking available'
+            },
+            smoking: {
+                policy: 'Non-smoking Rooms',
+                description:
+                    'Smoking is strictly prohibited inside rooms. Designated smoking zones are available outdoors.'
+            },
+            pets: {
+                status: 'Not Allowed',
+                description: 'To maintain a hypoallergenic environment, pets are not permitted.'
+            },
+            securityDeposit: {
+                status: 'Required',
+                amount: 'BDT 2,000 (Refundable)',
+                note: 'Collected at check-in for incidental charges'
+            }
+        },
+        image: premiumHousingImg, // Replaced
+        additionalImages: [premiumHousingImg, luxuryResortImg, centralHostelImg],
         mapLocation:
-            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.328233583151!2d90.3665091!3d23.8069245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d6f6b8c2ff%3A0x3b138861ee082232!2sMirpur%2010%20Roundabout!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd'
+            'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.328233583151!2d90.3665091!3d23.8069245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d6f6b8c2ff%3A0x3b138861ee082232!2sMirpur%2010%20Roundabout!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd' // Replaced
     },
     {
         id: 3,
-        title: 'Central Hostel - Chittagong',
-        location: 'GEC Circle, Chittagong',
-        rating: 4.3,
-        reviews: 92,
-        price: '10,000BDT',
-        roomStats: { single: 5, double: 2, deluxe: 6 },
+        title: 'Central Hostel - Chittagong', // Replaced
+        location: 'GEC Circle, Chittagong', // Replaced
+        rating: 4.5,
+        reviews: 128,
+        price: '8,000 BDT',
+        roomStats: { single: 14, double: 20, deluxe: 10 },
         availability: [
-            'Single: 12 available, Next free: 5 Dec, 2025',
-            'Double: 12 available, Next free: 5 Dec, 2025',
-            'Deluxe: 12 available, Next free: 5 Dec, 2025'
+            'Single: 14 available, Next free: 5 Dec, 2025',
+            'Double: 20 available, Next free: 5 Dec, 2025',
+            'Deluxe: 10 available, Next free: 5 Dec, 2025'
         ],
-        tags: ['WiFi', 'Hot Water', 'Basic Kitchen', '24/7 Security'],
-        meals: { breakfast: 'Free', lunch: 'Available(Paid)', dinner: 'Available(Paid)' },
-        image: centralHostelImg,
-        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong'
+        tags: [
+            'Free WiFi',
+            'Swimming Pool',
+            'Beach Access',
+            'Restaurant & Bar',
+            'Spa',
+            '24/7 Security'
+        ],
+        amenities: {
+            connectivity: {
+                title: 'Connectivity',
+                items: [
+                    {
+                        name: 'Free High-Speed WiFi',
+                        desc: 'Available in all rooms and public areas',
+                        icon: 'LuWifi'
+                    },
+                    {
+                        name: 'Business Center',
+                        desc: 'Equipped with printers and workstations',
+                        icon: 'LuPcCase'
+                    }
+                ]
+            },
+            facilities: {
+                title: 'Hotel Facilities',
+                items: [
+                    {
+                        name: 'Room Service 24/7',
+                        desc: 'Delicious meals delivered to your door',
+                        icon: 'LuConciergeBell'
+                    },
+                    {
+                        name: 'Restaurant & Bar',
+                        desc: 'Cuisine from around the world',
+                        icon: 'LuUtensils'
+                    },
+                    {
+                        name: 'Conference Rooms',
+                        desc: 'State-of-the-art meeting spaces',
+                        icon: 'LuPresentation'
+                    },
+                    {
+                        name: 'Parking Available',
+                        desc: 'Secure on-site parking for guests',
+                        icon: 'LuCar'
+                    }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Wellness',
+                items: [
+                    {
+                        name: 'Swimming Pool',
+                        desc: 'Infinity pool with a mountain view',
+                        icon: 'LuWaves'
+                    },
+                    {
+                        name: 'Spa & Wellness Center',
+                        desc: 'Professional massage and sauna',
+                        icon: 'LuFlower2'
+                    },
+                    {
+                        name: 'Fitness Center',
+                        desc: 'Modern equipment and personal trainers',
+                        icon: 'LuDumbbell'
+                    },
+                    {
+                        name: 'Beach Access',
+                        desc: 'Private path to the sandy shore',
+                        icon: 'LuPalmtree'
+                    }
+                ]
+            },
+            safety: {
+                title: 'Safety & Security',
+                items: [
+                    {
+                        name: '24/7 Security',
+                        desc: 'CCTV surveillance and professional guards',
+                        icon: 'LuShieldCheck'
+                    },
+                    {
+                        name: 'Fire Safety',
+                        desc: 'Smoke detectors and extinguishers in all areas',
+                        icon: 'LuFlame'
+                    }
+                ]
+            }
+        },
+        meals: {
+            breakfast: {
+                status: 'Free',
+                type: 'Continental & Local Buffet',
+                time: '7:30 AM - 10:30 AM',
+                description: 'Fresh fruits, juices, eggs, and traditional delicacies.',
+                icon: 'LuCoffee'
+            },
+            lunch: {
+                status: 'Available (Paid)',
+                type: 'A La Carte / Set Menu',
+                time: '1:00 PM - 3:30 PM',
+                description: 'Authentic Bengali cuisine and International dishes.',
+                icon: 'LuUtensils'
+            },
+            dinner: {
+                status: 'Available (Paid)',
+                type: 'Fine Dining / BBQ',
+                time: '7:30 PM - 10:30 PM',
+                description: 'Special rooftop BBQ and candle-light dinner options.',
+                icon: 'LuMoon'
+            },
+            allDayDining: {
+                status: 'Available',
+                type: 'Snacks & Beverages',
+                time: '24/7',
+                description: 'Room service and café available for quick bites.',
+                icon: 'LuPizza'
+            }
+        },
+        description:
+            "Experience luxury at our beachfront resort in Cox's Bazar. With stunning ocean views, world-class amenities, and exceptional service, we offer the perfect getaway destination. Our resort features multiple restaurants, spa facilities, and direct beach access.",
+        policies: {
+            checkIn: {
+                time: '2:00 PM',
+                note: 'Early check-in subject to availability',
+                icon: 'LuClock'
+            },
+            checkOut: {
+                time: '12:00 PM',
+                note: 'Express check-out available',
+                icon: 'LuLogOut'
+            },
+            cancellation: {
+                title: 'Flexible Cancellation',
+                description: 'Full refund if cancelled at least 24 hours before check-in date.',
+                isFree: true
+            },
+            childPolicy: {
+                title: 'Children & Extra Beds',
+                description:
+                    'Children under 5 stay for free using existing bedding. Extra bed incurs additional charges.'
+            },
+            parking: {
+                status: 'Complimentary',
+                type: 'On-site Secure Parking',
+                note: 'Valet parking available'
+            },
+            smoking: {
+                policy: 'Non-smoking Rooms',
+                description:
+                    'Smoking is strictly prohibited inside rooms. Designated smoking zones are available outdoors.'
+            },
+            pets: {
+                status: 'Not Allowed',
+                description: 'To maintain a hypoallergenic environment, pets are not permitted.'
+            },
+            securityDeposit: {
+                status: 'Required',
+                amount: 'BDT 2,000 (Refundable)',
+                note: 'Collected at check-in for incidental charges'
+            }
+        },
+        image: centralHostelImg, // Replaced
+        additionalImages: [centralHostelImg, premiumHousingImg, luxuryResortImg],
+        mapLocation: 'https://www.google.com/maps/search/Student+Hostel+GEC+Chittagong' // Replaced
     }
 ];
-
 export const homeRentalsData = [
     {
         id: 1,

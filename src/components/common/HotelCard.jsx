@@ -1,6 +1,8 @@
 import { LuArrowRight, LuMapPin, LuNavigation, LuStar } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 function HotelCard({ item, onRouteClick }) {
+    const navigate = useNavigate();
     return (
         <div className="bg-white rounded-[32px] border border-gray-100 p-6 flex flex-col xl:flex-row gap-8 hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-500 group relative overflow-hidden">
             {/* Image Section with Hover Effect */}
@@ -41,6 +43,18 @@ function HotelCard({ item, onRouteClick }) {
                                 {item.reviews} Verified
                             </p>
                         </div>
+                    </div>
+
+                    {/* Tags (আপনার ডাটা থেকে tags গুলো এখানে আসবে) */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {item.tags?.slice(0, 4).map((tag, idx) => (
+                            <span
+                                key={idx}
+                                className="px-3 py-1 bg-slate-50 text-slate-500 rounded-full text-[10px] font-black uppercase border border-slate-100"
+                            >
+                                #{tag}
+                            </span>
+                        ))}
                     </div>
 
                     {/* Room Capacity Chips - Re-designed for Professional Look */}
@@ -157,6 +171,7 @@ function HotelCard({ item, onRouteClick }) {
 
                         <button
                             type="button"
+                            onClick={() => navigate(`/hotel-resort/details/${item.id}`)}
                             className="flex-grow sm:flex-grow-0 flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-green-600 hover:shadow-lg hover:shadow-green-100 transition-all group/details"
                         >
                             View Details
