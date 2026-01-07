@@ -10,6 +10,7 @@ import {
     LuShield,
     LuShieldCheck,
     LuStar,
+    LuUtensils,
     LuZap
 } from 'react-icons/lu';
 import { useParams } from 'react-router-dom';
@@ -40,7 +41,7 @@ function ModernStudentHostel() {
 
     return (
         <div className="min-h-screen bg-[#FDFDFD] pb-44 font-sans selection:bg-blue-100">
-            <main className="max-w-[1200px] mx-auto px-6 pt-40 lg:px-12">
+            <main className="max-w-[1400px] mx-auto px-6 pt-40 lg:px-12">
                 {/* 1. Hero Image Slider */}
                 <section className="relative mx-auto max-w-[900px] rounded-[24px] overflow-hidden bg-slate-900 aspect-[16/9] md:aspect-[21/7] shadow-xl group border border-slate-200">
                     <img
@@ -235,6 +236,44 @@ function ModernStudentHostel() {
                                                     >
                                                         <span className="text-rose-500">•</span>{' '}
                                                         {term}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="space-y-4 p-6 bg-emerald-50/50 rounded-3xl border border-emerald-100">
+                                            <h3 className="flex items-center gap-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
+                                                <LuUtensils /> Dining Info
+                                            </h3>
+                                            <div className="space-y-3">
+                                                {Object.entries(hostel.diningInfo).map(
+                                                    ([key, value]) => (
+                                                        <div
+                                                            key={key}
+                                                            className="flex flex-col border-b border-emerald-100/50 pb-2"
+                                                        >
+                                                            <span className="text-[10px] text-emerald-400 font-black uppercase">
+                                                                {key.replace(/([A-Z])/g, ' $1')}
+                                                            </span>
+                                                            <span className="text-sm font-bold text-slate-700">
+                                                                {value}
+                                                            </span>
+                                                        </div>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4 p-6 bg-amber-50/50 rounded-3xl border border-amber-100">
+                                            <h3 className="flex items-center gap-2 text-xs font-black text-amber-700 uppercase tracking-widest">
+                                                <LuInfo /> Cancellation Policy
+                                            </h3>
+                                            <ul className="space-y-3">
+                                                {hostel.cancellationPolicy.map((policy, i) => (
+                                                    <li
+                                                        key={i}
+                                                        className="text-sm text-slate-600 font-medium flex gap-2"
+                                                    >
+                                                        <span className="text-amber-500">•</span>
+                                                        {policy}
                                                     </li>
                                                 ))}
                                             </ul>

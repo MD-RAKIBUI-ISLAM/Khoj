@@ -375,6 +375,18 @@ export const studentHostelsData = [
             'Quiet hours after 11 PM',
             'Guests allowed on weekends only'
         ],
+        diningInfo: {
+            breakfastTime: '7:30 AM - 10:30 AM',
+            mealSystem: 'Monthly meal plan or Pay-per-meal',
+            outsideFood: 'Allowed in dining area',
+            guestMeals: 'Available with 4-hour advance notice'
+        },
+        cancellationPolicy: [
+            'Full deposit refund with 30-day notice',
+            'No refund for mid-month departure',
+            'Security deposit non-adjustable with last month rent',
+            'Early exit fee applicable for contract break'
+        ],
 
         // ৫. রুম এভেইল্যাবিলিটি (আগের ডাটা বজায় রাখা হয়েছে)
         roomAvailability: [
@@ -443,6 +455,18 @@ export const studentHostelsData = [
             cookingFacilities: 'Full Kitchen Available'
         },
         terms: ['1 Month Advance', 'Quiet Hours: 11 PM', 'No Outside Guests after 8 PM'],
+        diningInfo: {
+            breakfastTime: '7:30 AM - 10:30 AM',
+            mealSystem: 'Monthly meal plan or Pay-per-meal',
+            outsideFood: 'Allowed in dining area',
+            guestMeals: 'Available with 4-hour advance notice'
+        },
+        cancellationPolicy: [
+            'Full deposit refund with 30-day notice',
+            'No refund for mid-month departure',
+            'Security deposit non-adjustable with last month rent',
+            'Early exit fee applicable for contract break'
+        ],
         userReviews: [
             {
                 id: 1,
@@ -491,6 +515,18 @@ export const studentHostelsData = [
             cookingFacilities: 'Basic Stove'
         },
         terms: ['Identity Verification Required', 'No Smoking', 'Rent due by 5th of month'],
+        diningInfo: {
+            breakfastTime: '7:30 AM - 10:30 AM',
+            mealSystem: 'Monthly meal plan or Pay-per-meal',
+            outsideFood: 'Allowed in dining area',
+            guestMeals: 'Available with 4-hour advance notice'
+        },
+        cancellationPolicy: [
+            'Full deposit refund with 30-day notice',
+            'No refund for mid-month departure',
+            'Security deposit non-adjustable with last month rent',
+            'Early exit fee applicable for contract break'
+        ],
         userReviews: [
             {
                 id: 1,
@@ -537,6 +573,18 @@ export const studentHostelsData = [
             cookingFacilities: 'Canteen Service Available'
         },
         terms: ['Students Only', 'No Noise after 10 PM', 'Security Deposit Required'],
+        diningInfo: {
+            breakfastTime: '7:30 AM - 10:30 AM',
+            mealSystem: 'Monthly meal plan or Pay-per-meal',
+            outsideFood: 'Allowed in dining area',
+            guestMeals: 'Available with 4-hour advance notice'
+        },
+        cancellationPolicy: [
+            'Full deposit refund with 30-day notice',
+            'No refund for mid-month departure',
+            'Security deposit non-adjustable with last month rent',
+            'Early exit fee applicable for contract break'
+        ],
         userReviews: [
             {
                 id: 1,
