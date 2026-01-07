@@ -5,10 +5,11 @@ import Navbar from './components/layout/Navbar';
 import Categories from './components/sections/Categories';
 import Hero from './components/sections/Hero';
 import WhyChoose from './components/sections/WhyChoose';
+import HomeRentalDetail from './Pages/HomeRentalsPage/HomeRentalDetail';
 import HomeRentalsPage from './Pages/HomeRentalsPage/HomeRentalsPage';
 import HotelResortDetail from './Pages/HotelResort/HotelResortDetail';
 import HotelResortPage from './Pages/HotelResort/HotelResortPage';
-import ListProperty from './Pages/ListProperty/ListProperty'; // এটি যোগ করুন
+import ListProperty from './Pages/ListProperty/ListProperty';
 import SignIn from './Pages/Sign/SignIn';
 import ModernStudentHostel from './Pages/StudentHousing/StudentHousingDetail';
 import StudentHousingPage from './Pages/StudentHousing/StudentHousingPage';
@@ -42,6 +43,7 @@ function App() {
                             element={<ModernStudentHostel />}
                         />
                         <Route path="/hotel-resort/details/:id" element={<HotelResortDetail />} />
+                        <Route path="/home-rentals/details/:id" element={<HomeRentalDetail />} />
                     </Routes>
                 </main>
 

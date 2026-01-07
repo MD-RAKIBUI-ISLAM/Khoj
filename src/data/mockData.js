@@ -1149,13 +1149,16 @@ export const homeRentalsData = [
         id: 1,
         title: 'Spacious Apartment - Banani',
         location: 'Banani, Dhaka',
+        description:
+            'Nestled in the most prestigious neighborhood of Banani, this ultra-modern apartment offers a perfect blend of luxury and convenience. Featuring high-end architectural finishes, the unit boasts expansive living areas flooded with natural light and a South-East orientation that ensures excellent cross-ventilation. Residents enjoy premium amenities including 24/7 elite security, a rooftop oasis with stunning city views, and close proximity to top-tier schools, gourmet restaurants, and corporate hubs. This is an ideal sanctuary for professionals and families seeking a high-standard urban lifestyle in Dhaka.',
         rating: 4.9,
         reviews: 128,
         price: '35,000BDT',
         size: '1,500 sqft',
         rooms: 3,
-        baths: 2,
-        balcony: 2,
+        bathrooms: 2,
+        verandas: 2,
+        kitchen: 1,
         direction: 'South-East',
         security: 'High - 24/7 Guard',
         flatAvailability: [
@@ -1165,13 +1168,14 @@ export const homeRentalsData = [
             { id: 'Flat 1B', status: 'Booked till Feb, 2026' },
             { id: 'Flat 2B', status: 'Booked till Apr, 2026' }
         ],
-        // যোগ করা হলো:
         amenities: {
             connectivity: {
                 title: 'Connectivity',
                 items: [
                     { name: 'High-Speed Fiber WiFi', icon: 'LuWifi' },
-                    { name: 'Intercom System', icon: 'LuPhone' }
+                    { name: 'Intercom System', icon: 'LuPhone' },
+                    { name: 'Satellite TV Connection', icon: 'LuTv' },
+                    { name: 'Smart Home Hub', icon: 'LuCpu' }
                 ]
             },
             facilities: {
@@ -1179,33 +1183,67 @@ export const homeRentalsData = [
                 items: [
                     { name: 'Modern Elevator', icon: 'LuArrowUpCircle' },
                     { name: 'Secure Parking', icon: 'LuCar' },
-                    { name: '24/7 Generator Back-up', icon: 'LuZap' }
+                    { name: '24/7 Generator Back-up', icon: 'LuZap' },
+                    { name: 'Central Waste Management', icon: 'LuTrash2' },
+                    { name: 'Water Filtration Plant', icon: 'LuDroplets' }
                 ]
             },
             leisure: {
                 title: 'Leisure & Outdoors',
                 items: [
                     { name: 'Rooftop Garden', icon: 'LuFlower2' },
-                    { name: 'Private Balcony', icon: 'LuLayout' }
+                    { name: 'Private Balcony', icon: 'LuLayout' },
+                    { name: 'Swimming Pool', icon: 'LuWaves' },
+                    { name: 'Fitness Gym Center', icon: 'LuDumbbell' },
+                    { name: 'Community Hall', icon: 'LuUsers' }
+                ]
+            }
+        },
+        securityDetails: {
+            protection: {
+                title: 'Security Protection',
+                items: [
+                    { name: '24/7 Physical Guard', icon: 'LuUserCheck' },
+                    { name: 'CCTV Surveillance', icon: 'LuCamera' },
+                    { name: 'Biometric Access', icon: 'LuFingerprint' },
+                    { name: 'Fire Sprinkler System', icon: 'LuWind' },
+                    { name: 'Emergency Alarm', icon: 'LuBellRing' },
+                    { name: 'Metal Detector Gate', icon: 'LuScan' }
+                ]
+            }
+        },
+        terms: {
+            rental_policy: {
+                title: 'Rental Terms',
+                items: [
+                    { name: 'Family Only', icon: 'LuUsers' },
+                    { name: '2 Month Advance', icon: 'LuWallet' },
+                    { name: '1 Year Contract', icon: 'LuFileText' },
+                    { name: 'No Smoking Inside', icon: 'LuSmoking' },
+                    { name: 'Service Charge Excluded', icon: 'LuCreditCard' }
                 ]
             }
         },
         tags: ['Balcony', 'Parking', 'Garden Access', 'Elevator'],
         features: ['Balcony', 'Parking', 'Garden Access'],
         image: bananiApartmentImg,
+        additionalImages: [bananiApartmentImg, feniComplexImg, familyHouseImg],
         mapLocation: 'https://www.google.com/maps?q=Banani+Dhaka'
     },
     {
         id: 2,
         title: 'Modern Apartment Complex - Feni City',
         location: 'Feni City, Feni',
+        description:
+            'This sleek and contemporary apartment complex in the heart of Feni City is designed for families who value both style and functionality. The unit is optimized for modern living with a smart layout that maximizes every square foot. It comes fully equipped with essential utilities including a dedicated gas connection and advanced water filtration systems. The complex features high-tech CCTV surveillance for peace of mind, a common garden for relaxation, and a safe, dedicated play area for children. Its central location provides effortless access to local markets, hospitals, and transportation hubs.',
         rating: 4.8,
         reviews: 256,
         price: '28,000BDT',
         size: '900 sqft',
         rooms: 2,
-        baths: 2,
-        balcony: 1,
+        bathrooms: 2,
+        verandas: 2,
+        kitchen: 1,
         direction: 'North-West',
         security: 'CCTV - 24/7 Security',
         flatAvailability: [
@@ -1216,44 +1254,79 @@ export const homeRentalsData = [
             { id: 'Flat 201', status: 'Vacant' },
             { id: 'Flat 203', status: 'Booked till Feb, 2026' }
         ],
-        // যোগ করা হলো:
         amenities: {
             connectivity: {
                 title: 'Connectivity',
-                items: [{ name: 'WiFi Ready', icon: 'LuWifi' }]
+                items: [
+                    { name: 'WiFi Ready', icon: 'LuWifi' },
+                    { name: 'Broadband Connection', icon: 'LuGlobe' },
+                    { name: 'Intercom Facility', icon: 'LuPhone' }
+                ]
             },
             facilities: {
                 title: 'Building Facilities',
                 items: [
                     { name: 'Gas Connection', icon: 'LuFlame' },
                     { name: 'Water Filter System', icon: 'LuDroplets' },
-                    { name: 'CCTV Surveillance', icon: 'LuShieldCheck' }
+                    { name: 'CCTV Surveillance', icon: 'LuShieldCheck' },
+                    { name: 'Prayer Room', icon: 'LuHome' },
+                    { name: 'Basement Parking', icon: 'LuCar' }
                 ]
             },
             leisure: {
                 title: 'Leisure & Outdoors',
                 items: [
                     { name: 'Common Garden', icon: 'LuPalmtree' },
-                    { name: 'Kids Play Area', icon: 'LuGamepad2' }
+                    { name: 'Kids Play Area', icon: 'LuGamepad2' },
+                    { name: 'Jogging Track', icon: 'LuFootprints' },
+                    { name: 'Rooftop Sitting Area', icon: 'LuCoffee' }
+                ]
+            }
+        },
+        securityDetails: {
+            surveillance: {
+                title: 'Building Security',
+                items: [
+                    { name: 'Night Guard', icon: 'LuMoon' },
+                    { name: 'Fire Alarm System', icon: 'LuBell' },
+                    { name: 'Intercom Monitoring', icon: 'LuMic' },
+                    { name: 'Visitor Log Management', icon: 'LuBook' },
+                    { name: 'Emergency Exit Stair', icon: 'LuDoorOpen' }
+                ]
+            }
+        },
+        terms: {
+            rules: {
+                title: 'Apartment Rules',
+                items: [
+                    { name: 'No Pets Allowed', icon: 'LuBan' },
+                    { name: 'Bachelor Friendly', icon: 'LuUser' },
+                    { name: 'Monthly Service Charge', icon: 'LuCreditCard' },
+                    { name: 'Guest Policy Active', icon: 'LuUserPlus' },
+                    { name: 'Rent Deadline 5th of Month', icon: 'LuCalendar' }
                 ]
             }
         },
         tags: ['Balcony', 'Common Garden', 'Security', 'Gas Connection'],
         features: ['Balcony', 'Common Garden', 'Security'],
         image: feniComplexImg,
+        additionalImages: [feniComplexImg, bananiApartmentImg, familyHouseImg],
         mapLocation: 'https://www.google.com/maps?q=Feni+City+Feni'
     },
     {
         id: 3,
         title: 'Family House Complex - Feni',
         location: 'GEC, Feni',
+        description:
+            'Experience tranquil living at this expansive Family House Complex located in the serene GEC area of Feni. This property stands out with its massive private garden and open terrace, providing a rare green escape from the city bustle. The complex is specifically designed to be pet-friendly and features a large community hall perfect for hosting family gatherings. With earthquake-resistant architecture and professional guard services, safety is prioritized alongside comfort. It is the perfect choice for families seeking a spacious, quiet, and secure environment with a strong sense of community.',
         rating: 4.3,
         reviews: 92,
         price: '28,000BDT',
         size: '1500 sqft',
         rooms: 2,
-        baths: 2,
-        balcony: 1,
+        bathrooms: 2,
+        verandas: 2,
+        kitchen: 1,
         direction: 'South-East',
         security: 'High - 24/7 Guard',
         flatAvailability: [
@@ -1263,13 +1336,15 @@ export const homeRentalsData = [
             { id: 'Flat A-2', status: 'Booked till Mar, 2026' },
             { id: 'Flat B-2', status: 'Vacant' }
         ],
-        // যোগ করা হলো:
         amenities: {
             facilities: {
                 title: 'Building Facilities',
                 items: [
                     { name: 'Wide Parking Space', icon: 'LuCar' },
-                    { name: 'Emergency Exit', icon: 'LuLogOut' }
+                    { name: 'Emergency Exit', icon: 'LuLogOut' },
+                    { name: 'Solar Power Backup', icon: 'LuSun' },
+                    { name: 'Servant Washroom', icon: 'LuBath' },
+                    { name: 'Deep Tubewell Water', icon: 'LuDroplet' }
                 ]
             },
             leisure: {
@@ -1277,20 +1352,48 @@ export const homeRentalsData = [
                 items: [
                     { name: 'Large Garden', icon: 'LuTrees' },
                     { name: 'Pet Friendly Area', icon: 'LuDog' },
-                    { name: 'Community Hall', icon: 'LuUsers' }
+                    { name: 'Community Hall', icon: 'LuUsers' },
+                    { name: 'BBQ Zone', icon: 'LuUtensils' },
+                    { name: 'Open Terrace', icon: 'LuSun' }
                 ]
             },
             safety: {
                 title: 'Safety & Security',
                 items: [
                     { name: 'Professional Guard', icon: 'LuUserCheck' },
-                    { name: 'Fire Extinguisher', icon: 'LuFlame' }
+                    { name: 'Fire Extinguisher', icon: 'LuFlame' },
+                    { name: 'First Aid Kit', icon: 'LuHeartPulse' }
+                ]
+            }
+        },
+        securityDetails: {
+            safety_measures: {
+                title: 'Safety Features',
+                items: [
+                    { name: 'Boundary Wall', icon: 'LuFence' },
+                    { name: 'Emergency Lights', icon: 'LuLightbulb' },
+                    { name: 'Earthquake Resistant', icon: 'LuActivity' },
+                    { name: 'Gas Leak Detector', icon: 'LuWind' },
+                    { name: 'Security Cabin', icon: 'LuHome' }
+                ]
+            }
+        },
+        terms: {
+            general_terms: {
+                title: 'Rental Policies',
+                items: [
+                    { name: 'Post-dated Cheque', icon: 'LuBanknote' },
+                    { name: 'Sublet Not Allowed', icon: 'LuXCircle' },
+                    { name: 'No Commercial Use', icon: 'LuBriefcase' },
+                    { name: 'Quiet Hours (11PM-7AM)', icon: 'LuVolumeX' },
+                    { name: 'ID Verification Mandatory', icon: 'LuUserSquare' }
                 ]
             }
         },
         tags: ['Large Balcony', 'Garden', 'Parking', 'Pet Friendly'],
         features: ['Large Balcony', 'Garden', 'Parking'],
         image: familyHouseImg,
+        additionalImages: [familyHouseImg, premiumHousingImg, luxuryResortImg],
         mapLocation: 'https://www.google.com/maps?q=GEC+Feni'
     }
 ];

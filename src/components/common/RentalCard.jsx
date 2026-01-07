@@ -11,8 +11,11 @@ import {
     LuStar,
     LuTrees
 } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 function RentalCard({ item, onRouteClick }) {
+    const navigate = useNavigate();
+
     return (
         <div className="bg-white rounded-[40px] border border-slate-100 p-6 flex flex-col xl:flex-row gap-8 hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] transition-all duration-500 group relative mb-8">
             {/* ১. ইমেজ সেকশন (রেটিং এবং রিভিওসহ) */}
@@ -151,33 +154,38 @@ function RentalCard({ item, onRouteClick }) {
                             </span>
                             <div className="flex items-center gap-1.5 text-slate-700 font-black text-xs bg-slate-100 px-3 py-1.5 rounded-xl">
                                 <LuShieldCheck size={14} className="text-emerald-500" />
-                                {item.security.split('-')[0]}
+                                High
                             </div>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-3 w-full sm:w-auto">
+                        {/* Route Button */}
                         <button
                             type="button"
                             onClick={onRouteClick}
-                            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 text-white rounded-[20px] hover:bg-blue-600 transition-all duration-300 group/btn"
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 text-white rounded-[20px] hover:bg-blue-600 transition-all duration-300 group/btn"
                         >
                             <LuNavigation
                                 size={20}
                                 className="group-hover/btn:rotate-12 transition-transform"
                             />
-                            <span className="font-bold text-xs uppercase tracking-widest">
+                            <span className="font-bold text-xs uppercase tracking-widest whitespace-nowrap">
                                 Route
                             </span>
                         </button>
 
+                        {/* View Details Button */}
                         <button
                             type="button"
-                            className="flex-grow sm:flex-grow-0 flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-[20px] font-black text-xs uppercase tracking-widest hover:bg-slate-900 transition-all group/details shadow-lg shadow-blue-200"
+                            onClick={() => navigate(`/home-rentals/details/${item.id}`)}
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-blue-500 text-white rounded-[20px] hover:bg-blue-600 hover:shadow-lg hover:shadow-green-100 transition-all duration-300 group/details"
                         >
-                            View Details
+                            <span className="font-bold text-xs uppercase tracking-widest whitespace-nowrap">
+                                View Details
+                            </span>
                             <LuArrowRight
-                                size={18}
+                                size={20}
                                 className="group-hover/details:translate-x-1 transition-transform"
                             />
                         </button>
