@@ -17,6 +17,8 @@ import { hotelResortData } from '../../data/mockData';
 function HotelResortDetail() {
     const { id } = useParams();
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+    // ২ নং রিকোয়ারমেন্ট: Initially amenities active
     const [activeTab, setActiveTab] = useState('Amenities');
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
@@ -34,13 +36,20 @@ function HotelResortDetail() {
             (prev) => (prev - 1 + resort.additionalImages.length) % resort.additionalImages.length
         );
 
+    // ১ নং রিকোয়ারমেন্ট: Aside বাটনে ট্যাপ করলে স্ক্রল হওয়ার ফাংশন
+    const handleTabClick = (tabId) => {
+        setActiveTab(tabId);
+        const element = document.getElementById('tab-content-container');
+        if (element) {
+            // এটি স্মুথলি কন্টেন্টকে ভিউতে নিয়ে আসবে
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     const handleViewMap = () => {
-        // হোটেলের নাম এবং লোকেশনকে URL friendly ফরম্যাটে নেওয়া হচ্ছে
+        // হোটেলের নাম এবং লোকেশনকে URL friendly ফরম্যাটে নেওয়া হচ্ছে
         const destination = encodeURIComponent(`${resort.title}, ${resort.location}`);
-
-        // 'origin=My+Location' দিলে গুগল ম্যাপস অটোমেটিক ইউজারের বর্তমান লোকেশন থেকে ডিরেকশন দেখাবে
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${destination}&travelmode=driving`;
-
         window.open(googleMapsUrl, '_blank');
     };
 
@@ -51,8 +60,8 @@ function HotelResortDetail() {
 
     return (
         <div className="min-h-screen bg-[#FDFDFD] pb-44 font-sans selection:bg-blue-100">
-            <main className="max-w-[1200px] mx-auto px-6 pt-40 lg:px-12">
-                {/* Image Slider */}
+            <main className="max-w-[1400px] mx-auto px-6 pt-40 lg:px-12">
+                {/* Image Slider Section */}
                 <section className="relative mx-auto max-w-[950px] rounded-[40px] overflow-hidden bg-slate-900 aspect-[16/9] md:aspect-[21/9] shadow-2xl group border border-slate-200">
                     <img
                         src={resort.additionalImages[currentImgIndex]}
@@ -94,7 +103,6 @@ function HotelResortDetail() {
                     </div>
                 </section>
 
-                {/* Content Order Logic for Mobile */}
                 <div className="mt-16 flex flex-col lg:grid lg:grid-cols-12 gap-12">
                     {/* 1. Description Section */}
                     <section className="order-1 lg:col-start-5 lg:col-span-8">
@@ -109,7 +117,6 @@ function HotelResortDetail() {
                     {/* 2. Availability Section */}
                     <section className="order-2 lg:col-start-5 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         {resort.availability.map((item, idx) => {
-                            // প্রতিটি কার্ডের জন্য আলাদা টাইটেল এবং আইকন সেট করা
                             const configs = [
                                 {
                                     label: 'Room Type',
@@ -130,7 +137,6 @@ function HotelResortDetail() {
                                 }
                             ];
 
-                            // যদি ৩টির বেশি আইটেম থাকে তবে লুপ হবে
                             const config = configs[idx % configs.length];
 
                             return (
@@ -138,7 +144,6 @@ function HotelResortDetail() {
                                     key={idx}
                                     className="group relative p-6 bg-white border border-slate-100 rounded-[32px] shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                                 >
-                                    {/* ব্যাকগ্রাউন্ডে একটি হালকা ডেকোরেশন */}
                                     <div
                                         className={`absolute -right-2 -top-2 w-16 h-16 ${config.bg} rounded-full opacity-20 group-hover:scale-150 transition-transform duration-500`}
                                     />
@@ -159,17 +164,16 @@ function HotelResortDetail() {
                                             {item}
                                         </p>
                                     </div>
-
-                                    {/* নিচ দিয়ে একটি চিকন কালার বার */}
                                     <div className="absolute bottom-0 left-0 h-1 w-0 bg-blue-500 group-hover:w-full transition-all duration-500" />
                                 </div>
                             );
                         })}
                     </section>
 
-                    {/* 3. Tab Buttons (Amenities, Policies, Dining) */}
+                    {/* 3. Aside Tab Buttons */}
                     <aside className="order-3 lg:col-span-4 lg:row-start-1 lg:row-span-3">
-                        <div className="sticky top-32 space-y-4 p-4 bg-slate-50/50 rounded-[40px] border border-slate-100">
+                        <div className="sticky top-32 flex flex-row lg:flex-col gap-3 p-3 overflow-x-auto lg:overflow-x-visible bg-slate-50/50 rounded-[30px] lg:rounded-[40px] border border-slate-100 no-scrollbar">
+                            {' '}
                             {[
                                 {
                                     id: 'Amenities',
@@ -182,7 +186,7 @@ function HotelResortDetail() {
                                 <button
                                     key={tab.id}
                                     type="button"
-                                    onClick={() => setActiveTab(tab.id)}
+                                    onClick={() => handleTabClick(tab.id)} // Changed logic here
                                     className={`w-full flex items-center justify-between px-6 py-5 rounded-3xl font-black text-xs uppercase tracking-widest transition-all ${
                                         activeTab === tab.id
                                             ? 'bg-white text-blue-600 shadow-xl border border-blue-50'
@@ -200,8 +204,11 @@ function HotelResortDetail() {
                         </div>
                     </aside>
 
-                    {/* 4. Tab Items Content */}
-                    <div className="order-4 lg:col-span-8 lg:col-start-5">
+                    {/* 4. Tab Items Content Container */}
+                    <div
+                        id="tab-content-container"
+                        className="order-4 lg:col-span-8 lg:col-start-5 scroll-mt-32"
+                    >
                         <div className="bg-white border border-slate-100 p-8 md:p-12 rounded-[48px] shadow-sm min-h-[400px]">
                             {activeTab === 'Amenities' && (
                                 <div className="space-y-12">
@@ -223,8 +230,7 @@ function HotelResortDetail() {
                                                         className="flex items-start gap-4 p-5 bg-white border border-slate-100 rounded-3xl hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 group"
                                                     >
                                                         <div className="p-3 bg-slate-50 text-slate-400 rounded-2xl group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                                                            <LuLayoutDashboard size={20} />{' '}
-                                                            {/* এখানে আপনি ডাইনামিক আইকন ম্যাপ করতে পারেন */}
+                                                            <LuLayoutDashboard size={20} />
                                                         </div>
                                                         <div>
                                                             <h4 className="text-[13px] font-bold text-slate-800 mb-1 leading-none">
@@ -249,7 +255,6 @@ function HotelResortDetail() {
                                             key={key}
                                             className="group p-6 bg-slate-50/50 hover:bg-white border border-slate-100 hover:border-blue-100 rounded-[32px] transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5"
                                         >
-                                            {/* হেডার: টাইটেল এবং স্ট্যাটাস */}
                                             <div className="flex items-center justify-between mb-3">
                                                 <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-blue-500 transition-colors">
                                                     {key.replace(/([A-Z])/g, ' $1')}
@@ -260,8 +265,6 @@ function HotelResortDetail() {
                                                     </span>
                                                 )}
                                             </div>
-
-                                            {/* কন্টেন্ট */}
                                             <div className="space-y-1">
                                                 <p className="text-sm font-bold text-slate-800">
                                                     {value.title ||
@@ -287,17 +290,13 @@ function HotelResortDetail() {
                                         >
                                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                                 <div className="flex items-start gap-4">
-                                                    {/* আইকন বক্স */}
                                                     <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                                         <LuUtensils size={24} />
                                                     </div>
-
-                                                    {/* তথ্য সেকশন */}
                                                     <div>
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <h4 className="font-black text-sm uppercase tracking-wider text-slate-800">
-                                                                {mealKey.replace(/([A-Z])/g, ' $1')}{' '}
-                                                                {/* CamelCase to Space */}
+                                                                {mealKey.replace(/([A-Z])/g, ' $1')}
                                                             </h4>
                                                             <span
                                                                 className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase ${mealData.status === 'Free' ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-500'}`}
@@ -326,35 +325,31 @@ function HotelResortDetail() {
                 </div>
             </main>
 
-            {/* Bottom Bar Code (No changes here as per request) */}
+            {/* Bottom Sticky Bar */}
             <div className="mt-20 px-0 md:px-6 sticky bottom-0 md:bottom-8 z-[100]">
-                {/* কন্টেইনার: মোবাইলে প্যাডিং এবং গ্যাপ কমানো হয়েছে */}
                 <div className="max-w-[1100px] mx-auto bg-slate-900/95 backdrop-blur-xl p-4 md:p-6 md:rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-t md:border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-5 transition-all duration-500">
-                    {/* ১. প্রাইস এবং এভেইলিবিলিটি সেকশন: মোবাইলে ফ্লেক্সবক্স দিয়ে পাশাপাশি রাখা হয়েছে */}
                     <div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-10 border-b border-white/5 pb-3 md:pb-0 md:border-none">
                         <div className="group cursor-default">
-                            <p className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-[1px] md:tracking-[2px] mb-0.5 md:mb-1 group-hover:text-blue-400 transition-colors">
+                            <p className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-[2px] mb-1 group-hover:text-blue-400 transition-colors">
                                 Price Starts From
                             </p>
-                            <div className="flex items-baseline gap-1 md:gap-2">
+                            <div className="flex items-baseline gap-2">
                                 <h2 className="text-2xl md:text-4xl font-black text-white tracking-tighter">
                                     {resort.price}
                                 </h2>
-                                <span className="text-blue-400 text-[9px] md:text-[10px] font-black uppercase bg-blue-400/10 px-1.5 py-0.5 rounded">
+                                <span className="text-blue-400 text-[10px] font-black uppercase bg-blue-400/10 px-1.5 py-0.5 rounded">
                                     / night
                                 </span>
                             </div>
                         </div>
 
-                        {/* ডেক্সটপ ডিভাইডার */}
                         <div className="hidden md:block h-12 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
-                        {/* স্ট্যাটাস ইন্ডিকেটর: মোবাইলে টেক্সট ছোট করা হয়েছে */}
                         <div className="flex flex-col items-end md:items-start">
-                            <p className="text-emerald-400 font-black text-[9px] md:text-[10px] uppercase tracking-widest mb-0.5 md:mb-1 flex items-center gap-1.5 md:gap-2">
-                                <span className="relative flex h-1.5 w-1.5 md:h-2 md:w-2">
+                            <p className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-1 flex items-center gap-2">
+                                <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 bg-emerald-500" />
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                                 </span>
                                 Live Status
                             </p>
@@ -364,21 +359,19 @@ function HotelResortDetail() {
                         </div>
                     </div>
 
-                    {/* ২. বাটন সেকশন: মোবাইলে যেন টেক্সট ভেঙে না যায় সেজন্য flex-nowrap এবং প্যাডিং অ্যাডজাস্ট করা হয়েছে */}
                     <div className="flex gap-2.5 w-full md:w-auto">
                         <button
                             type="button"
                             onClick={handleViewMap}
-                            className="flex-1 md:flex-none flex items-center justify-center gap-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl md:rounded-2xl px-3 md:px-6 py-3.5 md:py-4 font-bold text-[10px] md:text-[11px] uppercase tracking-wider md:tracking-widest transition-all active:scale-95 whitespace-nowrap"
+                            className="flex-1 md:flex-none flex items-center justify-center gap-1.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl px-3 md:px-6 py-3.5 md:py-4 font-bold text-[10px] uppercase tracking-widest transition-all active:scale-95 whitespace-nowrap"
                         >
-                            <LuMapPin className="text-blue-400 shrink-0" size={14} />
-                            Map
+                            <LuMapPin className="text-blue-400 shrink-0" size={14} /> Map
                         </button>
 
                         <button
                             type="button"
                             onClick={() => setIsBookingModalOpen(true)}
-                            className="flex-[2] md:flex-none relative overflow-hidden group bg-blue-600 hover:bg-blue-500 text-white py-3.5 md:py-4 px-5 md:px-10 rounded-xl md:rounded-2xl font-black uppercase tracking-[1px] md:tracking-[2px] text-[10px] md:text-[11px] shadow-[0_10px_30px_rgba(37,99,235,0.3)] transition-all active:scale-95 whitespace-nowrap"
+                            className="flex-[2] md:flex-none relative overflow-hidden group bg-blue-600 hover:bg-blue-500 text-white py-3.5 md:py-4 px-5 md:px-10 rounded-xl md:rounded-2xl font-black uppercase tracking-[2px] text-[10px] shadow-[0_10px_30px_rgba(37,99,235,0.3)] transition-all active:scale-95 whitespace-nowrap"
                         >
                             <span className="relative z-10">Booking Now</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />

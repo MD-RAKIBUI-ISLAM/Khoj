@@ -194,11 +194,13 @@ function BookingModal({ isOpen, onClose, hostelTitle, roomOptions = [] }) {
 
                             {/* Submit Button */}
                             <div className="pt-4">
-                                <Button
-                                    type="submit" // Button type added
-                                    label="Confirm Booking Request"
-                                    className="w-full py-4.5 rounded-[22px] text-sm font-black uppercase tracking-[0.15em] bg-slate-900 text-white border-2 border-slate-900 hover:bg-white hover:text-slate-900 transition-all duration-300 shadow-xl shadow-slate-200 active:scale-[0.98]"
-                                />
+                                <div className="flex justify-center w-full">
+                                    <Button
+                                        type="submit"
+                                        label="Confirm Booking Request"
+                                        className="w-full max-w-[300px] py-4.5 rounded-[22px] text-sm font-black uppercase tracking-[0.15em] bg-slate-900 text-white border-2 border-slate-900 hover:bg-white hover:text-slate-900 transition-all duration-300 shadow-xl shadow-slate-200 active:scale-[0.98]"
+                                    />
+                                </div>
                                 <p className="text-center text-slate-400 text-[9px] mt-5 font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                                     <LuShieldCheck size={12} className="text-emerald-500" />
                                     No payment required now • SSL Secured

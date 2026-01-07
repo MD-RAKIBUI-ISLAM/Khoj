@@ -22,7 +22,7 @@ import { studentHostelsData } from '../../data/mockData';
 function ModernStudentHostel() {
     const { id } = useParams();
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('Amenities');
+    const [activeTab, setActiveTab] = useState('Amenities'); // 2. Initially Amenities active
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
     const hostel =
@@ -39,6 +39,15 @@ function ModernStudentHostel() {
             (prev) => (prev - 1 + hostel.additionalImages.length) % hostel.additionalImages.length
         );
 
+    // 1. Function to handle tab click and scroll
+    const handleTabClick = (tabId) => {
+        setActiveTab(tabId);
+        const element = document.getElementById('tab-content');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#FDFDFD] pb-44 font-sans selection:bg-blue-100">
             <main className="max-w-[1400px] mx-auto px-6 pt-40 lg:px-12">
@@ -51,7 +60,6 @@ function ModernStudentHostel() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-                    {/* Navigation Arrows - ইমেজ ছোট হওয়ায় এগুলোও কিছুটা ছোট করা হয়েছে */}
                     <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                             type="button"
@@ -81,9 +89,7 @@ function ModernStudentHostel() {
                     </div>
                 </section>
 
-                {/* 2. Content Grid - Strictly Ordered for Mobile */}
                 <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    {/* 1. Overview - Mobile Order 1 */}
                     <div className="lg:col-span-8 order-1 lg:order-2 space-y-4">
                         <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
                             Overview
@@ -93,7 +99,6 @@ function ModernStudentHostel() {
                         </p>
                     </div>
 
-                    {/* 2. Room Capacity & Availability - Mobile Order 2 */}
                     <div className="lg:col-span-8 order-2 lg:order-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="p-6 bg-slate-900 rounded-[32px] flex items-center gap-5 border border-slate-800 shadow-xl shadow-slate-200/50">
                             <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white backdrop-blur-md">
@@ -140,9 +145,10 @@ function ModernStudentHostel() {
                         </div>
                     </div>
 
-                    {/* 3. Aside (Tabs) - Mobile Order 3, Desktop Order 1 (Left Sidebar) */}
+                    {/* Aside Section */}
                     <aside className="lg:col-span-4 order-3 lg:order-1 lg:row-span-3">
-                        <div className="sticky top-32 flex flex-col gap-3 p-3 bg-slate-50 rounded-[32px] border border-slate-100">
+                        <div className="sticky top-32 flex flex-row lg:flex-col gap-3 p-3 overflow-x-auto lg:overflow-x-visible bg-slate-50/50 rounded-[30px] lg:rounded-[40px] border border-slate-100 no-scrollbar">
+                            {' '}
                             {[
                                 { id: 'Amenities', icon: <LuShieldCheck />, label: 'Amenities' },
                                 { id: 'House Rule', icon: <LuInfo />, label: 'Hostel Info' },
@@ -151,7 +157,7 @@ function ModernStudentHostel() {
                                 <button
                                     key={tab.id}
                                     type="button"
-                                    onClick={() => setActiveTab(tab.id)}
+                                    onClick={() => handleTabClick(tab.id)} // Using scroll handler
                                     className={`flex items-center justify-between px-6 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${
                                         activeTab === tab.id
                                             ? 'bg-white text-blue-600 shadow-xl shadow-blue-500/10 scale-[1.02]'
@@ -169,8 +175,8 @@ function ModernStudentHostel() {
                         </div>
                     </aside>
 
-                    {/* 4. Tab Panels - Mobile Order 4 */}
-                    <div className="lg:col-span-8 order-4 lg:order-4">
+                    {/* Tab Panels Container with ID for scrolling */}
+                    <div id="tab-content" className="lg:col-span-8 order-4 lg:order-4 scroll-mt-32">
                         <div className="bg-white border border-slate-100 p-8 md:p-10 rounded-[40px] shadow-sm min-h-[400px]">
                             {activeTab === 'Amenities' && (
                                 <div className="space-y-10 animate-in fade-in duration-500">
