@@ -1,53 +1,48 @@
-import { useEffect, useState } from 'react';
-import { LuFilter, LuHouse, LuSearchX, LuX } from 'react-icons/lu';
+import { useEffect, useMemo, useState } from 'react';
+import { LuHouse, LuSearchX, LuX } from 'react-icons/lu';
 
+import Filter from '../../components/common/Filter'; // Filter কম্পোনেন্ট ইমপোর্ট
 import MapViewer from '../../components/common/MapViewer';
 import RentalCard from '../../components/common/RentalCard';
 import { homeRentalsData } from '../../data/mockData';
 
 function HomeRentalsPage() {
-    // ১. শুরুতে 'Dhaka' ডিফল্ট হিসেবে সেট করা যাতে শুধু ঢাকার প্রপার্টি দেখায়
     const [searchLocation, setSearchLocation] = useState('Dhaka');
     const [selectedDestination, setSelectedDestination] = useState(null);
-    const [price, setPrice] = useState(150000);
-    const [selectedSize, setSelectedSize] = useState('Any');
 
-    const [activeFilters, setActiveFilters] = useState({
-        maxPrice: 150000,
-        minSize: 'Any'
-    });
+    // নতুন স্টেট: ফিল্টারের জন্য
+    const [selectedAmenities, setSelectedAmenities] = useState([]);
 
-    // লজিক: যখনই নতুন কিছু সার্চ করা হবে, ম্যাপের পিন রিসেট হবে
     useEffect(() => {
         setSelectedDestination(null);
     }, [searchLocation]);
 
-    // ফিল্টারিং লজিক
-    const filteredResults = homeRentalsData.filter((item) => {
-        const searchTerm = searchLocation.toLowerCase().trim();
+    // মূল ফিল্টারিং লজিক (শুধুমাত্র Amenities এবং Location এর উপর ভিত্তি করে)
+    const filteredResults = useMemo(
+        () =>
+            homeRentalsData.filter((item) => {
+                const searchTerm = searchLocation.toLowerCase().trim();
 
-        // লজিক: সার্চ ফিল্ড খালি থাকলে সব (true), না থাকলে টাইটেল বা লোকেশন ম্যাচ করা
-        const matchesLocation =
-            searchTerm === '' ||
-            item.location.toLowerCase().includes(searchTerm) ||
-            item.title.toLowerCase().includes(searchTerm);
+                // ১. লোকেশন ফিল্টার
+                const matchesLocation =
+                    searchTerm === '' ||
+                    item.location.toLowerCase().includes(searchTerm) ||
+                    item.title.toLowerCase().includes(searchTerm);
 
-        const itemPrice = parseInt(item.price.replace(/\D/g, ''), 10) || 0;
-        const matchesPrice = itemPrice <= activeFilters.maxPrice;
+                // ২. Amenities ফিল্টার লজিক
+                const matchesAmenities =
+                    selectedAmenities.length === 0 ||
+                    selectedAmenities.every((selectedName) =>
+                        // চেক করা হচ্ছে যেন আইটেমের amenities এর ভেতরে ঐ নামটি থাকে
+                        Object.values(item.amenities || {}).some((cat) =>
+                            cat.items?.some((i) => i.name === selectedName)
+                        )
+                    );
 
-        const itemSize = parseInt(item.size.replace(/\D/g, ''), 10) || 0;
-        const matchesSize =
-            activeFilters.minSize === 'Any' || itemSize >= parseInt(activeFilters.minSize, 10);
-
-        return matchesLocation && matchesPrice && matchesSize;
-    });
-
-    const handleApplyFilters = () => {
-        setActiveFilters({
-            maxPrice: price,
-            minSize: selectedSize
-        });
-    };
+                return matchesLocation && matchesAmenities;
+            }),
+        [searchLocation, selectedAmenities]
+    );
 
     const handleNavigation = (item) => {
         const fullAddress = `${item.title}, ${item.location}`;
@@ -74,15 +69,14 @@ function HomeRentalsPage() {
                         </h1>
                     </div>
                     <p className="text-gray-500 font-medium text-lg max-w-2xl">
-                        Explore available apartments and homes. Currently showing properties in your
-                        area.
+                        Explore available apartments and homes based on your preferred amenities.
                     </p>
                 </div>
             </header>
 
             <div className="max-w-[1600px] mx-auto px-4 lg:px-12 pt-10">
                 <div className="flex flex-col lg:flex-row gap-10">
-                    {/* Left Sidebar: Map & Controls */}
+                    {/* Left Sidebar */}
                     <aside className="w-full lg:w-[380px] space-y-8 shrink-0 lg:sticky lg:top-8 h-fit">
                         <MapViewer
                             searchLocation={searchLocation}
@@ -91,63 +85,12 @@ function HomeRentalsPage() {
                             foundCount={filteredResults.length}
                         />
 
-                        {/* Filter Card */}
-                        <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 p-8">
-                            <div className="flex items-center gap-2 mb-8 border-b border-slate-50 pb-5">
-                                <LuFilter className="text-blue-600" size={22} />
-                                <h2 className="font-black text-xl tracking-tight text-slate-800">
-                                    Refine Search
-                                </h2>
-                            </div>
-
-                            <div className="space-y-8">
-                                {/* Price Range */}
-                                <div>
-                                    <div className="flex justify-between mb-3">
-                                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest">
-                                            Max Rent
-                                        </label>
-                                        <span className="text-blue-600 font-black text-sm">
-                                            {price.toLocaleString()} BDT
-                                        </span>
-                                    </div>
-                                    <input
-                                        type="range"
-                                        min="5000"
-                                        max="150000"
-                                        step="5000"
-                                        value={price}
-                                        onChange={(e) => setPrice(Number(e.target.value))}
-                                        className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                                    />
-                                </div>
-
-                                {/* Size Selection */}
-                                <div>
-                                    <label className="block text-xs font-black text-slate-400 uppercase tracking-widest mb-3">
-                                        Min Size (sqft)
-                                    </label>
-                                    <select
-                                        value={selectedSize}
-                                        onChange={(e) => setSelectedSize(e.target.value)}
-                                        className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-700 outline-none focus:ring-4 ring-blue-50 transition-all appearance-none"
-                                    >
-                                        <option value="Any">All Sizes</option>
-                                        <option value="800">800+ sqft</option>
-                                        <option value="1200">1200+ sqft</option>
-                                        <option value="1500">1500+ sqft</option>
-                                    </select>
-                                </div>
-
-                                <button
-                                    type="button"
-                                    onClick={handleApplyFilters}
-                                    className="w-full bg-slate-900 text-white py-5 rounded-[20px] font-black text-xs uppercase tracking-[2px] hover:bg-blue-600 shadow-lg shadow-slate-200 transition-all duration-300"
-                                >
-                                    Apply Search Filters
-                                </button>
-                            </div>
-                        </div>
+                        {/* নতুন ফিল্টার কম্পোনেন্ট এখানে কল করা হয়েছে */}
+                        <Filter
+                            studentHostelsData={homeRentalsData}
+                            selectedAmenities={selectedAmenities}
+                            setSelectedAmenities={setSelectedAmenities}
+                        />
                     </aside>
 
                     {/* Right Side: Results List */}
@@ -156,13 +99,16 @@ function HomeRentalsPage() {
                             <p className="text-sm font-black text-slate-400 uppercase tracking-widest">
                                 Results Found: {filteredResults.length}
                             </p>
-                            {searchLocation && (
+                            {(searchLocation || selectedAmenities.length > 0) && (
                                 <button
                                     type="button"
-                                    onClick={() => setSearchLocation('')}
+                                    onClick={() => {
+                                        setSearchLocation('');
+                                        setSelectedAmenities([]);
+                                    }}
                                     className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-slate-900 transition-colors"
                                 >
-                                    <LuX size={14} /> Clear Search & Show All
+                                    <LuX size={14} /> Clear All Filters
                                 </button>
                             )}
                         </div>
@@ -185,12 +131,14 @@ function HomeRentalsPage() {
                                         No properties match
                                     </h3>
                                     <p className="text-slate-400 font-medium max-w-xs mx-auto">
-                                        We couldn't find anything matching "{searchLocation}". Try
-                                        clearing your search.
+                                        Try changing your amenities selection or location search.
                                     </p>
                                     <button
                                         type="button"
-                                        onClick={() => setSearchLocation('')}
+                                        onClick={() => {
+                                            setSearchLocation('');
+                                            setSelectedAmenities([]);
+                                        }}
                                         className="mt-6 px-8 py-3 bg-slate-100 rounded-xl font-bold text-sm hover:bg-slate-200 transition-all"
                                     >
                                         Show All Properties

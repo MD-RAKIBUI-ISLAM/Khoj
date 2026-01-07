@@ -1,66 +1,44 @@
 import { useEffect, useState } from 'react';
-import { LuFilter } from 'react-icons/lu';
 
-import HotelCard from '../../components/common/HotelCard';
+import Filter from '../../components/common/Filter';
+import HotelCard from '../../components/common/HotelCard'; // আপনার ইম্পোর্ট করা নাম
 import MapViewer from '../../components/common/MapViewer';
 import { hotelResortData } from '../../data/mockData';
 
 function HotelResortPage() {
     const [searchLocation, setSearchLocation] = useState('Dhaka');
     const [selectedDestination, setSelectedDestination] = useState(null);
-    const [price, setPrice] = useState(100000);
-    const [selectedRooms, setSelectedRooms] = useState('Any');
-    const [activeFilters, setActiveFilters] = useState({
-        maxPrice: 100000,
-        rooms: 'Any'
-    });
+    const [selectedAmenities, setSelectedAmenities] = useState([]); // নতুন স্টেট
 
-    // লজিক: যখনই searchLocation চেঞ্জ হবে, ডিরেকশন/ডেস্টিনেশন রিসেট হয়ে যাবে
     useEffect(() => {
         setSelectedDestination(null);
     }, [searchLocation]);
 
-    // ফিল্টারিং লজিক (StudentHousing লজিক অনুযায়ী)
+    // ফিল্টারিং লজিক আপনার নতুন ডাটা অবজেক্ট অনুযায়ী ফিক্স করা হয়েছে
     const filteredResults = hotelResortData.filter((item) => {
         const searchTerm = searchLocation.toLowerCase();
         const matchesLocation = item.location.toLowerCase().includes(searchTerm);
         const matchesTitle = item.title.toLowerCase().includes(searchTerm);
 
-        const itemPrice = parseInt(item.price.replace(/\D/g, ''), 10) || 0;
-        const matchesPrice = itemPrice <= activeFilters.maxPrice;
+        // আপনার নেস্টেড এ্যামেনিটিস থেকে নামগুলো বের করে আনা হচ্ছে
+        const allItemAmenities = item.amenities
+            ? Object.values(item.amenities).flatMap((category) => category.items.map((i) => i.name))
+            : [];
 
-        // রুম ক্যালকুলেশন (রুম টাইপ গুলোর যোগফল)
-        const totalRooms = Object.values(item.roomStats).reduce((a, b) => a + b, 0);
-        const matchesRooms =
-            activeFilters.rooms === 'Any' ||
-            (activeFilters.rooms === '40+'
-                ? totalRooms >= 40
-                : totalRooms >= parseInt(activeFilters.rooms, 10));
+        const matchesAmenities =
+            selectedAmenities.length === 0 ||
+            selectedAmenities.every((selected) => allItemAmenities.includes(selected));
 
-        return (matchesLocation || matchesTitle) && matchesPrice && matchesRooms;
+        return (matchesLocation || matchesTitle) && matchesAmenities;
     });
 
-    const handleApplyFilters = () => {
-        setActiveFilters({
-            maxPrice: price,
-            rooms: selectedRooms
-        });
-    };
-
-    // সরাসরি নেভিগেশনের জন্য ফাংশন (Direction Logic)
     const handleNavigation = (item) => {
         const fullAddress = `${item.title}, ${item.location}`;
-
-        // ১. অ্যাপের ম্যাপ ভিউয়ারকে ডিরেকশন মোডে নেওয়ার জন্য অ্যাড্রেস আপডেট
         setSelectedDestination(fullAddress);
-
-        // ২. নতুন ট্যাবে গুগল ম্যাপে ডিরেকশন (ইউজারের কারেন্ট লোকেশন থেকে গন্তব্য) ওপেন হবে
-        // এখানে 'dir' প্যারামিটারটি ডিরেকশন নিশ্চিত করে
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`;
         window.open(googleMapsUrl, '_blank');
     };
 
-    // ম্যাপ ইউআরএল লজিক: ডিরেকশন শো করার জন্য
     const mapUrl = selectedDestination
         ? `https://maps.google.com/maps?q=${encodeURIComponent(selectedDestination)}&t=&z=15&ie=UTF8&iwloc=&output=embed`
         : `https://maps.google.com/maps?q=${encodeURIComponent(`${searchLocation} hotels resorts`)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
@@ -80,7 +58,7 @@ function HotelResortPage() {
 
             <div className="max-w-[1600px] mx-auto px-4 lg:px-12 pt-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Left Sidebar: Map & Filter */}
+                    {/* Left Sidebar */}
                     <aside className="w-full lg:w-[350px] space-y-6 shrink-0 lg:sticky lg:top-8 h-fit">
                         <MapViewer
                             searchLocation={searchLocation}
@@ -89,59 +67,11 @@ function HotelResortPage() {
                             foundCount={filteredResults.length}
                         />
 
-                        {/* ফিল্টার সেকশন */}
-                        <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 p-6">
-                            <div className="flex items-center gap-2 mb-6 border-b pb-4">
-                                <LuFilter className="text-slate-800" size={20} />
-                                <h2 className="font-extrabold text-lg">Search Filters</h2>
-                            </div>
-
-                            <div className="space-y-6">
-                                <div>
-                                    <div className="flex justify-between mb-2">
-                                        <label className="text-sm font-bold text-gray-700">
-                                            Max Price (Night):
-                                        </label>
-                                        <span className="text-green-600 font-black">
-                                            {price.toLocaleString()} BDT
-                                        </span>
-                                    </div>
-                                    <input
-                                        type="range"
-                                        min="2000"
-                                        max="100000"
-                                        step="500"
-                                        value={price}
-                                        onChange={(e) => setPrice(Number(e.target.value))}
-                                        className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-green-500"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                                        Room Capacity
-                                    </label>
-                                    <select
-                                        value={selectedRooms}
-                                        onChange={(e) => setSelectedRooms(e.target.value)}
-                                        className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:ring-2 ring-green-50 font-semibold text-gray-700"
-                                    >
-                                        <option value="Any">All Categories</option>
-                                        <option value="20">Min 20 Rooms</option>
-                                        <option value="30">Min 30 Rooms</option>
-                                        <option value="40+">40+ Rooms</option>
-                                    </select>
-                                </div>
-
-                                <button
-                                    type="button"
-                                    onClick={handleApplyFilters}
-                                    className="w-full bg-[#1A1A1A] text-white py-4 rounded-2xl font-black text-sm hover:bg-slate-800 transition-all uppercase tracking-wider"
-                                >
-                                    Apply Search Filters
-                                </button>
-                            </div>
-                        </div>
+                        <Filter
+                            studentHostelsData={hotelResortData} // ফিল্টার কম্পোনেন্ট এই ডাটা থেকেই এ্যামেনিটিস লিস্ট তৈরি করবে
+                            selectedAmenities={selectedAmenities}
+                            setSelectedAmenities={setSelectedAmenities}
+                        />
                     </aside>
 
                     {/* Right Side: List */}
@@ -152,13 +82,19 @@ function HotelResortPage() {
                             </p>
                         </div>
 
-                        {filteredResults.map((item) => (
-                            <HotelCard
-                                key={item.id}
-                                item={item}
-                                onRouteClick={() => handleNavigation(item)}
-                            />
-                        ))}
+                        {filteredResults.length > 0 ? (
+                            filteredResults.map((item) => (
+                                <HotelCard // সঠিক কম্পোনেন্ট নাম
+                                    key={item.id}
+                                    item={item}
+                                    onRouteClick={() => handleNavigation(item)}
+                                />
+                            ))
+                        ) : (
+                            <div className="bg-white rounded-[32px] p-20 text-center border-2 border-dashed border-gray-100 text-gray-400 font-bold">
+                                No resorts found with the selected amenities.
+                            </div>
+                        )}
                     </main>
                 </div>
             </div>

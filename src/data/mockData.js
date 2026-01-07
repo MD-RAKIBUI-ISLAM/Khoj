@@ -1165,6 +1165,31 @@ export const homeRentalsData = [
             { id: 'Flat 1B', status: 'Booked till Feb, 2026' },
             { id: 'Flat 2B', status: 'Booked till Apr, 2026' }
         ],
+        // যোগ করা হলো:
+        amenities: {
+            connectivity: {
+                title: 'Connectivity',
+                items: [
+                    { name: 'High-Speed Fiber WiFi', icon: 'LuWifi' },
+                    { name: 'Intercom System', icon: 'LuPhone' }
+                ]
+            },
+            facilities: {
+                title: 'Building Facilities',
+                items: [
+                    { name: 'Modern Elevator', icon: 'LuArrowUpCircle' },
+                    { name: 'Secure Parking', icon: 'LuCar' },
+                    { name: '24/7 Generator Back-up', icon: 'LuZap' }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Outdoors',
+                items: [
+                    { name: 'Rooftop Garden', icon: 'LuFlower2' },
+                    { name: 'Private Balcony', icon: 'LuLayout' }
+                ]
+            }
+        },
         tags: ['Balcony', 'Parking', 'Garden Access', 'Elevator'],
         features: ['Balcony', 'Parking', 'Garden Access'],
         image: bananiApartmentImg,
@@ -1191,6 +1216,28 @@ export const homeRentalsData = [
             { id: 'Flat 201', status: 'Vacant' },
             { id: 'Flat 203', status: 'Booked till Feb, 2026' }
         ],
+        // যোগ করা হলো:
+        amenities: {
+            connectivity: {
+                title: 'Connectivity',
+                items: [{ name: 'WiFi Ready', icon: 'LuWifi' }]
+            },
+            facilities: {
+                title: 'Building Facilities',
+                items: [
+                    { name: 'Gas Connection', icon: 'LuFlame' },
+                    { name: 'Water Filter System', icon: 'LuDroplets' },
+                    { name: 'CCTV Surveillance', icon: 'LuShieldCheck' }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Outdoors',
+                items: [
+                    { name: 'Common Garden', icon: 'LuPalmtree' },
+                    { name: 'Kids Play Area', icon: 'LuGamepad2' }
+                ]
+            }
+        },
         tags: ['Balcony', 'Common Garden', 'Security', 'Gas Connection'],
         features: ['Balcony', 'Common Garden', 'Security'],
         image: feniComplexImg,
@@ -1216,6 +1263,31 @@ export const homeRentalsData = [
             { id: 'Flat A-2', status: 'Booked till Mar, 2026' },
             { id: 'Flat B-2', status: 'Vacant' }
         ],
+        // যোগ করা হলো:
+        amenities: {
+            facilities: {
+                title: 'Building Facilities',
+                items: [
+                    { name: 'Wide Parking Space', icon: 'LuCar' },
+                    { name: 'Emergency Exit', icon: 'LuLogOut' }
+                ]
+            },
+            leisure: {
+                title: 'Leisure & Outdoors',
+                items: [
+                    { name: 'Large Garden', icon: 'LuTrees' },
+                    { name: 'Pet Friendly Area', icon: 'LuDog' },
+                    { name: 'Community Hall', icon: 'LuUsers' }
+                ]
+            },
+            safety: {
+                title: 'Safety & Security',
+                items: [
+                    { name: 'Professional Guard', icon: 'LuUserCheck' },
+                    { name: 'Fire Extinguisher', icon: 'LuFlame' }
+                ]
+            }
+        },
         tags: ['Large Balcony', 'Garden', 'Parking', 'Pet Friendly'],
         features: ['Large Balcony', 'Garden', 'Parking'],
         image: familyHouseImg,
