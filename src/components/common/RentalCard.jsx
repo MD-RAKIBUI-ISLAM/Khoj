@@ -86,13 +86,15 @@ function RentalCard({ item, onRouteClick }) {
                         </div>
                         <div className="flex flex-col items-center p-4 rounded-3xl border-2 border-orange-50 bg-orange-50/20">
                             <LuBath className="text-orange-500 mb-1" size={18} />
-                            <span className="text-lg font-black text-slate-800">{item.baths}</span>
+                            <span className="text-lg font-black text-slate-800">
+                                {item.bathrooms}
+                            </span>
                             <p className="text-[9px] font-bold text-slate-400 uppercase">Baths</p>
                         </div>
                         <div className="flex flex-col items-center p-4 rounded-3xl border-2 border-blue-50 bg-blue-50/20">
                             <LuTrees className="text-blue-500 mb-1" size={18} />
                             <span className="text-lg font-black text-slate-800">
-                                {item.balcony}
+                                {item.verandas}
                             </span>
                             <p className="text-[9px] font-bold text-slate-400 uppercase">Balcony</p>
                         </div>

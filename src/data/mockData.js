@@ -1172,30 +1172,86 @@ export const homeRentalsData = [
             connectivity: {
                 title: 'Connectivity',
                 items: [
-                    { name: 'High-Speed Fiber WiFi', icon: 'LuWifi' },
-                    { name: 'Intercom System', icon: 'LuPhone' },
-                    { name: 'Satellite TV Connection', icon: 'LuTv' },
-                    { name: 'Smart Home Hub', icon: 'LuCpu' }
+                    {
+                        name: 'High-Speed Fiber WiFi',
+                        icon: 'LuWifi',
+                        desc: 'Seamless internet for work and entertainment.'
+                    },
+                    {
+                        name: 'Intercom System',
+                        icon: 'LuPhone',
+                        desc: 'Instant communication with building staff.'
+                    },
+                    {
+                        name: 'Satellite TV Connection',
+                        icon: 'LuTv',
+                        desc: 'Pre-installed cable for global channels.'
+                    },
+                    {
+                        name: 'Smart Home Hub',
+                        icon: 'LuCpu',
+                        desc: 'Centralized control for your smart devices.'
+                    }
                 ]
             },
             facilities: {
                 title: 'Building Facilities',
                 items: [
-                    { name: 'Modern Elevator', icon: 'LuArrowUpCircle' },
-                    { name: 'Secure Parking', icon: 'LuCar' },
-                    { name: '24/7 Generator Back-up', icon: 'LuZap' },
-                    { name: 'Central Waste Management', icon: 'LuTrash2' },
-                    { name: 'Water Filtration Plant', icon: 'LuDroplets' }
+                    {
+                        name: 'Modern Elevator',
+                        icon: 'LuArrowUpCircle',
+                        desc: 'Fast and safe vertical transportation.'
+                    },
+                    {
+                        name: 'Secure Parking',
+                        icon: 'LuCar',
+                        desc: 'Dedicated space for your vehicle.'
+                    },
+                    {
+                        name: '24/7 Generator Back-up',
+                        icon: 'LuZap',
+                        desc: 'Uninterrupted power supply for all units.'
+                    },
+                    {
+                        name: 'Central Waste Management',
+                        icon: 'LuTrash2',
+                        desc: 'Hygienic and organized disposal system.'
+                    },
+                    {
+                        name: 'Water Filtration Plant',
+                        icon: 'LuDroplets',
+                        desc: 'Clean and safe drinking water supply.'
+                    }
                 ]
             },
             leisure: {
                 title: 'Leisure & Outdoors',
                 items: [
-                    { name: 'Rooftop Garden', icon: 'LuFlower2' },
-                    { name: 'Private Balcony', icon: 'LuLayout' },
-                    { name: 'Swimming Pool', icon: 'LuWaves' },
-                    { name: 'Fitness Gym Center', icon: 'LuDumbbell' },
-                    { name: 'Community Hall', icon: 'LuUsers' }
+                    {
+                        name: 'Rooftop Garden',
+                        icon: 'LuFlower2',
+                        desc: 'A peaceful green space with city views.'
+                    },
+                    {
+                        name: 'Private Balcony',
+                        icon: 'LuLayout',
+                        desc: 'Personal outdoor space for relaxation.'
+                    },
+                    {
+                        name: 'Swimming Pool',
+                        icon: 'LuWaves',
+                        desc: 'Refreshing pool for residents only.'
+                    },
+                    {
+                        name: 'Fitness Gym Center',
+                        icon: 'LuDumbbell',
+                        desc: 'Fully equipped gym for your health.'
+                    },
+                    {
+                        name: 'Community Hall',
+                        icon: 'LuUsers',
+                        desc: 'Spacious area for hosting your events.'
+                    }
                 ]
             }
         },
@@ -1203,12 +1259,36 @@ export const homeRentalsData = [
             protection: {
                 title: 'Security Protection',
                 items: [
-                    { name: '24/7 Physical Guard', icon: 'LuUserCheck' },
-                    { name: 'CCTV Surveillance', icon: 'LuCamera' },
-                    { name: 'Biometric Access', icon: 'LuFingerprint' },
-                    { name: 'Fire Sprinkler System', icon: 'LuWind' },
-                    { name: 'Emergency Alarm', icon: 'LuBellRing' },
-                    { name: 'Metal Detector Gate', icon: 'LuScan' }
+                    {
+                        name: '24/7 Physical Guard',
+                        icon: 'LuUserCheck',
+                        desc: 'Trained personnel on duty at all times.'
+                    },
+                    {
+                        name: 'CCTV Surveillance',
+                        icon: 'LuCamera',
+                        desc: '24-hour monitoring of all common areas.'
+                    },
+                    {
+                        name: 'Biometric Access',
+                        icon: 'LuFingerprint',
+                        desc: 'Secure entry using advanced technology.'
+                    },
+                    {
+                        name: 'Fire Sprinkler System',
+                        icon: 'LuWind',
+                        desc: 'Automated fire safety in every room.'
+                    },
+                    {
+                        name: 'Emergency Alarm',
+                        icon: 'LuBellRing',
+                        desc: 'Instant alert system for any hazards.'
+                    },
+                    {
+                        name: 'Metal Detector Gate',
+                        icon: 'LuScan',
+                        desc: 'Strict security screening at the entrance.'
+                    }
                 ]
             }
         },
@@ -1216,11 +1296,31 @@ export const homeRentalsData = [
             rental_policy: {
                 title: 'Rental Terms',
                 items: [
-                    { name: 'Family Only', icon: 'LuUsers' },
-                    { name: '2 Month Advance', icon: 'LuWallet' },
-                    { name: '1 Year Contract', icon: 'LuFileText' },
-                    { name: 'No Smoking Inside', icon: 'LuSmoking' },
-                    { name: 'Service Charge Excluded', icon: 'LuCreditCard' }
+                    {
+                        name: 'Family Only',
+                        icon: 'LuUsers',
+                        desc: 'Residential unit reserved for families.'
+                    },
+                    {
+                        name: '2 Month Advance',
+                        icon: 'LuWallet',
+                        desc: 'Refundable security deposit required.'
+                    },
+                    {
+                        name: '1 Year Contract',
+                        icon: 'LuFileText',
+                        desc: 'Minimum lease agreement duration.'
+                    },
+                    {
+                        name: 'No Smoking Inside',
+                        icon: 'LuSmoking',
+                        desc: 'Ensuring a clean indoor environment.'
+                    },
+                    {
+                        name: 'Service Charge Excluded',
+                        icon: 'LuCreditCard',
+                        desc: 'Utilities and maintenance billed separately.'
+                    }
                 ]
             }
         },
@@ -1258,28 +1358,76 @@ export const homeRentalsData = [
             connectivity: {
                 title: 'Connectivity',
                 items: [
-                    { name: 'WiFi Ready', icon: 'LuWifi' },
-                    { name: 'Broadband Connection', icon: 'LuGlobe' },
-                    { name: 'Intercom Facility', icon: 'LuPhone' }
+                    {
+                        name: 'WiFi Ready',
+                        icon: 'LuWifi',
+                        desc: 'High-speed internet infrastructure ready.'
+                    },
+                    {
+                        name: 'Broadband Connection',
+                        icon: 'LuGlobe',
+                        desc: 'Reliable fiber optic line availability.'
+                    },
+                    {
+                        name: 'Intercom Facility',
+                        icon: 'LuPhone',
+                        desc: 'Direct line to the main security gate.'
+                    }
                 ]
             },
             facilities: {
                 title: 'Building Facilities',
                 items: [
-                    { name: 'Gas Connection', icon: 'LuFlame' },
-                    { name: 'Water Filter System', icon: 'LuDroplets' },
-                    { name: 'CCTV Surveillance', icon: 'LuShieldCheck' },
-                    { name: 'Prayer Room', icon: 'LuHome' },
-                    { name: 'Basement Parking', icon: 'LuCar' }
+                    {
+                        name: 'Gas Connection',
+                        icon: 'LuFlame',
+                        desc: 'Piped natural gas for hassle-free cooking.'
+                    },
+                    {
+                        name: 'Water Filter System',
+                        icon: 'LuDroplets',
+                        desc: 'Integrated purification for all taps.'
+                    },
+                    {
+                        name: 'CCTV Surveillance',
+                        icon: 'LuShieldCheck',
+                        desc: 'Strategic camera placement for safety.'
+                    },
+                    {
+                        name: 'Prayer Room',
+                        icon: 'LuHouse',
+                        desc: 'Dedicated quiet space for daily prayers.'
+                    },
+                    {
+                        name: 'Basement Parking',
+                        icon: 'LuCar',
+                        desc: 'Underground secure car parking area.'
+                    }
                 ]
             },
             leisure: {
                 title: 'Leisure & Outdoors',
                 items: [
-                    { name: 'Common Garden', icon: 'LuPalmtree' },
-                    { name: 'Kids Play Area', icon: 'LuGamepad2' },
-                    { name: 'Jogging Track', icon: 'LuFootprints' },
-                    { name: 'Rooftop Sitting Area', icon: 'LuCoffee' }
+                    {
+                        name: 'Common Garden',
+                        icon: 'LuPalmtree',
+                        desc: 'Shared green area for morning walks.'
+                    },
+                    {
+                        name: 'Kids Play Area',
+                        icon: 'LuGamepad2',
+                        desc: 'Safe playground for children within the gates.'
+                    },
+                    {
+                        name: 'Jogging Track',
+                        icon: 'LuFootprints',
+                        desc: 'Pathway designed for your daily run.'
+                    },
+                    {
+                        name: 'Rooftop Sitting Area',
+                        icon: 'LuCoffee',
+                        desc: 'Lounge space to enjoy your evening tea.'
+                    }
                 ]
             }
         },
@@ -1287,11 +1435,31 @@ export const homeRentalsData = [
             surveillance: {
                 title: 'Building Security',
                 items: [
-                    { name: 'Night Guard', icon: 'LuMoon' },
-                    { name: 'Fire Alarm System', icon: 'LuBell' },
-                    { name: 'Intercom Monitoring', icon: 'LuMic' },
-                    { name: 'Visitor Log Management', icon: 'LuBook' },
-                    { name: 'Emergency Exit Stair', icon: 'LuDoorOpen' }
+                    {
+                        name: 'Night Guard',
+                        icon: 'LuMoon',
+                        desc: 'Dedicated security patrol during night hours.'
+                    },
+                    {
+                        name: 'Fire Alarm System',
+                        icon: 'LuBell',
+                        desc: 'Highly sensitive smoke and fire detectors.'
+                    },
+                    {
+                        name: 'Intercom Monitoring',
+                        icon: 'LuMic',
+                        desc: 'Security verifies all visitors via intercom.'
+                    },
+                    {
+                        name: 'Visitor Log Management',
+                        icon: 'LuBook',
+                        desc: 'Strict record-keeping of all building entries.'
+                    },
+                    {
+                        name: 'Emergency Exit Stair',
+                        icon: 'LuDoorOpen',
+                        desc: 'Clearly marked and unobstructed fire exits.'
+                    }
                 ]
             }
         },
@@ -1299,11 +1467,31 @@ export const homeRentalsData = [
             rules: {
                 title: 'Apartment Rules',
                 items: [
-                    { name: 'No Pets Allowed', icon: 'LuBan' },
-                    { name: 'Bachelor Friendly', icon: 'LuUser' },
-                    { name: 'Monthly Service Charge', icon: 'LuCreditCard' },
-                    { name: 'Guest Policy Active', icon: 'LuUserPlus' },
-                    { name: 'Rent Deadline 5th of Month', icon: 'LuCalendar' }
+                    {
+                        name: 'No Pets Allowed',
+                        icon: 'LuBan',
+                        desc: 'Strict no-pet policy for building hygiene.'
+                    },
+                    {
+                        name: 'Bachelor Friendly',
+                        icon: 'LuUser',
+                        desc: 'Single professionals are welcome to rent.'
+                    },
+                    {
+                        name: 'Monthly Service Charge',
+                        icon: 'LuCreditCard',
+                        desc: 'Fixed cost for common area maintenance.'
+                    },
+                    {
+                        name: 'Guest Policy Active',
+                        icon: 'LuUserPlus',
+                        desc: 'Advance notice needed for overnight guests.'
+                    },
+                    {
+                        name: 'Rent Deadline 5th of Month',
+                        icon: 'LuCalendar',
+                        desc: 'Timely payment expected by the 5th.'
+                    }
                 ]
             }
         },
@@ -1340,29 +1528,81 @@ export const homeRentalsData = [
             facilities: {
                 title: 'Building Facilities',
                 items: [
-                    { name: 'Wide Parking Space', icon: 'LuCar' },
-                    { name: 'Emergency Exit', icon: 'LuLogOut' },
-                    { name: 'Solar Power Backup', icon: 'LuSun' },
-                    { name: 'Servant Washroom', icon: 'LuBath' },
-                    { name: 'Deep Tubewell Water', icon: 'LuDroplet' }
+                    {
+                        name: 'Wide Parking Space',
+                        icon: 'LuCar',
+                        desc: 'Spacious area suitable for large vehicles.'
+                    },
+                    {
+                        name: 'Emergency Exit',
+                        icon: 'LuLogOut',
+                        desc: 'Strategic exits for quick evacuation.'
+                    },
+                    {
+                        name: 'Solar Power Backup',
+                        icon: 'LuSun',
+                        desc: 'Eco-friendly lighting for common areas.'
+                    },
+                    {
+                        name: 'Servant Washroom',
+                        icon: 'LuBath',
+                        desc: 'Separate washroom facility for house help.'
+                    },
+                    {
+                        name: 'Deep Tubewell Water',
+                        icon: 'LuDroplet',
+                        desc: 'Pure underground water source available.'
+                    }
                 ]
             },
             leisure: {
                 title: 'Leisure & Outdoors',
                 items: [
-                    { name: 'Large Garden', icon: 'LuTrees' },
-                    { name: 'Pet Friendly Area', icon: 'LuDog' },
-                    { name: 'Community Hall', icon: 'LuUsers' },
-                    { name: 'BBQ Zone', icon: 'LuUtensils' },
-                    { name: 'Open Terrace', icon: 'LuSun' }
+                    {
+                        name: 'Large Garden',
+                        icon: 'LuTrees',
+                        desc: 'Expansive lawn for kids and gardening.'
+                    },
+                    {
+                        name: 'Pet Friendly Area',
+                        icon: 'LuDog',
+                        desc: 'Welcome space for your furry friends.'
+                    },
+                    {
+                        name: 'Community Hall',
+                        icon: 'LuUsers',
+                        desc: 'Indoor space for family celebrations.'
+                    },
+                    {
+                        name: 'BBQ Zone',
+                        icon: 'LuUtensils',
+                        desc: 'Dedicated pit for outdoor cooking events.'
+                    },
+                    {
+                        name: 'Open Terrace',
+                        icon: 'LuSun',
+                        desc: 'Large roof area for sunbathing and air.'
+                    }
                 ]
             },
             safety: {
                 title: 'Safety & Security',
                 items: [
-                    { name: 'Professional Guard', icon: 'LuUserCheck' },
-                    { name: 'Fire Extinguisher', icon: 'LuFlame' },
-                    { name: 'First Aid Kit', icon: 'LuHeartPulse' }
+                    {
+                        name: 'Professional Guard',
+                        icon: 'LuUserCheck',
+                        desc: 'Security staff from recognized agencies.'
+                    },
+                    {
+                        name: 'Fire Extinguisher',
+                        icon: 'LuFlame',
+                        desc: 'Manual fire fighting gear on every floor.'
+                    },
+                    {
+                        name: 'First Aid Kit',
+                        icon: 'LuHeartPulse',
+                        desc: 'Emergency medical supplies on standby.'
+                    }
                 ]
             }
         },
@@ -1370,11 +1610,31 @@ export const homeRentalsData = [
             safety_measures: {
                 title: 'Safety Features',
                 items: [
-                    { name: 'Boundary Wall', icon: 'LuFence' },
-                    { name: 'Emergency Lights', icon: 'LuLightbulb' },
-                    { name: 'Earthquake Resistant', icon: 'LuActivity' },
-                    { name: 'Gas Leak Detector', icon: 'LuWind' },
-                    { name: 'Security Cabin', icon: 'LuHome' }
+                    {
+                        name: 'Boundary Wall',
+                        icon: 'LuFence',
+                        desc: 'High wall with barbed wire for protection.'
+                    },
+                    {
+                        name: 'Emergency Lights',
+                        icon: 'LuLightbulb',
+                        desc: 'Automatic lights during power outages.'
+                    },
+                    {
+                        name: 'Earthquake Resistant',
+                        icon: 'LuActivity',
+                        desc: 'Built to withstand seismic activities.'
+                    },
+                    {
+                        name: 'Gas Leak Detector',
+                        icon: 'LuWind',
+                        desc: 'Smart sensors to prevent fire hazards.'
+                    },
+                    {
+                        name: 'Security Cabin',
+                        icon: 'LuHome',
+                        desc: 'Main gate office for entry verification.'
+                    }
                 ]
             }
         },
@@ -1382,11 +1642,31 @@ export const homeRentalsData = [
             general_terms: {
                 title: 'Rental Policies',
                 items: [
-                    { name: 'Post-dated Cheque', icon: 'LuBanknote' },
-                    { name: 'Sublet Not Allowed', icon: 'LuXCircle' },
-                    { name: 'No Commercial Use', icon: 'LuBriefcase' },
-                    { name: 'Quiet Hours (11PM-7AM)', icon: 'LuVolumeX' },
-                    { name: 'ID Verification Mandatory', icon: 'LuUserSquare' }
+                    {
+                        name: 'Post-dated Cheque',
+                        icon: 'LuBanknote',
+                        desc: 'Payment security via dated bank cheques.'
+                    },
+                    {
+                        name: 'Sublet Not Allowed',
+                        icon: 'LuXCircle',
+                        desc: 'Property cannot be rented to third parties.'
+                    },
+                    {
+                        name: 'No Commercial Use',
+                        icon: 'LuBriefcase',
+                        desc: 'Unit is strictly for residential living.'
+                    },
+                    {
+                        name: 'Quiet Hours (11PM-7AM)',
+                        icon: 'LuVolumeX',
+                        desc: 'Minimum noise policy during night time.'
+                    },
+                    {
+                        name: 'ID Verification Mandatory',
+                        icon: 'LuUserSquare',
+                        desc: 'National ID/Passport copy required.'
+                    }
                 ]
             }
         },

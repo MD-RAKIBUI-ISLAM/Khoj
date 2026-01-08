@@ -251,9 +251,14 @@ function RentalDetail() {
                                                         <div className="p-3 bg-slate-50 text-slate-400 rounded-2xl group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
                                                             <LuCircleCheckBig size={20} />
                                                         </div>
-                                                        <h4 className="text-[13px] font-bold text-slate-800">
-                                                            {item.name}
-                                                        </h4>
+                                                        <div>
+                                                            <h4 className="text-[13px] font-bold text-slate-800">
+                                                                {item.name}
+                                                            </h4>
+                                                            <p className="text-[11px] text-slate-500 leading-relaxed">
+                                                                {item.desc}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 ))}
                                             </div>
