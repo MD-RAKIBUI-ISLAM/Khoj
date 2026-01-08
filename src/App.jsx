@@ -12,6 +12,7 @@ import HomeRentalsPage from './Pages/HomeRentalsPage/HomeRentalsPage';
 import HotelResortDetail from './Pages/HotelResort/HotelResortDetail';
 import HotelResortPage from './Pages/HotelResort/HotelResortPage';
 import ListProperty from './Pages/ListProperty/ListProperty';
+import RegistrationPage from './Pages/RegistrationPage/Registration';
 import Services from './Pages/Services/ServicesMenu';
 import SignIn from './Pages/Sign/SignIn';
 import ModernStudentHostel from './Pages/StudentHousing/StudentHousingDetail';
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/services" element={<Services />} />
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/signin" element={<SignIn />} />
+                        <Route path="/register" element={<RegistrationPage />} />
                         {/* List Property পেজের জন্য নতুন রাউট */}
                         <Route path="/list-property" element={<ListProperty />} />
                         <Route path="/student-housing" element={<StudentHousingPage />} />

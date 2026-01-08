@@ -1,52 +1,72 @@
 import { FiShield, FiUsers } from 'react-icons/fi';
-// LuCheckCircle এর বদলে LuBadgeCheck বা LuCheck ব্যবহার করুন
 import { LuBadgeCheck } from 'react-icons/lu';
 
 import { lpHostWorryData } from '../../../data/mockData';
 
 function LP_HostWithoutWorry() {
-    // Icon mapping logic আপডেট করা হয়েছে
     const getIcon = (name) => {
         switch (name) {
             case 'check':
-                return <LuBadgeCheck className="text-green-500 text-2xl" />;
+                return (
+                    <div className="p-3 bg-green-50 rounded-xl">
+                        <LuBadgeCheck className="text-green-600 text-3xl" />
+                    </div>
+                );
             case 'users':
-                return <FiUsers className="text-orange-400 text-2xl" />;
+                return (
+                    <div className="p-3 bg-orange-50 rounded-xl">
+                        <FiUsers className="text-orange-500 text-3xl" />
+                    </div>
+                );
             case 'shield':
-                return <FiShield className="text-red-500 text-2xl" />;
+                return (
+                    <div className="p-3 bg-red-50 rounded-xl">
+                        <FiShield className="text-red-500 text-3xl" />
+                    </div>
+                );
             default:
                 return null;
         }
     };
 
     return (
-        <section className="py-16 px-6 lg:px-20 bg-white">
+        <section className="py-20 px-6 lg:px-20 bg-[#FAFBFF]">
             <div className="max-w-[1440px] mx-auto">
-                {/* Section Title */}
-                <h2 className="text-4xl lg:text-5xl font-serif font-bold text-[#1A1A1A] mb-12">
-                    {lpHostWorryData.title}
-                </h2>
+                {/* Section Header */}
+                <div className="max-w-3xl mb-16">
+                    <h2 className="text-4xl lg:text-5xl font-black text-slate-900 leading-tight mb-6">
+                        {lpHostWorryData.title}
+                    </h2>
+                    <div className="w-20 h-1.5 bg-[#0095FF] rounded-full" />
+                </div>
 
-                {/* Grid Columns */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+                {/* Grid Columns with Premium Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                     {lpHostWorryData.columns.map((col) => (
-                        <div key={col.id} className="space-y-6">
-                            <div className="flex items-center gap-3">
-                                {/* আইকন রেন্ডার হচ্ছে */}
+                        <div
+                            key={col.id}
+                            className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group"
+                        >
+                            <div className="mb-6 inline-block transition-transform group-hover:scale-110 duration-300">
                                 {getIcon(col.iconName)}
-                                <h3 className="text-xl font-bold text-[#1A1A1A]">{col.header}</h3>
                             </div>
 
-                            <ul className="space-y-5">
+                            <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                                {col.header}
+                            </h3>
+
+                            <ul className="space-y-4">
                                 {col.points.map((point, idx) => (
-                                    <li key={idx} className="flex items-start gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-[#0095FF] mt-2.5 flex-shrink-0" />
-                                        <p className="text-gray-600 text-base leading-relaxed">
+                                    <li key={idx} className="flex items-start gap-3 group/item">
+                                        <div className="mt-1.5">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-[#0095FF] group-hover/item:scale-150 transition-transform" />
+                                        </div>
+                                        <p className="text-slate-600 text-[15px] leading-relaxed">
                                             {point.text}
                                             {point.linkText && (
                                                 <a
                                                     href={point.url}
-                                                    className="text-[#0095FF] font-medium hover:underline mx-1"
+                                                    className="text-[#0095FF] font-semibold hover:text-blue-700 mx-1 underline decoration-blue-200 underline-offset-4"
                                                 >
                                                     {point.linkText}
                                                 </a>
@@ -60,21 +80,28 @@ function LP_HostWithoutWorry() {
                     ))}
                 </div>
 
-                {/* Perfect For Section */}
-                <div className="pt-12 border-t border-gray-100">
-                    <h4 className="text-2xl font-bold text-[#1A1A1A] mb-8">
+                {/* Perfect For Section - Glassmorphism look */}
+                <div className="bg-white rounded-[40px] p-10 lg:p-16 border border-blue-50 shadow-sm relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-32 -mt-32 opacity-50" />
+
+                    <h4 className="text-3xl font-black text-slate-900 mb-12 relative">
                         {lpHostWorryData.perfectFor.title}
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16">
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 relative">
                         {lpHostWorryData.perfectFor.items.map((item, idx) => (
-                            <div key={idx} className="flex items-start gap-4">
-                                <span className="text-3xl mt-1">{item.icon}</span>
-                                <div className="leading-tight">
-                                    <span className="font-bold text-[#1A1A1A] text-lg">
+                            <div
+                                key={idx}
+                                className="flex items-center gap-6 p-4 rounded-2xl hover:bg-slate-50 transition-colors"
+                            >
+                                <span className="text-5xl filter drop-shadow-md transition-transform hover:scale-110 cursor-default">
+                                    {item.icon}
+                                </span>
+                                <div className="space-y-1">
+                                    <h5 className="font-bold text-slate-900 text-xl tracking-tight">
                                         {item.label}
-                                    </span>
-                                    <span className="text-gray-400 mx-2">—</span>
-                                    <span className="text-gray-600 text-base">{item.desc}</span>
+                                    </h5>
+                                    <p className="text-slate-500 text-base">{item.desc}</p>
                                 </div>
                             </div>
                         ))}

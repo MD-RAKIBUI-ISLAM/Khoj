@@ -45,7 +45,7 @@ function Navbar() {
                 </div>
 
                 {/* 3. Right Side Actions */}
-                <div className="flex items-center gap-3 lg:gap-6">
+                <div className="flex items-center gap-3 lg:gap-5">
                     {/* User Profile / Login */}
                     <Link
                         to="/signin"
@@ -58,6 +58,14 @@ function Navbar() {
                         <span className="text-sm font-bold hidden sm:block">
                             {navData.signInText}
                         </span>
+                    </Link>
+
+                    {/* Register Button - Added between Login and List Property */}
+                    <Link
+                        to="/register"
+                        className="hidden sm:flex items-center justify-center px-5 py-2.5 border-2 border-blue-50 text-[#0095FF] bg-blue-50/30 rounded-[12px] font-bold text-xs uppercase tracking-wider hover:bg-[#0095FF] hover:text-white hover:border-[#0095FF] transition-all active:scale-95"
+                    >
+                        Register
                     </Link>
 
                     {/* List Property Button */}

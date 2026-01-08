@@ -9,40 +9,95 @@ function Hero() {
         <section className="bg-gradient-to-r from-[#CADCFF] via-[#E2E8FF] to-[#A5C9FF] py-16 lg:py-24 px-6 lg:px-20 overflow-hidden min-h-[750px] flex items-center">
             <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 {/* Left Content - Created as per image_013d0d.jpg */}
-                <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-12">
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-3 bg-white border-[3px] border-[#0095FF] px-8 py-3 rounded-full shadow-md">
-                        <span className="w-3.5 h-3.5 bg-[#0095FF] rounded-full shadow-[0_0_8px_rgba(0,149,255,0.8)]" />
-                        <span className="text-[#0095FF] text-xl font-extrabold tracking-tight">
-                            Accrose all of Bangladesh
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-10 lg:space-y-14">
+                    {/* Animated Badge */}
+                    <div className="inline-flex items-center gap-3 bg-blue-50/50 border border-blue-100 px-6 py-2.5 rounded-full shadow-sm backdrop-blur-sm group">
+                        <span className="relative flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0095FF] opacity-75" />
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-[#0095FF]" />
+                        </span>
+                        <span className="text-[#0095FF] text-base lg:text-lg font-bold tracking-wider uppercase">
+                            Across all of Bangladesh
                         </span>
                     </div>
 
-                    {/* Main Heading */}
-                    <h1 className="text-7xl lg:text-[105px] font-serif font-medium text-[#1A1A1A] leading-[1] tracking-tight">
-                        Find Your Perfect Stay
+                    {/* Main Heading with Gradient Touch */}
+                    <h1 className="text-6xl lg:text-[110px] font-black text-slate-900 leading-[0.95] tracking-tight">
+                        Find Your <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0095FF] to-blue-700">
+                            Perfect Stay
+                        </span>
                     </h1>
 
-                    {/* Description */}
-                    <p className="text-gray-700 text-xl lg:text-2xl leading-relaxed max-w-2xl font-medium opacity-90">
-                        Discover verified accommodations tailored for students, tourists, families,
-                        and travelers. Browse thousands of listings with detailed information and
-                        real reviews.
+                    {/* Description - Improved Readability */}
+                    <p className="text-slate-500 text-lg lg:text-2xl leading-relaxed max-w-2xl font-medium">
+                        Discover verified accommodations tailored for{' '}
+                        <span className="text-slate-900">students, tourists, and families</span>.
+                        Browse thousands of listings with real-time availability and trusted
+                        reviews.
                     </p>
 
-                    {/* Search Bar - Precise Alignment as per Image */}
-                    <div className="w-full max-w-2xl bg-white p-3 rounded-[35px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.15)] border-2 border-white flex items-center gap-4">
-                        <button
-                            type="button"
-                            className="bg-[#0095FF] text-white px-12 py-5 rounded-[28px] font-black text-xl hover:bg-blue-600 transition-all active:scale-95 shadow-lg"
-                        >
-                            Search
-                        </button>
-                        <input
-                            type="text"
-                            placeholder="Search by a city or distric..."
-                            className="flex-1 px-4 outline-none text-[#1A1A1A] text-xl font-semibold placeholder-gray-400 bg-transparent"
-                        />
+                    {/* Modern Search Bar - High Conversion Design */}
+                    <div className="w-full max-w-3xl relative group">
+                        {/* Glow Effect behind search bar */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-[#0095FF] rounded-[40px] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+
+                        <div className="relative w-full bg-white p-2.5 lg:p-3 rounded-[38px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center gap-2">
+                            {/* Search Input Icon (Optional but Premium) */}
+                            <div className="pl-6 hidden lg:block">
+                                <svg
+                                    className="w-6 h-6 text-slate-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    />
+                                </svg>
+                            </div>
+
+                            <input
+                                type="text"
+                                placeholder="Search by city or district..."
+                                className="flex-1 px-4 lg:px-2 outline-none text-slate-900 text-lg lg:text-xl font-medium placeholder-slate-400 bg-transparent"
+                            />
+
+                            <button
+                                type="button"
+                                className="bg-[#0095FF] text-white px-8 lg:px-12 py-4 lg:py-5 rounded-[32px] font-bold text-lg lg:text-xl hover:bg-blue-600 transition-all active:scale-95 shadow-[0_10px_20px_rgba(0,149,255,0.3)] flex items-center gap-2"
+                            >
+                                <span>Search</span>
+                                <svg
+                                    className="w-5 h-5 hidden lg:block"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2.5"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Trust Badges - Adds Authority */}
+                    <div className="flex items-center gap-8 pt-4 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                        <p className="text-slate-400 font-bold text-sm uppercase tracking-widest">
+                            Trusted Partners:
+                        </p>
+                        <div className="flex gap-6 text-slate-900 font-black italic text-xl">
+                            <span>Booking.com</span>
+                            <span>Airbnb</span>
+                            <span>Agoda</span>
+                        </div>
                     </div>
                 </div>
 
@@ -77,7 +132,7 @@ function Hero() {
                         </div>
 
                         {/* No. 5: Balcony */}
-                        <div className="absolute bottom-[15%] left-[5%] w-[45%] z-50">
+                        <div className="absolute bottom-[15%] left-[5%] w-[45%] z-40">
                             <img
                                 src={hero3}
                                 alt="Balcony"

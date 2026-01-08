@@ -1,4 +1,5 @@
 import { LuCirclePlus, LuSearch, LuSparkles } from 'react-icons/lu';
+import { useNavigate } from 'react-router-dom';
 
 import detailedImg from '../../assets/Detailed_information.png';
 import nationwideImg from '../../assets/nationwide_coverage.png';
@@ -8,6 +9,7 @@ import { whyChooseData } from '../../data/mockData';
 const featureImages = [nationwideImg, detailedImg, verifiedImg];
 
 function WhyChoose() {
+    const navigate = useNavigate();
     return (
         <section className="py-24 px-6 lg:px-24 bg-[#F1F5F9]">
             <div className="max-w-[1440px] mx-auto">
@@ -96,7 +98,8 @@ function WhyChoose() {
 
                             <button
                                 type="button"
-                                className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-md text-white border border-white/20 px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-white/10 transition-all active:scale-95 w-full sm:w-auto"
+                                onClick={() => navigate('/list-property')} // রাউটে নেভিগেট করবে
+                                className="flex items-center justify-center gap-2 bg-white/5 backdrop-blur-md text-white border border-white/20 px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-white/10 transition-all active:scale-95 w-full sm:w-auto cursor-pointer"
                             >
                                 <LuCirclePlus size={20} />
                                 List Your Property

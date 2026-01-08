@@ -6,7 +6,7 @@ function Contact() {
             icon: <LuPhone size={24} />,
             title: 'Call Us',
             detail: '+880 1234 567 890',
-            subDetail: 'Mon-Fri from 9am to 6pm',
+            subDetail: 'Sunday-Thursday from 9am to 6pm',
             color: 'text-blue-600',
             bg: 'bg-blue-50'
         },

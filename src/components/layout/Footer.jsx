@@ -17,7 +17,7 @@ function Footer() {
     return (
         <footer className="bg-[#1A1A1A] text-white pt-10 pb-4 px-6 lg:px-24">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
                     {/* Logo & Description */}
                     <div className="space-y-4">
                         <div className="bg-white p-1.5 rounded-md inline-block">
