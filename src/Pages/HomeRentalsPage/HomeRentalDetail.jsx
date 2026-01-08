@@ -18,7 +18,6 @@ import {
 import { useParams } from 'react-router-dom';
 
 import BookingModal from '../../components/common/BookingModal';
-// আপনার ডাটা সোর্স অনুযায়ী ইমপোর্ট পাথ ঠিক করে নিন
 import { homeRentalsData } from '../../data/mockData';
 
 function RentalDetail() {
@@ -27,7 +26,6 @@ function RentalDetail() {
     const [activeTab, setActiveTab] = useState('Amenities');
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-    // ডাটা খুঁজে বের করা
     const rental =
         homeRentalsData.find((item) => item.id === parseInt(id, 10)) || homeRentalsData[0];
 
@@ -51,13 +49,11 @@ function RentalDetail() {
     };
 
     const handleViewMap = () => {
-        // হোটেলের নাম এবং লোকেশনকে URL friendly ফরম্যাটে নেওয়া হচ্ছে
         const destination = encodeURIComponent(`${rental.title}, ${rental.location}`);
-        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${destination}&travelmode=driving`;
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${destination}`;
         window.open(googleMapsUrl, '_blank');
     };
 
-    // Modal এর জন্য ডাটা ফরম্যাট করা
     const formattedRoomOptions = rental.flatAvailability.map((flat) => ({
         room: flat.id,
         status: flat.status
@@ -119,7 +115,7 @@ function RentalDetail() {
                         </p>
                     </section>
 
-                    {/* 2. Key Features Section (Using size, rooms, security, etc. from object) */}
+                    {/* 2. Key Features Section */}
                     <section className="order-2 lg:col-start-5 lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         {[
                             {
@@ -249,7 +245,11 @@ function RentalDetail() {
                                                         className="flex items-center gap-4 p-5 bg-white border border-slate-100 rounded-3xl hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 group"
                                                     >
                                                         <div className="p-3 bg-slate-50 text-slate-400 rounded-2xl group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                                                            <LuCircleCheckBig size={20} />
+                                                            {item.icon ? (
+                                                                <item.icon size={20} />
+                                                            ) : (
+                                                                <LuCircleCheckBig size={20} />
+                                                            )}
                                                         </div>
                                                         <div>
                                                             <h4 className="text-[13px] font-bold text-slate-800">
@@ -286,11 +286,20 @@ function RentalDetail() {
                                                             className="flex items-center gap-4 p-5 bg-slate-50/50 border border-slate-100 rounded-3xl group"
                                                         >
                                                             <div className="p-3 bg-white text-blue-600 rounded-2xl shadow-sm">
-                                                                <LuShield size={20} />
+                                                                {item.icon ? (
+                                                                    <item.icon size={20} />
+                                                                ) : (
+                                                                    <LuShield size={20} />
+                                                                )}
                                                             </div>
-                                                            <h4 className="text-[13px] font-bold text-slate-800">
-                                                                {item.name}
-                                                            </h4>
+                                                            <div>
+                                                                <h4 className="text-[13px] font-bold text-slate-800">
+                                                                    {item.name}
+                                                                </h4>
+                                                                <p className="text-[11px] text-slate-500 leading-relaxed">
+                                                                    {item.desc}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -317,13 +326,25 @@ function RentalDetail() {
                                                         key={index}
                                                         className="flex items-center gap-4 p-5 border border-dashed border-slate-200 rounded-3xl"
                                                     >
-                                                        <LuFileText
-                                                            className="text-slate-400"
-                                                            size={18}
-                                                        />
-                                                        <h4 className="text-[13px] font-bold text-slate-600">
-                                                            {item.name}
-                                                        </h4>
+                                                        {item.icon ? (
+                                                            <item.icon
+                                                                className="text-slate-400"
+                                                                size={18}
+                                                            />
+                                                        ) : (
+                                                            <LuFileText
+                                                                className="text-slate-400"
+                                                                size={18}
+                                                            />
+                                                        )}
+                                                        <div>
+                                                            <h4 className="text-[13px] font-bold text-slate-800">
+                                                                {item.name}
+                                                            </h4>
+                                                            <p className="text-[11px] text-slate-500 leading-relaxed">
+                                                                {item.desc}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 ))}
                                             </div>
