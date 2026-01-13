@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import ScrollToTop from './components/common/ScrollToTop';
 import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
 import Categories from './components/sections/Categories';
@@ -21,6 +22,7 @@ import StudentHousingPage from './Pages/StudentHousing/StudentHousingPage';
 function App() {
     return (
         <Router>
+            <ScrollToTop />
             <div className="flex flex-col min-h-screen font-sans">
                 <Navbar />
 

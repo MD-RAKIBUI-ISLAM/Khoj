@@ -17,11 +17,13 @@ import { useParams } from 'react-router-dom';
 
 import BookingModal from '../../components/common/BookingModal';
 import Button from '../../components/common/Button';
+import ReviewForm from '../../components/common/ReviewForm';
 import { studentHostelsData } from '../../data/mockData';
 
 function ModernStudentHostel() {
     const { id } = useParams();
     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+    const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('Amenities'); // 2. Initially Amenities active
     const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
@@ -46,6 +48,11 @@ function ModernStudentHostel() {
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    };
+
+    const handleNewReview = (newReview) => {
+        hostel.userReviews = [newReview, ...hostel.userReviews];
+        setIsReviewModalOpen(false); // ফর্ম বন্ধ হবে
     };
 
     return (
@@ -289,40 +296,65 @@ function ModernStudentHostel() {
                             )}
                             {activeTab === 'Reviews' && (
                                 <div className="space-y-6 animate-in fade-in duration-500">
-                                    {hostel.userReviews.map((rev) => (
-                                        <div
-                                            key={rev.id}
-                                            className="p-6 bg-slate-50 rounded-[32px] border border-slate-100"
-                                        >
-                                            <div className="flex justify-between items-center mb-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center font-black text-blue-600 shadow-sm border border-slate-100">
-                                                        {rev.user.charAt(0)}
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="font-black text-slate-900">
-                                                            {rev.user}
-                                                        </h4>
-                                                        <p className="text-[10px] text-slate-400 font-bold uppercase">
-                                                            {rev.date}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="flex gap-0.5 text-yellow-400">
-                                                    {[...Array(rev.rating)].map((_, i) => (
-                                                        <LuStar
-                                                            key={i}
-                                                            size={14}
-                                                            className="fill-current"
-                                                        />
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <p className="text-slate-600 font-medium italic leading-relaxed">
-                                                "{rev.comment}"
+                                    {/* ২. নতুন ডাইনামিক বাটন হেডার */}
+                                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                                        <div>
+                                            <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight">
+                                                Guest Experience
+                                            </h3>
+                                            <p className="text-xs text-slate-500 font-medium">
+                                                {hostel.userReviews.length} Reviews found
                                             </p>
                                         </div>
-                                    ))}
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsReviewModalOpen(true)}
+                                            className="group flex items-center gap-2 bg-slate-950 hover:bg-slate-900 text-white px-6 py-3 rounded-2xl font-black text-[10px] uppercase tracking-[2px] transition-all active:scale-95 shadow-lg shadow-blue-200 self-end md:self-auto"
+                                        >
+                                            <span className="group-hover:rotate-90 transition-transform duration-300">
+                                                +
+                                            </span>
+                                            Write a Review
+                                        </button>
+                                    </div>
+
+                                    {/* Reviews List */}
+                                    <div className="grid gap-6">
+                                        {hostel.userReviews.map((rev) => (
+                                            <div
+                                                key={rev.id}
+                                                className="p-6 bg-slate-50 rounded-[32px] border border-slate-100 hover:border-blue-100 transition-colors"
+                                            >
+                                                <div className="flex justify-between items-center mb-4">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center font-black text-blue-600 shadow-sm border border-slate-100 uppercase">
+                                                            {rev.user.charAt(0)}
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="font-black text-slate-900">
+                                                                {rev.user}
+                                                            </h4>
+                                                            <p className="text-[10px] text-slate-400 font-bold uppercase">
+                                                                {rev.date}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex gap-0.5 text-yellow-400">
+                                                        {[...Array(rev.rating)].map((_, i) => (
+                                                            <LuStar
+                                                                key={i}
+                                                                size={14}
+                                                                className="fill-current"
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <p className="text-slate-600 font-medium italic leading-relaxed">
+                                                    "{rev.comment}"
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -384,6 +416,33 @@ function ModernStudentHostel() {
                     </div>
                 </div>
             </div>
+
+            {/* ModernStudentHostel ফাইলের নিচের মোডাল অংশটি এইভাবে রিপ্লেস করুন */}
+            {isReviewModalOpen && (
+                <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4">
+                    {/* Backdrop: Native Button ব্যবহার করা হয়েছে অ্যাক্সেসিবিলিটির জন্য */}
+                    <button
+                        type="button"
+                        aria-label="Close modal"
+                        className="absolute inset-0 bg-slate-900/60 backdrop-blur-md cursor-default w-full h-full border-none"
+                        onClick={() => setIsReviewModalOpen(false)}
+                    />
+
+                    {/* Modal Card */}
+                    <div
+                        className="relative w-full max-w-lg transform transition-all shadow-2xl"
+                        role="dialog"
+                        aria-modal="true"
+                    >
+                        <div className="bg-white rounded-[40px] overflow-hidden">
+                            <ReviewForm
+                                onReviewSubmit={handleNewReview}
+                                onClose={() => setIsReviewModalOpen(false)}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <BookingModal
                 isOpen={isBookingModalOpen}
