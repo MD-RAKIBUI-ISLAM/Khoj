@@ -80,28 +80,66 @@ function LP_HostWithoutWorry() {
                     ))}
                 </div>
 
-                {/* Perfect For Section - Glassmorphism look */}
-                <div className="bg-white rounded-[40px] p-10 lg:p-16 border border-blue-50 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-32 -mt-32 opacity-50" />
+                {/* Perfect For Section - Advanced Glassmorphism Look */}
+                <div className="bg-white rounded-[40px] p-10 lg:p-16 border border-blue-50 shadow-[0_20px_50px_rgba(0,149,255,0.05)] relative overflow-hidden">
+                    {/* Decorative Background Elements */}
+                    <div className="absolute top-0 right-0 w-80 h-80 bg-blue-50/50 rounded-full -mr-40 -mt-40 blur-3xl opacity-60" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50/30 rounded-full -ml-32 -mb-32 blur-2xl opacity-50" />
 
-                    <h4 className="text-3xl font-black text-slate-900 mb-12 relative">
-                        {lpHostWorryData.perfectFor.title}
-                    </h4>
+                    {/* Section Header */}
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 relative gap-4">
+                        <div className="space-y-2">
+                            <span className="text-[#0095FF] font-bold tracking-widest uppercase text-sm">
+                                Categories
+                            </span>
+                            <h4 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+                                {lpHostWorryData.perfectFor.title}
+                            </h4>
+                        </div>
+                        <p className="text-slate-400 font-medium italic">
+                            Showing all {lpHostWorryData.perfectFor.items.length} types
+                        </p>
+                    </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10 relative">
+                    {/* Dynamic Grid Layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12 relative">
                         {lpHostWorryData.perfectFor.items.map((item, idx) => (
                             <div
-                                key={idx}
-                                className="flex items-center gap-6 p-4 rounded-2xl hover:bg-slate-50 transition-colors"
+                                key={item.id || idx}
+                                className="group flex flex-col gap-5 p-6 rounded-[28px] border border-transparent hover:border-blue-100 hover:bg-blue-50/40 hover:shadow-xl hover:shadow-blue-50/50 transition-all duration-300"
                             >
-                                <span className="text-5xl filter drop-shadow-md transition-transform hover:scale-110 cursor-default">
-                                    {item.icon}
-                                </span>
-                                <div className="space-y-1">
-                                    <h5 className="font-bold text-slate-900 text-xl tracking-tight">
+                                {/* Icon Container with Hover Animation */}
+                                <div className="w-16 h-16 bg-white shadow-sm border border-slate-100 rounded-2xl flex items-center justify-center text-4xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-blue-100">
+                                    <span className="filter drop-shadow-sm">{item.icon}</span>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <h5 className="font-bold text-slate-900 text-xl lg:text-2xl tracking-tight leading-tight group-hover:text-[#0095FF] transition-colors">
                                         {item.label}
                                     </h5>
-                                    <p className="text-slate-500 text-base">{item.desc}</p>
+                                    <p className="text-slate-500 text-base leading-relaxed opacity-90">
+                                        {item.desc}
+                                    </p>
+                                </div>
+
+                                {/* Subtle Action Link */}
+                                <div className="pt-2">
+                                    <span className="text-xs font-bold text-[#0095FF] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 cursor-pointer">
+                                        Learn More
+                                        <svg
+                                            className="w-3 h-3"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="3"
+                                                d="M9 5l7 7-7 7"
+                                            />
+                                        </svg>
+                                    </span>
                                 </div>
                             </div>
                         ))}

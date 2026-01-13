@@ -272,16 +272,74 @@ export const lpHostWorryData = {
         }
     ],
     perfectFor: {
-        title: 'Perfect for:',
+        title: 'Perfect for every property type',
         items: [
             {
+                id: 1,
                 icon: '🎓',
-                label: 'Student Housing',
-                desc: 'Host verified students with flexible stay options'
+                label: 'Student Housing & Mess',
+                desc: 'Connect with verified students looking for long-term hostels or mess facilities with flexible payment options.'
             },
-            { icon: '🏨', label: 'Hotels', desc: 'Increase occupancy with smart booking tools' },
-            { icon: '🏖️', label: 'Tourist Resorts', desc: 'Reach global travelers effortlessly' },
-            { icon: '🏡', label: 'Home Rentals', desc: 'Earn more from your extra space' }
+            {
+                id: 2,
+                icon: '🏨',
+                label: 'Hotels & Guest Houses',
+                desc: 'Maximize your daily occupancy rate and manage check-ins seamlessly with our advanced hospitality dashboard.'
+            },
+            {
+                id: 3,
+                icon: '🏖️',
+                label: 'Resorts & Vacation Rentals',
+                desc: 'Showcase your luxury amenities and reach thousands of local and international tourists year-round.'
+            },
+            {
+                id: 4,
+                icon: '🏡',
+                label: 'Family Apartments & Flats',
+                desc: 'Rent out your vacant apartments or studio flats to reliable families and professionals with verified identities.'
+            },
+            {
+                id: 5,
+                icon: '🏢',
+                label: 'Office & Commercial Spaces',
+                desc: 'List your coworking spaces or small office cabins for startups and entrepreneurs in prime city locations.'
+            },
+            {
+                id: 6,
+                icon: '🛋️',
+                label: 'Shared Rooms & Sublets',
+                desc: 'Easily find roommates or sublet your extra room to reduce your own rent costs securely.'
+            },
+            {
+                id: 7,
+                icon: '👰',
+                label: 'Convention Centers & Halls',
+                desc: 'List your community centers or luxury halls for weddings, corporate galas, and social events.'
+            },
+            {
+                id: 8,
+                icon: '🏥',
+                label: 'Medical Attendant Stays',
+                desc: 'Offer peaceful accommodations for patient families near major hospitals and diagnostic centers.'
+            },
+            {
+                id: 9,
+                icon: '📦',
+                label: 'Warehouses & Storage',
+                desc: 'Rent out your secure garage, basement, or warehouse space for business inventory and logistics.'
+            },
+            {
+                id: 10,
+                icon: '🌳',
+                label: 'Farmhouses & Eco-Retreats',
+                desc: 'Promote your countryside farmhouses for weekend getaways and nature-loving group travelers.'
+            },
+            {
+                id: 11,
+                icon: '🚿',
+                label: 'Day-use Rooms',
+                desc: 'Provide short-stay options for transit travelers or professionals needing a place for a few hours.'
+            }
         ]
     }
 };

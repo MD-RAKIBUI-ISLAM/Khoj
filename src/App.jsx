@@ -40,7 +40,6 @@ function App() {
                         <Route path="/about" element={<AboutPage />} />
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/register" element={<RegistrationPage />} />
-                        {/* List Property পেজের জন্য নতুন রাউট */}
                         <Route path="/list-property" element={<ListProperty />} />
                         <Route path="/student-housing" element={<StudentHousingPage />} />
                         <Route path="/hotel-resort" element={<HotelResortPage />} />

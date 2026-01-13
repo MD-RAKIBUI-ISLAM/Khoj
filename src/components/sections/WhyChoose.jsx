@@ -10,6 +10,21 @@ const featureImages = [nationwideImg, detailedImg, verifiedImg];
 
 function WhyChoose() {
     const navigate = useNavigate();
+    const handleStartSearching = () => {
+        // ১. আগে হোম পেজে নেভিগেট করবে
+        navigate('/');
+
+        // ২. হোম পেজ লোড হওয়ার জন্য সামান্য অপেক্ষা করে নির্দিষ্ট সেকশনে স্ক্রল করবে
+        setTimeout(() => {
+            const categoriesSection = document.getElementById('categories');
+            if (categoriesSection) {
+                categoriesSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, 150); // ছোট একটি ডিলে যাতে রাউটিং কমপ্লিট হয়
+    };
     return (
         <section className="py-24 px-6 lg:px-24 bg-[#F1F5F9]">
             <div className="max-w-[1440px] mx-auto">
@@ -87,6 +102,7 @@ function WhyChoose() {
                         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
                             <button
                                 type="button"
+                                onClick={handleStartSearching}
                                 className="group relative flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-blue-500 transition-all shadow-xl active:scale-95 w-full sm:w-auto overflow-hidden"
                             >
                                 <LuSearch

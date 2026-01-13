@@ -65,17 +65,17 @@ function Navbar() {
                         to="/register"
                         className="hidden sm:flex items-center justify-center px-5 py-2.5 border-2 border-blue-50 text-[#0095FF] bg-blue-50/30 rounded-[12px] font-bold text-xs uppercase tracking-wider hover:bg-[#0095FF] hover:text-white hover:border-[#0095FF] transition-all active:scale-95"
                     >
-                        Register
+                        Sign Up
                     </Link>
 
                     {/* List Property Button */}
-                    <button
+                    {/* <button
                         type="button"
                         onClick={() => navigate(navData.btnUrl)}
                         className="hidden md:block bg-[#0095FF] text-white px-6 py-2.5 rounded-[12px] font-black text-xs uppercase tracking-wider hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-200 transition-all active:scale-95"
                     >
                         {navData.btnText}
-                    </button>
+                    </button> */}
 
                     {/* Mobile Menu Toggle */}
                     <button

@@ -35,7 +35,7 @@ function Categories() {
     };
 
     return (
-        <section className="py-16 px-6 lg:px-24 bg-white">
+        <section id="categories" className="py-16 px-6 lg:px-24 bg-white">
             <div className="max-w-[1440px] mx-auto">
                 {/* Stats Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
