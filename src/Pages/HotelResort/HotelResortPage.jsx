@@ -5,10 +5,16 @@ import HotelCard from '../../components/common/HotelCard'; // আপনার �
 import MapViewer from '../../components/common/MapViewer';
 import { hotelResortData } from '../../data/mockData';
 
+const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    return parseInt(priceStr.replace(/,/g, '').replace('BDT', ''), 10);
+};
+
 function HotelResortPage() {
     const [searchLocation, setSearchLocation] = useState('Dhaka');
     const [selectedDestination, setSelectedDestination] = useState(null);
-    const [selectedAmenities, setSelectedAmenities] = useState([]); // নতুন স্টেট
+    const [selectedAmenities, setSelectedAmenities] = useState([]);
+    const [priceRange, setPriceRange] = useState(25000);
 
     useEffect(() => {
         setSelectedDestination(null);
@@ -19,6 +25,8 @@ function HotelResortPage() {
         const searchTerm = searchLocation.toLowerCase();
         const matchesLocation = item.location.toLowerCase().includes(searchTerm);
         const matchesTitle = item.title.toLowerCase().includes(searchTerm);
+        const hostelPrice = parsePrice(item.price);
+        const matchesPrice = hostelPrice <= priceRange;
 
         // আপনার নেস্টেড এ্যামেনিটিস থেকে নামগুলো বের করে আনা হচ্ছে
         const allItemAmenities = item.amenities
@@ -29,7 +37,7 @@ function HotelResortPage() {
             selectedAmenities.length === 0 ||
             selectedAmenities.every((selected) => allItemAmenities.includes(selected));
 
-        return (matchesLocation || matchesTitle) && matchesAmenities;
+        return (matchesLocation || matchesTitle) && matchesAmenities && matchesPrice;
     });
 
     const handleNavigation = (item) => {
@@ -68,9 +76,12 @@ function HotelResortPage() {
                         />
 
                         <Filter
-                            studentHostelsData={hotelResortData} // ফিল্টার কম্পোনেন্ট এই ডাটা থেকেই এ্যামেনিটিস লিস্ট তৈরি করবে
+                            data={hotelResortData} // ফিল্টার কম্পোনেন্ট এই ডাটা থেকেই এ্যামেনিটিস লিস্ট তৈরি করবে
                             selectedAmenities={selectedAmenities}
                             setSelectedAmenities={setSelectedAmenities}
+                            priceRange={priceRange}
+                            setPriceRange={setPriceRange}
+                            maxPrice={100000}
                         />
                     </aside>
 

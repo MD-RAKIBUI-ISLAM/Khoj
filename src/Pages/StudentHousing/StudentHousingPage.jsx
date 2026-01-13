@@ -5,10 +5,16 @@ import HostelCard from '../../components/common/HostelCard';
 import MapViewer from '../../components/common/MapViewer';
 import { studentHostelsData } from '../../data/mockData';
 
+const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    return parseInt(priceStr.replace(/,/g, '').replace('BDT', ''), 10);
+};
+
 function StudentHousingPage() {
     const [searchLocation, setSearchLocation] = useState('Dhaka');
     const [selectedDestination, setSelectedDestination] = useState(null);
-    const [selectedAmenities, setSelectedAmenities] = useState([]); // নতুন স্টেট
+    const [selectedAmenities, setSelectedAmenities] = useState([]);
+    const [priceRange, setPriceRange] = useState(25000);
 
     useEffect(() => {
         setSelectedDestination(null);
@@ -18,6 +24,8 @@ function StudentHousingPage() {
         const searchTerm = searchLocation.toLowerCase();
         const matchesLocation = hostel.location.toLowerCase().includes(searchTerm);
         const matchesTitle = hostel.title.toLowerCase().includes(searchTerm);
+        const hostelPrice = parsePrice(hostel.price);
+        const matchesPrice = hostelPrice <= priceRange;
 
         // এ্যামেনিটিস ম্যাচিং লজিক (সবগুলো সিলেক্টেড আইটেম থাকতে হবে)
         const allHostelAmenities = Object.values(hostel.amenities).flat();
@@ -25,7 +33,7 @@ function StudentHousingPage() {
             selectedAmenities.length === 0 ||
             selectedAmenities.every((selected) => allHostelAmenities.includes(selected));
 
-        return (matchesLocation || matchesTitle) && matchesAmenities;
+        return (matchesLocation || matchesTitle) && matchesAmenities && matchesPrice;
     });
 
     const handleNavigation = (item) => {
@@ -64,9 +72,12 @@ function StudentHousingPage() {
 
                         {/* নতুন রিইউজেবল ফিল্টার কম্পোনেন্ট */}
                         <Filter
-                            studentHostelsData={studentHostelsData}
+                            data={studentHostelsData}
                             selectedAmenities={selectedAmenities}
                             setSelectedAmenities={setSelectedAmenities}
+                            priceRange={priceRange}
+                            setPriceRange={setPriceRange}
+                            maxPrice={25000}
                         />
                     </aside>
 

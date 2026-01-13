@@ -1,47 +1,53 @@
 import { useMemo, useState } from 'react';
 import { LuCheck, LuChevronDown, LuChevronUp, LuFilter, LuX } from 'react-icons/lu';
 
-function Filter({ studentHostelsData, selectedAmenities, setSelectedAmenities }) {
-    const [openCategory, setOpenCategory] = useState(null);
+function Filter({
+    data, // যে কোনো ডাটা (Hostels, Rentals, Resorts)
+    selectedAmenities,
+    setSelectedAmenities,
+    priceRange,
+    setPriceRange,
+    maxPrice = 50000 // ডিফল্ট ম্যাক্স প্রাইস, প্রপস হিসেবে পাঠানো যাবে
+}) {
+    const [openCategories, setOpenCategories] = useState(['Price Range', 'Amenities']);
 
-    // মেমোজাইজড ক্যাটাগরি লজিক - শুধুমাত্র amenities সেকশন থেকে ডাটা নেবে
+    // ১. সব ধরণের ডাটা থেকে ডাইনামিক ক্যাটাগরি এবং অ্যামেনিটিস বের করার লজিক
     const categories = useMemo(() => {
         const cats = {};
+        if (!data || !Array.isArray(data)) return cats;
 
-        studentHostelsData.forEach((hotel) => {
-            // যদি হোটেল বা তার amenities না থাকে তবে স্কিপ করবে
-            if (!hotel || !hotel.amenities) return;
+        data.forEach((item) => {
+            if (!item || !item.amenities) return;
 
-            Object.entries(hotel.amenities).forEach(([key, value]) => {
-                // ক্যাটাগরি টাইটেল (যেমন: "Leisure & Wellness" অথবা "Connectivity")
-                const categoryTitle = value.title || key.charAt(0).toUpperCase() + key.slice(1);
+            Object.entries(item.amenities).forEach(([key, value]) => {
+                // ক্যাটাগরি টাইটেল তৈরি (যেমন: 'connectivity' -> 'Connectivity')
+                const categoryTitle = key.charAt(0).toUpperCase() + key.slice(1);
 
-                if (!cats[categoryTitle]) {
-                    cats[categoryTitle] = new Set();
+                if (!cats[categoryTitle]) cats[categoryTitle] = new Set();
+
+                // যদি ভ্যালু সরাসরি অ্যারে হয় (Hostel Data এর মতো)
+                if (Array.isArray(value)) {
+                    value.forEach((val) => cats[categoryTitle].add(val));
                 }
-
-                // আপনার নতুন স্ট্রাকচার: value.items এর ভেতরে name আছে
-                if (value.items && Array.isArray(value.items)) {
-                    value.items.forEach((item) => {
-                        if (item.name) cats[categoryTitle].add(item.name);
-                    });
-                }
-                // আপনার পুরাতন স্ট্রাকচার: সরাসরি স্ট্রিং এর অ্যারে
-                else if (Array.isArray(value)) {
-                    value.forEach((item) => cats[categoryTitle].add(item));
+                // যদি ভ্যালু অবজেক্ট হয় এবং তার ভেতরে items অ্যারে থাকে (Rental Data এর মতো)
+                else if (typeof value === 'object' && value.items) {
+                    value.items.forEach((i) => cats[categoryTitle].add(i.name || i));
                 }
             });
         });
 
-        // Set-কে অ্যারেতে রূপান্তর
         const finalCats = {};
         Object.keys(cats).forEach((cat) => {
-            if (cats[cat].size > 0) {
-                finalCats[cat] = Array.from(cats[cat]).sort();
-            }
+            if (cats[cat].size > 0) finalCats[cat] = Array.from(cats[cat]).sort();
         });
         return finalCats;
-    }, [studentHostelsData]);
+    }, [data]);
+
+    const toggleCategory = (catName) => {
+        setOpenCategories((prev) =>
+            prev.includes(catName) ? prev.filter((c) => c !== catName) : [...prev, catName]
+        );
+    };
 
     const handleToggle = (item) => {
         setSelectedAmenities((prev) =>
@@ -50,121 +56,126 @@ function Filter({ studentHostelsData, selectedAmenities, setSelectedAmenities })
     };
 
     return (
-        <div className="bg-white/80 backdrop-blur-md rounded-[32px] shadow-2xl shadow-slate-200/50 border border-white overflow-hidden sticky top-8">
+        <div className="bg-[#EAEAEA] rounded-lg shadow-md border border-slate-300 overflow-hidden sticky top-8 w-full">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-slate-50">
+            <div className="flex items-center justify-between p-5 border-b border-slate-300 bg-white/50">
                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-slate-900 rounded-xl text-white">
-                        <LuFilter size={18} />
-                    </div>
-                    <div>
-                        <h2 className="font-black text-slate-900 text-lg leading-none">Filters</h2>
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">
-                            Refine your stay
-                        </p>
-                    </div>
+                    <LuFilter size={20} className="text-slate-700" />
+                    <h2 className="font-bold text-slate-900 text-lg uppercase tracking-tight">
+                        Filters
+                    </h2>
                 </div>
-                {selectedAmenities.length > 0 && (
+                {(selectedAmenities.length > 0 || priceRange < maxPrice) && (
                     <button
                         type="button"
-                        onClick={() => setSelectedAmenities([])}
-                        className="group flex items-center gap-1.5 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-full transition-all duration-300"
+                        onClick={() => {
+                            setSelectedAmenities([]);
+                            setPriceRange(maxPrice);
+                        }}
+                        className="flex items-center gap-1 text-red-500 hover:text-red-700 transition-colors"
                     >
-                        <LuX size={12} className="group-hover:rotate-90 transition-transform" />
-                        <span className="text-[10px] font-black uppercase">Clear</span>
+                        <LuX size={14} />
+                        <span className="text-[10px] font-bold uppercase">Clear All</span>
                     </button>
                 )}
             </div>
 
-            {/* Categories Content */}
-            <div className="p-4 space-y-2 max-h-[calc(100vh-300px)] overflow-y-auto no-scrollbar">
-                {Object.entries(categories).map(([catName, items]) => {
-                    const isActive = openCategory === catName;
-                    const selectedInCat = items.filter((i) => selectedAmenities.includes(i)).length;
+            {/* Price Range */}
+            <div className="border-b border-slate-300">
+                <button
+                    type="button"
+                    onClick={() => toggleCategory('Price Range')}
+                    className="w-full flex items-center justify-between p-4 text-slate-800 font-bold hover:bg-slate-200 transition-colors"
+                >
+                    <span className="text-[16px]">Price Range</span>
+                    {openCategories.includes('Price Range') ? <LuChevronUp /> : <LuChevronDown />}
+                </button>
 
+                {openCategories.includes('Price Range') && (
+                    <div className="p-5 space-y-6 bg-slate-100/50">
+                        <div className="relative w-full h-1.5 bg-slate-300 rounded-full mt-4">
+                            <div
+                                className="absolute h-full bg-[#D14D32] rounded-full"
+                                style={{ width: `${(priceRange / maxPrice) * 100}%` }}
+                            />
+                            <input
+                                type="range"
+                                min="0"
+                                max={maxPrice}
+                                step="500"
+                                value={priceRange}
+                                onChange={(e) => setPriceRange(parseInt(e.target.value, 10))}
+                                className="absolute -top-2 left-0 w-full h-5 opacity-0 cursor-pointer z-30"
+                            />
+                            <div
+                                className="absolute top-1/2 -translate-y-1/2 w-5 h-5 bg-white border-2 border-[#D14D32] rounded-full shadow-md z-20 pointer-events-none"
+                                style={{ left: `calc(${(priceRange / maxPrice) * 100}% - 10px)` }}
+                            >
+                                <div className="w-1.5 h-1.5 bg-[#D14D32] rounded-full m-auto mt-[5px]" />
+                            </div>
+                        </div>
+                        <div className="flex justify-between gap-4">
+                            <div className="bg-white border border-slate-300 px-3 py-2 text-center flex-1 rounded text-sm text-slate-600">
+                                0
+                            </div>
+                            <div className="bg-white border border-slate-300 px-3 py-2 text-center flex-1 rounded text-sm text-[#D14D32] font-black">
+                                {priceRange.toLocaleString()} BDT
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Dynamic Amenities */}
+            <div className="max-h-[60vh] overflow-y-auto custom-scrollbar">
+                {Object.entries(categories).map(([catName, items]) => {
+                    const isActive = openCategories.includes(catName);
                     return (
-                        <div
-                            key={catName}
-                            className={`group transition-all duration-500 rounded-[24px] ${isActive ? 'bg-slate-50' : 'bg-transparent'}`}
-                        >
+                        <div key={catName} className="border-b border-slate-300 last:border-0">
                             <button
                                 type="button"
-                                onClick={() => setOpenCategory(isActive ? null : catName)}
-                                className="w-full flex items-center justify-between p-4"
+                                onClick={() => toggleCategory(catName)}
+                                className="w-full flex items-center justify-between p-4 text-slate-800 font-bold hover:bg-slate-200 transition-colors"
                             >
-                                <div className="flex items-center gap-3">
-                                    <span
-                                        className={`text-[11px] font-black uppercase tracking-[0.1em] transition-colors ${isActive ? 'text-slate-900' : 'text-slate-400'}`}
-                                    >
-                                        {catName}
-                                    </span>
-                                    {selectedInCat > 0 && (
-                                        <span className="w-4 h-4 flex items-center justify-center bg-slate-900 text-white text-[8px] font-bold rounded-full">
-                                            {selectedInCat}
-                                        </span>
-                                    )}
-                                </div>
-                                <div
-                                    className={`p-1 rounded-lg transition-all ${isActive ? 'bg-white shadow-sm text-slate-900' : 'text-slate-300'}`}
-                                >
-                                    {isActive ? (
-                                        <LuChevronUp size={16} />
-                                    ) : (
-                                        <LuChevronDown size={16} />
-                                    )}
-                                </div>
+                                <span className="text-[16px]">{catName}</span>
+                                {isActive ? <LuChevronUp /> : <LuChevronDown />}
                             </button>
-
-                            <div
-                                className={`grid transition-all duration-300 ease-in-out ${isActive ? 'grid-rows-[1fr] opacity-100 pb-4' : 'grid-rows-[0fr] opacity-0'}`}
-                            >
-                                <div className="overflow-hidden px-4">
-                                    <div className="grid grid-cols-1 gap-2">
-                                        {items.map((item) => {
-                                            const isChecked = selectedAmenities.includes(item);
-                                            return (
-                                                <label
-                                                    key={item}
-                                                    className={`flex items-center justify-between p-3 rounded-2xl cursor-pointer transition-all duration-300 ${isChecked ? 'bg-white shadow-sm border-slate-100' : 'hover:bg-white/60 border-transparent'} border`}
-                                                >
-                                                    <span
-                                                        className={`text-xs font-bold transition-colors ${isChecked ? 'text-slate-900' : 'text-slate-500'}`}
-                                                    >
-                                                        {item}
-                                                    </span>
-                                                    <div className="relative flex items-center">
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={isChecked}
-                                                            onChange={() => handleToggle(item)}
-                                                            className="peer appearance-none w-5 h-5 rounded-lg border-2 border-slate-200 checked:bg-slate-900 checked:border-slate-900 transition-all cursor-pointer"
-                                                        />
+                            {isActive && (
+                                <div className="bg-slate-50 p-4 space-y-3">
+                                    {items.map((item) => {
+                                        const isChecked = selectedAmenities.includes(item);
+                                        return (
+                                            <label
+                                                key={item}
+                                                className="flex items-center gap-3 group cursor-pointer"
+                                            >
+                                                <div className="relative flex items-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={isChecked}
+                                                        onChange={() => handleToggle(item)}
+                                                        className="appearance-none w-5 h-5 border border-slate-400 rounded-sm bg-white checked:bg-[#D14D32] checked:border-[#D14D32] transition-all cursor-pointer"
+                                                    />
+                                                    {isChecked && (
                                                         <LuCheck
-                                                            size={12}
-                                                            className="absolute left-1 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"
+                                                            className="absolute left-1 text-white"
+                                                            size={14}
                                                         />
-                                                    </div>
-                                                </label>
-                                            );
-                                        })}
-                                    </div>
+                                                    )}
+                                                </div>
+                                                <span
+                                                    className={`text-[14px] ${isChecked ? 'text-black font-bold' : 'text-slate-600 font-medium'}`}
+                                                >
+                                                    {item}
+                                                </span>
+                                            </label>
+                                        );
+                                    })}
                                 </div>
-                            </div>
+                            )}
                         </div>
                     );
                 })}
-            </div>
-
-            {/* Footer Summary */}
-            <div className="p-6 bg-slate-900 text-white">
-                <div className="flex items-center justify-between">
-                    <div>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                            Total Selected
-                        </p>
-                        <p className="text-xl font-black">{selectedAmenities.length}</p>
-                    </div>
-                </div>
             </div>
         </div>
     );

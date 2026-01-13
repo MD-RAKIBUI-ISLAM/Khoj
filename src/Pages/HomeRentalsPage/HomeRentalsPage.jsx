@@ -6,12 +6,19 @@ import MapViewer from '../../components/common/MapViewer';
 import RentalCard from '../../components/common/RentalCard';
 import { homeRentalsData } from '../../data/mockData';
 
+const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    // 'BDT 15,000' থেকে '15000' এ রূপান্তর করবে
+    return parseInt(priceStr.replace(/,/g, '').replace(/[^\d]/g, ''), 10);
+};
+
 function HomeRentalsPage() {
     const [searchLocation, setSearchLocation] = useState('Dhaka');
     const [selectedDestination, setSelectedDestination] = useState(null);
 
     // নতুন স্টেট: ফিল্টারের জন্য
     const [selectedAmenities, setSelectedAmenities] = useState([]);
+    const [priceRange, setPriceRange] = useState(20000);
 
     useEffect(() => {
         setSelectedDestination(null);
@@ -28,6 +35,8 @@ function HomeRentalsPage() {
                     searchTerm === '' ||
                     item.location.toLowerCase().includes(searchTerm) ||
                     item.title.toLowerCase().includes(searchTerm);
+                const itemPrice = parsePrice(item.price);
+                const matchesPrice = itemPrice <= priceRange;
 
                 // ২. Amenities ফিল্টার লজিক
                 const matchesAmenities =
@@ -39,9 +48,9 @@ function HomeRentalsPage() {
                         )
                     );
 
-                return matchesLocation && matchesAmenities;
+                return matchesLocation && matchesAmenities && matchesPrice;
             }),
-        [searchLocation, selectedAmenities]
+        [searchLocation, selectedAmenities, priceRange]
     );
 
     const handleNavigation = (item) => {
@@ -87,9 +96,12 @@ function HomeRentalsPage() {
 
                         {/* নতুন ফিল্টার কম্পোনেন্ট এখানে কল করা হয়েছে */}
                         <Filter
-                            studentHostelsData={homeRentalsData}
+                            data={homeRentalsData}
                             selectedAmenities={selectedAmenities}
                             setSelectedAmenities={setSelectedAmenities}
+                            priceRange={priceRange}
+                            setPriceRange={setPriceRange}
+                            maxPrice={100000}
                         />
                     </aside>
 
@@ -105,6 +117,7 @@ function HomeRentalsPage() {
                                     onClick={() => {
                                         setSearchLocation('');
                                         setSelectedAmenities([]);
+                                        setPriceRange(25000);
                                     }}
                                     className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-slate-900 transition-colors"
                                 >
@@ -138,6 +151,7 @@ function HomeRentalsPage() {
                                         onClick={() => {
                                             setSearchLocation('');
                                             setSelectedAmenities([]);
+                                            setPriceRange(25000);
                                         }}
                                         className="mt-6 px-8 py-3 bg-slate-100 rounded-xl font-bold text-sm hover:bg-slate-200 transition-all"
                                     >
