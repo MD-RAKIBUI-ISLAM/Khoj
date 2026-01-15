@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { LuCheck, LuChevronDown, LuChevronUp, LuFilter, LuX } from 'react-icons/lu';
 
 function Filter({
@@ -9,7 +9,7 @@ function Filter({
     setPriceRange,
     maxPrice = 50000 // ডিফল্ট ম্যাক্স প্রাইস, প্রপস হিসেবে পাঠানো যাবে
 }) {
-    const [openCategories, setOpenCategories] = useState(['Price Range', 'Amenities']);
+    const [openCategories, setOpenCategories] = useState(['Price Range']);
 
     // ১. সব ধরণের ডাটা থেকে ডাইনামিক ক্যাটাগরি এবং অ্যামেনিটিস বের করার লজিক
     const categories = useMemo(() => {
@@ -42,6 +42,20 @@ function Filter({
         });
         return finalCats;
     }, [data]);
+
+    useEffect(() => {
+        const categoryKeys = Object.keys(categories);
+        if (categoryKeys.length > 0) {
+            const firstCategory = categoryKeys[0];
+            setOpenCategories((prev) => {
+                // যদি অলরেডি ইনক্লুড না থাকে তবেই যোগ করবে
+                if (!prev.includes(firstCategory)) {
+                    return [...prev, firstCategory];
+                }
+                return prev;
+            });
+        }
+    }, [categories]);
 
     const toggleCategory = (catName) => {
         setOpenCategories((prev) =>

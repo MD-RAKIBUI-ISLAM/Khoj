@@ -447,6 +447,8 @@ export const studentHostelsData = [
         id: 1,
         title: 'Modern Student Hostel-Dhanmondi',
         location: 'Dhanmondi, Dhaka',
+        lat: 23.7509,
+        lng: 90.3935,
         rating: 4.5,
         reviews: 128, // total review count
         price: '12,000BDT', // monthly rent
@@ -544,6 +546,8 @@ export const studentHostelsData = [
         id: 2,
         title: 'Premium Student Housing - Mirpur',
         location: 'Mirpur-10, Dhaka',
+        lat: 23.7509,
+        lng: 90.3935,
         rating: 4.8,
         reviews: 256,
         price: '10,000BDT',
@@ -604,6 +608,8 @@ export const studentHostelsData = [
         id: 3,
         title: 'Central Hostel - Chittagong',
         location: 'GEC Circle, Chittagong',
+        lat: 22.3193,
+        lng: 91.7892,
         rating: 4.3,
         reviews: 92,
         price: '10,000BDT',
@@ -663,6 +669,8 @@ export const studentHostelsData = [
         id: 4,
         title: 'Sylhet Elite Student Home',
         location: 'Zindabazar, Sylhet',
+        lat: 24.8948,
+        lng: 91.8731,
         rating: 4.6,
         reviews: 75,
         price: '9,500BDT',
@@ -724,6 +732,8 @@ export const hotelResortData = [
         id: 1,
         title: "Luxuary 5- Star Resort - Cox's Bazar", // Replaced
         location: "Cox's Bazar", // Replaced
+        lat: 23.7509,
+        lng: 90.3935,
         rating: 4.5,
         reviews: 128,
         price: '8,000 BDT',
@@ -904,6 +914,8 @@ export const hotelResortData = [
         id: 2,
         title: 'Premium Hotels - Mirpur', // Replaced
         location: 'Mirpur-10, Dhaka', // Replaced
+        lat: 23.7509,
+        lng: 90.3935,
         rating: 4.5,
         reviews: 128,
         price: '8,000 BDT',
@@ -1085,6 +1097,8 @@ export const hotelResortData = [
         id: 3,
         title: 'Central Hostel - Chittagong', // Replaced
         location: 'GEC Circle, Chittagong', // Replaced
+        lat: 23.7509,
+        lng: 90.3935,
         rating: 4.5,
         reviews: 128,
         price: '8,000 BDT',
@@ -1268,6 +1282,8 @@ export const homeRentalsData = [
         id: 1,
         title: 'Spacious Apartment - Banani',
         location: 'Banani, Dhaka',
+        lat: 23.7509,
+        lng: 90.3936,
         description:
             'Nestled in the most prestigious neighborhood of Banani, this ultra-modern apartment offers a perfect blend of luxury and convenience. Featuring high-end architectural finishes, the unit boasts expansive living areas flooded with natural light and a South-East orientation that ensures excellent cross-ventilation. Residents enjoy premium amenities including 24/7 elite security, a rooftop oasis with stunning city views, and close proximity to top-tier schools, gourmet restaurants, and corporate hubs. This is an ideal sanctuary for professionals and families seeking a high-standard urban lifestyle in Dhaka.',
         rating: 4.9,
@@ -1453,6 +1469,8 @@ export const homeRentalsData = [
         id: 2,
         title: 'Modern Apartment Complex - Feni City',
         location: 'Feni City, Feni',
+        lat: 22.9025,
+        lng: 91.4037,
         description:
             'This sleek and contemporary apartment complex in the heart of Feni City is designed for families who value both style and functionality. The unit is optimized for modern living with a smart layout that maximizes every square foot. It comes fully equipped with essential utilities including a dedicated gas connection and advanced water filtration systems. The complex features high-tech CCTV surveillance for peace of mind, a common garden for relaxation, and a safe, dedicated play area for children. Its central location provides effortless access to local markets, hospitals, and transportation hubs.',
         rating: 4.8,
@@ -1624,6 +1642,8 @@ export const homeRentalsData = [
         id: 3,
         title: 'Family House Complex - Feni',
         location: 'GEC, Feni',
+        lat: 22.9025,
+        lng: 91.4037,
         description:
             'Experience tranquil living at this expansive Family House Complex located in the serene GEC area of Feni. This property stands out with its massive private garden and open terrace, providing a rare green escape from the city bustle. The complex is specifically designed to be pet-friendly and features a large community hall perfect for hosting family gatherings. With earthquake-resistant architecture and professional guard services, safety is prioritized alongside comfort. It is the perfect choice for families seeking a spacious, quiet, and secure environment with a strong sense of community.',
         rating: 4.3,

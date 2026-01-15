@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import Filter from '../../components/common/Filter';
-import HotelCard from '../../components/common/HotelCard'; // আপনার ইম্পোর্ট করা নাম
+import HotelCard from '../../components/common/HotelCard';
 import MapViewer from '../../components/common/MapViewer';
 import { hotelResortData } from '../../data/mockData';
 
 const parsePrice = (priceStr) => {
     if (!priceStr) return 0;
-    return parseInt(priceStr.replace(/,/g, '').replace('BDT', ''), 10);
+    return parseInt(priceStr.replace(/,/g, '').replace(/[^\d]/g, ''), 10);
 };
 
 function HotelResortPage() {
@@ -15,20 +15,20 @@ function HotelResortPage() {
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
     const [priceRange, setPriceRange] = useState(25000);
+    const [userCoords, setUserCoords] = useState(null); // নতুন ম্যাপের জন্য
 
     useEffect(() => {
         setSelectedDestination(null);
     }, [searchLocation]);
 
-    // ফিল্টারিং লজিক আপনার নতুন ডাটা অবজেক্ট অনুযায়ী ফিক্স করা হয়েছে
+    // ফিল্টারিং লজিক
     const filteredResults = hotelResortData.filter((item) => {
         const searchTerm = searchLocation.toLowerCase();
         const matchesLocation = item.location.toLowerCase().includes(searchTerm);
         const matchesTitle = item.title.toLowerCase().includes(searchTerm);
-        const hostelPrice = parsePrice(item.price);
-        const matchesPrice = hostelPrice <= priceRange;
+        const itemPrice = parsePrice(item.price);
+        const matchesPrice = itemPrice <= priceRange;
 
-        // আপনার নেস্টেড এ্যামেনিটিস থেকে নামগুলো বের করে আনা হচ্ছে
         const allItemAmenities = item.amenities
             ? Object.values(item.amenities).flatMap((category) => category.items.map((i) => i.name))
             : [];
@@ -43,10 +43,17 @@ function HotelResortPage() {
     const handleNavigation = (item) => {
         const fullAddress = `${item.title}, ${item.location}`;
         setSelectedDestination(fullAddress);
+
+        // নতুন ম্যাপকে ওই লোকেশনে মুভ করানোর জন্য কোঅর্ডিনেট সেট করা
+        if (item.lat && item.lng) {
+            setUserCoords({ lat: item.lat, lng: item.lng });
+        }
+
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}`;
         window.open(googleMapsUrl, '_blank');
     };
 
+    // আপনার আগের mapUrl লজিক (যদি MapViewer-এ iframe ব্যবহার করেন)
     const mapUrl = selectedDestination
         ? `https://maps.google.com/maps?q=${encodeURIComponent(selectedDestination)}&t=&z=15&ie=UTF8&iwloc=&output=embed`
         : `https://maps.google.com/maps?q=${encodeURIComponent(`${searchLocation} hotels resorts`)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
@@ -68,15 +75,19 @@ function HotelResortPage() {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Left Sidebar */}
                     <aside className="w-full lg:w-[350px] space-y-6 shrink-0 lg:sticky lg:top-8 h-fit">
+                        {/* ম্যাপ ভিউয়ার: আপনার ডিজাইন অনুযায়ী প্রপস পাস করা হয়েছে */}
                         <MapViewer
                             searchLocation={searchLocation}
                             setSearchLocation={setSearchLocation}
                             mapUrl={mapUrl}
+                            userCoords={userCoords} // নতুন ম্যাপ লজিকের জন্য
                             foundCount={filteredResults.length}
+                            category="hotel"
+                            onRouteClick={handleNavigation}
                         />
 
                         <Filter
-                            data={hotelResortData} // ফিল্টার কম্পোনেন্ট এই ডাটা থেকেই এ্যামেনিটিস লিস্ট তৈরি করবে
+                            data={hotelResortData}
                             selectedAmenities={selectedAmenities}
                             setSelectedAmenities={setSelectedAmenities}
                             priceRange={priceRange}
@@ -94,16 +105,18 @@ function HotelResortPage() {
                         </div>
 
                         {filteredResults.length > 0 ? (
-                            filteredResults.map((item) => (
-                                <HotelCard // সঠিক কম্পোনেন্ট নাম
-                                    key={item.id}
-                                    item={item}
-                                    onRouteClick={() => handleNavigation(item)}
-                                />
-                            ))
+                            <div className="grid grid-cols-1 gap-6">
+                                {filteredResults.map((item) => (
+                                    <HotelCard
+                                        key={item.id}
+                                        item={item}
+                                        onRouteClick={() => handleNavigation(item)}
+                                    />
+                                ))}
+                            </div>
                         ) : (
                             <div className="bg-white rounded-[32px] p-20 text-center border-2 border-dashed border-gray-100 text-gray-400 font-bold">
-                                No resorts found with the selected amenities.
+                                No resorts found matching your search.
                             </div>
                         )}
                     </main>
