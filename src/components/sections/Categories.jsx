@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import homeImg from '../../assets/home_rentals.png';
 import studentImg from '../../assets/students_housing.png';
 import touristImg from '../../assets/tourist_resort.png';
+import travelImg from '../../assets/Travel.jpeg';
 import { categoriesData, statsData } from '../../data/mockData';
 
-const categoryImages = [studentImg, touristImg, homeImg];
+const categoryImages = [studentImg, touristImg, homeImg, travelImg];
 
 function Categories() {
     const navigate = useNavigate();
@@ -29,6 +30,8 @@ function Categories() {
             cat.id === 3
         ) {
             navigate('/home-rentals');
+        } else if (title.includes('travel') || title.includes('tour') || cat.id === 4) {
+            navigate('/travel-tours');
         } else {
             console.log(`${cat.title} clicked but no route found`);
         }
@@ -56,7 +59,7 @@ function Categories() {
                 </div>
 
                 {/* Category Cards Row */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {categoriesData.map((cat, index) => (
                         <div
                             key={cat.id}

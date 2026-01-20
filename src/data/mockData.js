@@ -167,6 +167,17 @@ export const categoriesData = [
         borderColor: 'border-yellow-400',
         bgColor: 'bg-[#FFF9E5]',
         btnColor: 'bg-[#0095FF]'
+    },
+    {
+        id: 4,
+        title: 'Travel Bd & Tours',
+        description: 'Explore the beauty of Bangladesh',
+        listings: '1.2K+ Tour Packages',
+        features: ['Guided Tours', 'Easy Transport', 'Budget Friendly'],
+        image: '/assets/travel_bd.png',
+        borderColor: 'border-green-400',
+        bgColor: 'bg-[#F0FFF4]',
+        btnColor: 'bg-[#28A745]'
     }
 ];
 

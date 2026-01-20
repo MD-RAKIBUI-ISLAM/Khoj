@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import FlightDetailsPage from './components/common/CommonItemDetails';
 import ScrollToTop from './components/common/ScrollToTop';
+import ServiceDetailsPage from './components/common/ServiceDetailsPage';
 import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
 import Categories from './components/sections/Categories';
@@ -18,8 +21,14 @@ import Services from './Pages/Services/ServicesMenu';
 import SignIn from './Pages/Sign/SignIn';
 import ModernStudentHostel from './Pages/StudentHousing/StudentHousingDetail';
 import StudentHousingPage from './Pages/StudentHousing/StudentHousingPage';
+import TravelPage from './Pages/TravelPage/TravelPage';
 
 function App() {
+    useEffect(() => {
+        if ('scrollRestoration' in window.history) {
+            window.history.scrollRestoration = 'auto';
+        }
+    }, []);
     return (
         <Router>
             <ScrollToTop />
@@ -43,6 +52,7 @@ function App() {
                         <Route path="/signin" element={<SignIn />} />
                         <Route path="/register" element={<RegistrationPage />} />
                         <Route path="/list-property" element={<ListProperty />} />
+                        <Route path="/travel-tours" element={<TravelPage />} />
                         <Route path="/student-housing" element={<StudentHousingPage />} />
                         <Route path="/hotel-resort" element={<HotelResortPage />} />
                         <Route path="/contact" element={<ContactPge />} />
@@ -53,6 +63,11 @@ function App() {
                         />
                         <Route path="/hotel-resort/details/:id" element={<HotelResortDetail />} />
                         <Route path="/home-rentals/details/:id" element={<HomeRentalDetail />} />
+                        <Route
+                            path="/travel-tours/details/:serviceId"
+                            element={<ServiceDetailsPage />}
+                        />
+                        <Route path="/service/:serviceId/:itemId" element={<FlightDetailsPage />} />
                     </Routes>
                 </main>
 
