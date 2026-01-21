@@ -22,6 +22,21 @@ function RecenterMap({ coords }) {
     return null;
 }
 
+const userLocationIcon = L.divIcon({
+    className: 'user-pos-icon',
+    html: `<div style="
+        background-color: #0070FF; 
+        width: 14px; 
+        height: 14px; 
+        border-radius: 50%; 
+        border: 3px solid white; 
+        box-shadow: 0 0 10px rgba(0,112,255,0.5);
+        animation: pulse 2s infinite;
+    "></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+});
+
 function MapViewer({
     searchLocation,
     setSearchLocation,
@@ -35,6 +50,23 @@ function MapViewer({
     // ডিফল্ট লোকেশন (ঢাকা)
     const defaultPos = useMemo(() => [23.8223, 90.4219], []);
     const [mapCenter, setMapCenter] = useState(defaultPos);
+
+    useEffect(() => {
+        // ব্রাউজার Geolocation সাপোর্ট করে কি না দেখা
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    // ম্যাপের সেন্টার ইউজারের লোকেশনে সেট করা
+                    setMapCenter([latitude, longitude]);
+                },
+                (error) => {
+                    console.error('Error getting location:', error);
+                    // যদি ইউজার অনুমতি না দেয়, তবে ডিফল্ট ঢাকা থাকবে (যা অলরেডি set করা আছে)
+                }
+            );
+        }
+    }, []); // এটি শুধুমাত্র একবার (মাউন্ট হওয়ার সময়) রান করবে
 
     // ১. গুগল ম্যাপসে বড় করে দেখার ফাংশন
     const handleLargerView = () => {
@@ -75,30 +107,32 @@ function MapViewer({
             // ক্যাটাগরি অনুযায়ী ফিল্টার (এখানে ট্যাগগুলো আরও বাড়ানো হয়েছে)
             if (category === 'hotel') {
                 filter = `
-                node["tourism"~"hotel|resort|guest_house|motel"](around:2000, ${lat}, ${lng});
-                way["tourism"~"hotel|resort|guest_house|motel"](around:2000, ${lat}, ${lng});
-                relation["tourism"~"hotel|resort|guest_house|motel"](around:2000, ${lat}, ${lng});
+                node["tourism"~"hotel|resort|guest_house|motel"](around:1000, ${lat}, ${lng});
+                way["tourism"~"hotel|resort|guest_house|motel"](around:1000, ${lat}, ${lng});
+                relation["tourism"~"hotel|resort|guest_house|motel"](around:1000, ${lat}, ${lng});
             `;
                 defaultTitle = 'Hotel/Resort';
             } else if (category === 'hostel') {
                 filter = `
-        node["amenity"~"hostel|dormitory"](around:3000, ${lat}, ${lng});
-        way["amenity"~"hostel|dormitory"](around:3000, ${lat}, ${lng});
-        node["name"~"Hostel|Mess|Hall|Housing", i](around:3000, ${lat}, ${lng});
+        node["amenity"~"hostel|dormitory"](around:1500, ${lat}, ${lng});
+        way["amenity"~"hostel|dormitory"](around:1500, ${lat}, ${lng});
+        node["residential"~"university|student_accommodation"](around:1500, ${lat}, ${lng});
+        node["name"~"Hall|Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
+        way["name"~"Hall|Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
     `;
                 defaultTitle = 'Student Hostel';
             } else if (category === 'rentals') {
-                // আমরা এখানে way ব্যবহার করছি না, কারণ way এর জন্য [center] লাগে যা আপনার মেইন কুয়েরিতে নেই।
-                // তাই আমরা শুধুমাত্র node (Point) খুঁজব যা সরাসরি পিন হিসেবে আসবে।
                 filter = `
-                    node["amenity"~"apartment|flat|residential"](around:2500, ${lat}, ${lng});
-                    node["building"~"apartments|residential"](around:2500, ${lat}, ${lng});
-                    node["name"~"Apartment|Tower|Residence|Bhaban", i](around:2500, ${lat}, ${lng});
-                `;
-                defaultTitle = 'Apartment';
+    (
+      node["building"~"apartments|residential"](around:2000, ${lat}, ${lng});
+      way["building"~"apartments|residential"](around:2000, ${lat}, ${lng});
+      node["amenity"~"apartment"](around:2000, ${lat}, ${lng});
+    );
+    `;
+                defaultTitle = 'Rental Property';
             }
 
-            const query = `[out:json][timeout:30]; ( ${filter} ); out center;`;
+            const query = `[out:json][timeout:15]; ( ${filter} ); out center;`;
 
             try {
                 const response = await fetch(
@@ -127,9 +161,10 @@ function MapViewer({
 
     // ইউজারের লোকেশন সিঙ্ক
     useEffect(() => {
-        if (userCoords) setMapCenter([userCoords.lat, userCoords.lng]);
+        if (userCoords) {
+            setMapCenter([userCoords.lat, userCoords.lng]);
+        }
     }, [userCoords]);
-
     return (
         <div className="bg-white rounded-[32px] shadow-lg border border-gray-200 p-5 overflow-hidden">
             {/* হেডার: আপনার ডিজাইন অনুযায়ী */}
@@ -191,6 +226,11 @@ function MapViewer({
                     zoomControl={false}
                 >
                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    {userCoords && userCoords.lat && userCoords.lng && (
+                        <Marker position={[userCoords.lat, userCoords.lng]} icon={userLocationIcon}>
+                            <Popup>You are here</Popup>
+                        </Marker>
+                    )}
                     <RecenterMap coords={mapCenter} />
 
                     {/* ১ কিমি রেডিয়াস বর্ডার (ডিজাইন অনুযায়ী) */}

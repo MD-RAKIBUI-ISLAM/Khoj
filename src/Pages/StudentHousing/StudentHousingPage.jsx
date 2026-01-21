@@ -11,11 +11,49 @@ const parsePrice = (priceStr) => {
 };
 
 function StudentHousingPage() {
-    const [searchLocation, setSearchLocation] = useState('Dhaka');
+    const [searchLocation, setSearchLocation] = useState('');
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
     const [priceRange, setPriceRange] = useState(25000);
     const [userCoords, setUserCoords] = useState(null);
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+
+                    // ১. ইউজারের কোঅর্ডিনেট সেট করা (যাতে ম্যাপে নীল ডট দেখায়)
+                    setUserCoords({ lat: latitude, lng: longitude });
+
+                    // ২. রিভার্স জিওকোডিং করে জায়গার নাম বের করা (সার্চ ফিল্ডের জন্য)
+                    // try {
+                    //     const res = await fetch(
+                    //         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+                    //     );
+                    //     const data = await res.json();
+                    //     // শহরের নাম বা এলাকার নাম নেওয়া
+                    //     const locationName =
+                    //         data.address.neighbourhood ||
+                    //         data.address.suburb ||
+                    //         data.address.village ||
+                    //         data.address.town ||
+                    //         data.address.city ||
+                    //         'Current Location';
+
+                    //     setSearchLocation(locationName);
+                    // } catch (err) {
+                    //     setSearchLocation('Current Location');
+                    // }
+                },
+                (error) => {
+                    console.error('Location access denied', error);
+                    setSearchLocation('Dhaka'); // অনুমতি না দিলে ডিফল্ট
+                },
+                { enableHighAccuracy: true }
+            );
+        }
+    }, []);
 
     useEffect(() => {
         setSelectedDestination(null);
@@ -47,19 +85,18 @@ function StudentHousingPage() {
         return (matchesLocation || matchesTitle) && matchesAmenities && matchesPrice;
     });
 
+    // সংশোধন: handleNavigation ফাংশন (StudentHousingPage.js)
     const handleNavigation = (item) => {
-        // পিন আপডেট করার জন্য userCoords সেট করুন
+        // এখানে longitude এর বদলে item.lng হবে
         if (item.lat && item.lng) {
             setUserCoords({ lat: item.lat, lng: item.lng });
         }
 
-        // গন্তব্য সেট করা
         const fullAddress = `${item.title}, ${item.location}`;
         setSelectedDestination(fullAddress);
 
-        // ডিরেকশন দেখানোর জন্য গুগল ম্যাপস ইউআরএল (আপনার লোকেশন থেকে হোস্টেল পর্যন্ত)
-        // 'My Location' অরিজিন হিসেবে দিলে ব্রাউজার অটোমেটিক আপনার লোকেশন নেবে
-        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${encodeURIComponent(fullAddress)}&travelmode=driving`;
+        // Google Maps URL সংশোধন (Template Literal এর জন্য ${} ব্যবহার করতে হবে)
+        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}&travelmode=driving`;
 
         window.open(googleMapsUrl, '_blank');
     };

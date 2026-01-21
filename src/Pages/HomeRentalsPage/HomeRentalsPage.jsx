@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+// সঠিক আইকন ইম্পোর্ট নিশ্চিত করুন
 import { LuHouse, LuSearchX, LuX } from 'react-icons/lu';
 
 import Filter from '../../components/common/Filter';
@@ -8,51 +9,88 @@ import { homeRentalsData } from '../../data/mockData';
 
 const parsePrice = (priceStr) => {
     if (!priceStr) return 0;
-    return parseInt(priceStr.replace(/,/g, '').replace(/[^\d]/g, ''), 10);
+    return parseInt(priceStr.toString().replace(/,/g, '').replace(/[^\d]/g, ''), 10);
 };
 
 function HomeRentalsPage() {
-    const [searchLocation, setSearchLocation] = useState('Dhaka');
+    const [searchLocation, setSearchLocation] = useState('');
     const [selectedDestination, setSelectedDestination] = useState(null);
     const [selectedAmenities, setSelectedAmenities] = useState([]);
-    const [priceRange, setPriceRange] = useState(100000);
+    const [priceRange, setPriceRange] = useState(150000); // ফিল্টারের maxPrice এর সাথে মিল রাখা হয়েছে
     const [userCoords, setUserCoords] = useState(null);
+
+    // Geolocation লজিক (StudentHousingPage এর মতো হুবহু)
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setUserCoords({ lat: latitude, lng: longitude });
+
+                    // try {
+                    //     const res = await fetch(
+                    //         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+                    //     );
+                    //     const data = await res.json();
+                    //     const locationName =
+                    //         data.address.neighbourhood ||
+                    //         data.address.suburb ||
+                    //         data.address.village ||
+                    //         data.address.town ||
+                    //         data.address.city ||
+                    //         'Current Location';
+
+                    //     setSearchLocation(locationName);
+                    // } catch (err) {
+                    //     setSearchLocation('Current Location');
+                    // }
+                },
+                (error) => {
+                    console.error('Location access denied', error);
+                    setSearchLocation('Dhaka');
+                },
+                { enableHighAccuracy: true }
+            );
+        }
+    }, []);
 
     useEffect(() => {
         setSelectedDestination(null);
     }, [searchLocation]);
 
-    // ফিল্টারিং লজিক (অন্য পেজগুলোর সাথে সামঞ্জস্যপূর্ণ)
     const filteredResults = useMemo(
         () =>
             homeRentalsData.filter((item) => {
                 const searchTerm = searchLocation.toLowerCase().trim();
-                const matchesLocation =
-                    searchTerm === '' ||
-                    item.location.toLowerCase().includes(searchTerm) ||
-                    item.title.toLowerCase().includes(searchTerm);
+                const matchesLocation = item.location.toLowerCase().includes(searchTerm);
+                const matchesTitle = item.title.toLowerCase().includes(searchTerm);
 
                 const itemPrice = parsePrice(item.price);
                 const matchesPrice = itemPrice <= priceRange;
 
-                // এ্যামেনিটিস চেক
+                // এ্যামেনিটিস লজিক (StudentHousing এর মতই গভীর ফিল্টারিং)
+                const allAmenities = item.amenities
+                    ? Object.values(item.amenities).flatMap((category) => {
+                          if (Array.isArray(category)) return category;
+                          if (category.items)
+                              return category.items.map((i) =>
+                                  typeof i === 'string' ? i : i.name
+                              );
+                          return [];
+                      })
+                    : [];
+
                 const matchesAmenities =
                     selectedAmenities.length === 0 ||
-                    selectedAmenities.every((selectedName) =>
-                        Object.values(item.amenities || {}).some((cat) =>
-                            (Array.isArray(cat) ? cat : cat.items || []).some(
-                                (i) => (typeof i === 'string' ? i : i.name) === selectedName
-                            )
-                        )
-                    );
+                    selectedAmenities.every((selected) => allAmenities.includes(selected));
 
-                return matchesLocation && matchesAmenities && matchesPrice;
+                return (matchesLocation || matchesTitle) && matchesAmenities && matchesPrice;
             }),
         [searchLocation, selectedAmenities, priceRange]
     );
 
     const handleNavigation = (item) => {
-        // পিন আপডেট করার জন্য userCoords সেট করুন
+        // এখানে longitude এর বদলে item.lng হবে
         if (item.lat && item.lng) {
             setUserCoords({ lat: item.lat, lng: item.lng });
         }
@@ -60,11 +98,11 @@ function HomeRentalsPage() {
         const fullAddress = `${item.title}, ${item.location}`;
         setSelectedDestination(fullAddress);
 
-        // আপনার লোকেশন থেকে ডিরেকশন ওপেন করা
-        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=${encodeURIComponent(fullAddress)}&travelmode=driving`;
+        // Google Maps URL সংশোধন (Template Literal এর জন্য ${} ব্যবহার করতে হবে)
+        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(fullAddress)}&travelmode=driving`;
+
         window.open(googleMapsUrl, '_blank');
     };
-
     const mapUrl = selectedDestination
         ? `https://maps.google.com/maps?q=${encodeURIComponent(selectedDestination)}&t=&z=15&ie=UTF8&iwloc=&output=embed`
         : `https://maps.google.com/maps?q=${encodeURIComponent(`${searchLocation} apartments rentals`)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
@@ -72,7 +110,8 @@ function HomeRentalsPage() {
     const handleResetFilters = () => {
         setSearchLocation('Dhaka');
         setSelectedAmenities([]);
-        setPriceRange(100000);
+        setPriceRange(150000);
+        setUserCoords(null);
         setSelectedDestination(null);
     };
 
@@ -89,14 +128,14 @@ function HomeRentalsPage() {
                         </h1>
                     </div>
                     <p className="text-gray-500 font-medium text-lg max-w-2xl">
-                        Explore available apartments and homes based on your preferred amenities.
+                        Explore available apartments and homes based on your preferred location.
                     </p>
                 </div>
             </header>
 
             <div className="max-w-[1600px] mx-auto px-4 lg:px-12 pt-10">
                 <div className="flex flex-col lg:flex-row gap-10">
-                    {/* Left Sidebar */}
+                    {/* Sidebar */}
                     <aside className="w-full lg:w-[380px] space-y-8 shrink-0 lg:sticky lg:top-8 h-fit">
                         <MapViewer
                             searchLocation={searchLocation}
@@ -118,13 +157,13 @@ function HomeRentalsPage() {
                         />
                     </aside>
 
-                    {/* Right Side: List */}
+                    {/* Main Content */}
                     <main className="flex-grow space-y-8">
                         <div className="flex items-center justify-between px-2">
                             <p className="text-sm font-black text-slate-400 uppercase tracking-widest">
-                                Results Found: {filteredResults.length}
+                                Showing {filteredResults.length} rentals available
                             </p>
-                            {(searchLocation !== 'Dhaka' || selectedAmenities.length > 0) && (
+                            {(searchLocation !== '' || selectedAmenities.length > 0) && (
                                 <button
                                     type="button"
                                     onClick={handleResetFilters}

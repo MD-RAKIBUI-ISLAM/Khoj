@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import hero1 from '../../assets/hero-1.png'; // No. 1 (Bedroom)
 import hero2 from '../../assets/hero-2.png'; // No. 4 (Men making bed)
 import hero3 from '../../assets/hero-3.png'; // No. 5 (Balcony)
@@ -5,6 +8,18 @@ import hero5 from '../../assets/hero-4.png'; // No. 2 (Girl at desk)
 import hero4 from '../../assets/hero-5.png'; // No. 3 (Sofa/Living)
 
 function Hero() {
+    const navigate = useNavigate();
+    const categories = [
+        { id: 'student', label: 'Students Housing & Hostels', path: '/student-housing' },
+        { id: 'hotel', label: 'Tourist Resorts and Hotels', path: '/hotel-resort' },
+        { id: 'rental', label: 'Home Rentals & Apartments', path: '/home-rentals' },
+        { id: 'travel', label: 'Travel Bd & Tours', path: '/travel-tours' }
+    ];
+    const [selectedCategory, setSelectedCategory] = useState(categories[0].path);
+
+    const handleSearch = () => {
+        navigate(selectedCategory);
+    };
     return (
         <section className="bg-gradient-to-r from-[#CADCFF] via-[#E2E8FF] to-[#A5C9FF] py-16 lg:py-24 px-6 lg:px-20 overflow-hidden min-h-[750px] flex items-center">
             <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -37,16 +52,17 @@ function Hero() {
                         reviews.
                     </p>
 
-                    {/* Modern Search Bar - High Conversion Design */}
+                    {/* Modern Search Bar Container */}
                     <div className="w-full max-w-3xl relative group">
-                        {/* Glow Effect behind search bar */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-[#0095FF] rounded-[40px] blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200" />
+                        {/* Glow Effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-[#0095FF] rounded-[40px] blur opacity-20 group-hover:opacity-40 transition duration-1000" />
 
-                        <div className="relative w-full bg-white p-2.5 lg:p-3 rounded-[38px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center gap-2">
-                            {/* Search Input Icon (Optional but Premium) */}
-                            <div className="pl-6 hidden lg:block">
+                        {/* Parent Div: এখানে flex-row ফিক্সড রাখা হয়েছে এবং আইটেমগুলোকে ডানে-বামে সরানোর জন্য justify-between ব্যবহার করা হয়েছে */}
+                        <div className="relative w-full bg-white p-2 lg:p-3 rounded-[50px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] flex items-center justify-between overflow-hidden">
+                            {/* Left Side: Icon + Select Menu */}
+                            <div className="flex items-center flex-grow pl-4 sm:pl-6">
                                 <svg
-                                    className="w-6 h-6 text-slate-400"
+                                    className="w-5 h-5 lg:w-6 lg:h-6 text-slate-400 shrink-0"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -58,21 +74,30 @@ function Hero() {
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                                     />
                                 </svg>
+
+                                <select
+                                    value={selectedCategory}
+                                    onChange={(e) => setSelectedCategory(e.target.value)}
+                                    className="w-full bg-transparent outline-none text-slate-400 text-base sm:text-xl font-bold cursor-pointer appearance-none px-3 sm:px-4"
+                                >
+                                    {categories.map((cat) => (
+                                        <option key={cat.id} value={cat.path}>
+                                            {cat.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
-                            <input
-                                type="text"
-                                placeholder="Search by city or district..."
-                                className="flex-1 px-4 lg:px-2 outline-none text-slate-900 text-lg lg:text-xl font-medium placeholder-slate-400 bg-transparent"
-                            />
-
+                            {/* Right Side: Search Button */}
+                            {/* এখানে w-full সরিয়ে শুধু w-auto রাখা হয়েছে যাতে এটি সবসময় ছোট থাকে */}
                             <button
                                 type="button"
-                                className="bg-[#0095FF] text-white px-8 lg:px-12 py-4 lg:py-5 rounded-[32px] font-bold text-lg lg:text-xl hover:bg-blue-600 transition-all active:scale-95 shadow-[0_10px_20px_rgba(0,149,255,0.3)] flex items-center gap-2"
+                                onClick={handleSearch}
+                                className="flex-shrink-0 whitespace-nowrap bg-[#0095FF] text-white px-6 sm:px-10 lg:px-12 py-3 sm:py-4 lg:py-5 rounded-[40px] font-bold text-base sm:text-xl hover:bg-blue-600 transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2"
                             >
                                 <span>Search</span>
                                 <svg
-                                    className="w-5 h-5 hidden lg:block"
+                                    className="w-4 h-4 sm:w-5 sm:h-5"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
