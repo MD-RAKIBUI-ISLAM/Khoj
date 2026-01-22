@@ -117,8 +117,8 @@ function MapViewer({
         node["amenity"~"hostel|dormitory"](around:1500, ${lat}, ${lng});
         way["amenity"~"hostel|dormitory"](around:1500, ${lat}, ${lng});
         node["residential"~"university|student_accommodation"](around:1500, ${lat}, ${lng});
-        node["name"~"Hall|Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
-        way["name"~"Hall|Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
+        node["name"~"Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
+        way["name"~"Hostel|Mess|Housing|Dormitory", i](around:1500, ${lat}, ${lng});
     `;
                 defaultTitle = 'Student Hostel';
             } else if (category === 'rentals') {
