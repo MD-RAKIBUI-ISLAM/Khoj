@@ -24,7 +24,7 @@ function Navbar() {
                     <img
                         src={logo}
                         alt="Khoj Logo"
-                        className="h-20 md:h-16 w-auto object-contain transition-transform hover:scale-105"
+                        className="h-16 md:h-10 w-auto object-contain transition-transform hover:scale-105"
                     />
                 </Link>
 

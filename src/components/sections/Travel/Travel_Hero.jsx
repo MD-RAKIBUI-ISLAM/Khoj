@@ -4,8 +4,10 @@ import { LuCalendar, LuLayers, LuMapPin, LuSend } from 'react-icons/lu';
 
 // আপনার ডাটা ফাইল থেকে ইমপোর্ট করা হলো
 import travel_hero, { allServiceData } from '../../../data/mockTravelData';
+import TravelBookingForm from '../../common/TravelBookingForm';
 
 function TravelHero() {
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
     const [searchData, setSearchData] = useState({
         serviceType: 'flights', // ডিফল্ট ক্যাটাগরি
         to: '',
@@ -15,6 +17,7 @@ function TravelHero() {
     const [isSearching, setIsSearching] = useState(false);
     const [results, setResults] = useState([]);
     const [hasSearched, setHasSearched] = useState(false);
+    const [selectedService, setSelectedService] = useState(null);
 
     // সার্চ লজিক
     const handleSearch = (e) => {
@@ -217,6 +220,11 @@ function TravelHero() {
                                     </div>
                                     <button
                                         type="button"
+                                        onClick={() => {
+                                            const currentItem = item; // আইটেমটি একটি ভেরিয়েবলে নিন
+                                            setSelectedService(currentItem);
+                                            setIsBookingModalOpen(true);
+                                        }}
                                         className="bg-blue-600 text-white px-6 py-2 rounded-2xl font-bold hover:bg-blue-700 transition-colors"
                                     >
                                         Book Now
@@ -234,6 +242,19 @@ function TravelHero() {
                     </div>
                 )}
             </div>
+            {isBookingModalOpen && selectedService && (
+                <TravelBookingForm
+                    isOpen={isBookingModalOpen}
+                    onClose={() => {
+                        setIsBookingModalOpen(false);
+                        setSelectedService(null);
+                    }}
+                    // এখানে পরিবর্তন: selectedService-কে 'item' নামে পাঠান
+                    item={selectedService}
+                    // categoryTitle-ও পাঠাতে হবে কারণ আপনার মোডাল এটি ব্যবহার করছে
+                    categoryTitle={allServiceData[searchData.serviceType].title}
+                />
+            )}
         </section>
     );
 }

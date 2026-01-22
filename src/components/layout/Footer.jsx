@@ -20,8 +20,8 @@ function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
                     {/* Logo & Description */}
                     <div className="space-y-4">
-                        <div className="bg-white p-1.5 rounded-md inline-block">
-                            <img src={logo} alt="Khoj Logo" className="h-7" />
+                        <div className="bg-white p-1.5 rounded-3xl inline-block">
+                            <img src={logo} alt="Khoj Logo" className="h-16 w-16" />
                         </div>
                         <p className="text-gray-400 text-xs leading-relaxed max-w-[200px]">
                             {footerData.description}

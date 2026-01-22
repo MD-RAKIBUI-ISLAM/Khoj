@@ -34,7 +34,7 @@ function Register() {
         <div className="min-h-screen bg-[#F9FAFB] flex flex-col items-center pt-10 pb-20 px-6 font-sans">
             <div className="max-w-[480px] w-full bg-white p-8 lg:p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
                 <div className="flex justify-center mb-8">
-                    <img src={logo} alt="Khoj Logo" className="h-10 object-contain" />
+                    <img src={logo} alt="Khoj Logo" className="h-20 object-contain" />
                 </div>
 
                 <div className="space-y-2 mb-8 text-center">

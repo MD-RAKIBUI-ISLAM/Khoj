@@ -124,9 +124,9 @@ function MapViewer({
             } else if (category === 'rentals') {
                 filter = `
     (
-      node["building"~"apartments|residential"](around:2000, ${lat}, ${lng});
-      way["building"~"apartments|residential"](around:2000, ${lat}, ${lng});
-      node["amenity"~"apartment"](around:2000, ${lat}, ${lng});
+      node["building"~"apartments|residential"](around:1000, ${lat}, ${lng});
+      way["building"~"apartments|residential"](around:1000, ${lat}, ${lng});
+      node["amenity"~"apartment"](around:1000, ${lat}, ${lng});
     );
     `;
                 defaultTitle = 'Rental Property';

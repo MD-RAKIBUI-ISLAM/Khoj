@@ -16,6 +16,7 @@ function BookingFormModal({ isOpen, onClose, item, categoryTitle }) {
     const [isSubmitted, setIsSubmitted] = useState(false); // সাবমিট স্টেট
 
     if (!isOpen) return null;
+    if (!item) return null; // যদি আইটেম না থাকে, তাহলে কিছু রেন্ডার করবেন না
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,7 +45,7 @@ function BookingFormModal({ isOpen, onClose, item, categoryTitle }) {
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                className="relative bg-white w-full max-w-2xl rounded-[40px] shadow-[0_50px_100px_rgba(0,0,0,0.2)] border border-white overflow-hidden"
+                className="relative bg-white w-full max-w-2xl rounded-[40px] shadow-[0_50px_100px_rgba(0,0,0,0.2)] border border-white overflow-y-auto max-h-[90vh] scrollbar-hide"
             >
                 {/* ক্লোজ বাটন */}
                 <button

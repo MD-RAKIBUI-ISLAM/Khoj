@@ -13,7 +13,7 @@ function SignIn() {
             <div className="max-w-[440px] w-full bg-white p-8 lg:p-10 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
                 {/* Logo */}
                 <div className="flex justify-center mb-10">
-                    <img src={logo} alt="Khoj Logo" className="h-10 object-contain" />
+                    <img src={logo} alt="Khoj Logo" className="h-20 object-contain" />
                 </div>
 
                 {/* Header Text */}
