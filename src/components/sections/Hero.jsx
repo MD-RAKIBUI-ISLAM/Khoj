@@ -37,7 +37,7 @@ function Hero() {
                     </div>
 
                     {/* Main Heading with Gradient Touch */}
-                    <h1 className="text-6xl lg:text-[110px] font-black text-slate-900 leading-[0.95] tracking-tight">
+                    <h1 className="text-6xl lg:text-[80px] font-black text-slate-900 leading-[0.95] tracking-tight">
                         Find Your <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0095FF] to-blue-700">
                             Perfect Stay
